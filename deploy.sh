@@ -17,6 +17,7 @@ echo "━━━━━━━━━━━━━━━━━━━━━━━━�
 cd "$PROJECT_DIR"
 
 echo "› Pulling latest from main..."
+git checkout -- package-lock.json 2>/dev/null || true
 git pull origin main
 
 echo "› Installing dependencies..."
