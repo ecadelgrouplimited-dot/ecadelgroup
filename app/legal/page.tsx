@@ -405,17 +405,12 @@ const TermsContent = () => (
       <Para>
         Services are subject to change. We may introduce new features, modify existing
         functionality, or discontinue services with reasonable notice to active subscribers.
-          <Para>
-          For enterprise, government, and institutional accounts are subject to a separate Master
-          Services Agreement or Government Services Agreement, the terms of which supplement and,
-          in the event of conflict, supersede these Terms.
-          </Para>
-        <Para>
-          Certain services require account registration. You agree to provide accurate, current,
-          and complete information during registration and to keep your account information updated.
-          You are responsible for maintaining the confidentiality of your credentials.
-        </Para>
-      </Sub>
+      </Para>
+      <Para>
+        Certain services require account registration. You agree to provide accurate, current,
+        and complete information during registration and to keep your account information updated.
+        You are responsible for maintaining the confidentiality of your credentials.
+      </Para>
       <Sub title="Enterprise Accounts">
         <Para>
           Enterprise, government, and institutional accounts are subject to a separate Master
