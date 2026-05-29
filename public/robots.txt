@@ -1,4 +1,9 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://ecadel.com/sitemap.xml
+# Block internal/build paths
+Disallow: /api/
+Disallow: /_next/
+Disallow: /404
+
+Sitemap: https://ecadelgroup.com/sitemap.xml

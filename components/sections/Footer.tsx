@@ -11,8 +11,8 @@ const footerLinks = {
     { label: "Contact", href: "#contact" },
   ],
   Platforms: [
-    { label: "Smart Business Book", href: "#platforms" },
-    { label: "PAME AI", href: "#platforms" },
+    { label: "Smart Business Book", href: "https://sbb.finance" },
+    { label: "PAME AI", href: "https://pame.cc" },
     { label: "SafeRoad UG", href: "#platforms" },
     { label: "Hapa", href: "#platforms" },
     { label: "Meridian", href: "#platforms" },
