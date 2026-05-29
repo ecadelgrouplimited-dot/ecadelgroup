@@ -1,0 +1,202 @@
+"use client";
+
+import { useRef, useState } from "react";
+import { motion, useInView } from "framer-motion";
+import { Mail, MapPin, Send } from "lucide-react";
+
+const contactEmails = [
+  { label: "General Inquiries", email: "ecadelgroup@ecadelgroup.com" },
+  { label: "Partnerships", email: "partnerships@ecadelgroup.com" },
+  { label: "Investors", email: "invest@ecadelgroup.com" },
+  { label: "Media", email: "media@ecadelgroup.com" },
+];
+
+export default function Contact() {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
+  const [form, setForm] = useState({
+    name: "",
+    org: "",
+    email: "",
+    type: "services",
+    message: "",
+  });
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitted(true);
+  };
+
+  return (
+    <section id="contact" ref={ref} className="relative py-32 bg-graphite">
+      <div className="absolute inset-0 bg-intelligence-grid opacity-20" />
+
+      <div className="relative z-10 max-w-7xl mx-auto px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          className="mb-4"
+        >
+          <span className="text-xs tracking-[0.35em] uppercase text-emerald-glow font-display">
+            Contact
+          </span>
+        </motion.div>
+
+        <div className="grid lg:grid-cols-2 gap-16">
+          {/* left */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.1 }}
+          >
+            <h2 className="font-display font-bold text-4xl md:text-5xl text-softwhite leading-tight mb-8">
+              Let&apos;s Build
+              <br />
+              <span style={{ color: "#C8A96E" }}>Together</span>
+            </h2>
+              <p className="text-platinum/55 leading-relaxed mb-12">
+              Whether you need a website, a mobile app, a custom software system,
+              AI integration, or a technology partner for the long term — we want
+              to hear from you. ECADEL GROUP LIMITED builds for clients and
+              institutions that demand the same standard we apply to our own platforms.
+            </p>
+
+            {/* emails */}
+            <div className="space-y-4 mb-10">
+              {contactEmails.map((c) => (
+                <div key={c.email} className="flex items-start gap-4">
+                  <Mail size={13} className="text-emerald-deep mt-1 flex-shrink-0" />
+                  <div>
+                    <div className="text-platinum/40 text-[10px] tracking-[0.2em] uppercase mb-0.5">
+                      {c.label}
+                    </div>
+                    <a
+                      href={`mailto:${c.email}`}
+                      className="text-platinum/70 text-sm hover:text-softwhite transition-colors duration-200"
+                    >
+                      {c.email}
+                    </a>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* location */}
+            <div className="flex items-center gap-3 text-platinum/50 text-sm">
+              <MapPin size={13} className="text-emerald-deep flex-shrink-0" />
+              <span>Kampala, Uganda</span>
+            </div>
+          </motion.div>
+
+          {/* right: form */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.3 }}
+          >
+            {submitted ? (
+              <div className="h-full flex flex-col items-center justify-center text-center py-16 border border-emerald-deep/20 bg-emerald-deep/5">
+                <div className="w-12 h-12 border border-emerald-deep flex items-center justify-center mb-6">
+                  <Send size={18} className="text-emerald-glow" />
+                </div>
+                <h3 className="font-display font-semibold text-softwhite text-xl mb-3">
+                  Inquiry Received
+                </h3>
+                <p className="text-platinum/50 text-sm max-w-xs">
+                  Thank you for reaching out. Our team will respond within 48
+                  hours.
+                </p>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-5">
+                <div className="grid sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-[10px] tracking-[0.25em] uppercase text-platinum/40 mb-2">
+                      Full Name *
+                    </label>
+                    <input
+                      required
+                      value={form.name}
+                      onChange={(e) => setForm({ ...form, name: e.target.value })}
+                      className="w-full bg-carbon border border-white/8 px-4 py-3 text-sm text-softwhite placeholder-platinum/20 focus:outline-none focus:border-emerald-deep/60 transition-colors duration-200"
+                      placeholder="Your name"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] tracking-[0.25em] uppercase text-platinum/40 mb-2">
+                      Organisation *
+                    </label>
+                    <input
+                      required
+                      value={form.org}
+                      onChange={(e) => setForm({ ...form, org: e.target.value })}
+                      className="w-full bg-carbon border border-white/8 px-4 py-3 text-sm text-softwhite placeholder-platinum/20 focus:outline-none focus:border-emerald-deep/60 transition-colors duration-200"
+                      placeholder="Your organisation"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-[10px] tracking-[0.25em] uppercase text-platinum/40 mb-2">
+                    Email Address *
+                  </label>
+                  <input
+                    required
+                    type="email"
+                    value={form.email}
+                    onChange={(e) => setForm({ ...form, email: e.target.value })}
+                    className="w-full bg-carbon border border-white/8 px-4 py-3 text-sm text-softwhite placeholder-platinum/20 focus:outline-none focus:border-emerald-deep/60 transition-colors duration-200"
+                    placeholder="your@organisation.com"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-[10px] tracking-[0.25em] uppercase text-platinum/40 mb-2">
+                    Inquiry Type
+                  </label>
+                  <select
+                    value={form.type}
+                    onChange={(e) => setForm({ ...form, type: e.target.value })}
+                    className="w-full bg-carbon border border-white/8 px-4 py-3 text-sm text-softwhite focus:outline-none focus:border-emerald-deep/60 transition-colors duration-200"
+                  >
+                    <option value="services">Services Inquiry</option>
+                    <option value="partnership">Partnership Inquiry</option>
+                    <option value="government">Government / Civic</option>
+                    <option value="investment">Investment Inquiry</option>
+                    <option value="media">Media & Press</option>
+                    <option value="research">Research Collaboration</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-[10px] tracking-[0.25em] uppercase text-platinum/40 mb-2">
+                    Message *
+                  </label>
+                  <textarea
+                    required
+                    rows={5}
+                    value={form.message}
+                    onChange={(e) => setForm({ ...form, message: e.target.value })}
+                    className="w-full bg-carbon border border-white/8 px-4 py-3 text-sm text-softwhite placeholder-platinum/20 focus:outline-none focus:border-emerald-deep/60 transition-colors duration-200 resize-none"
+                    placeholder="Tell us about your initiative and how we can work together..."
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  className="w-full flex items-center justify-center gap-2 px-6 py-4 bg-emerald-deep text-softwhite text-sm font-medium tracking-wide hover:bg-emerald-glow transition-all duration-300"
+                  style={{ boxShadow: "0 0 24px rgba(200,169,110,0.25)" }}
+                >
+                  <Send size={14} />
+                  Submit Inquiry
+                </button>
+              </form>
+            )}
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+}

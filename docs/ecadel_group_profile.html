@@ -1,0 +1,1939 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ECADEL GROUP LIMITED — Company Profile</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #060608;
+    --deep: #0A0C12;
+    --navy: #0D1220;
+    --steel: #141928;
+    --muted-border: rgba(255,255,255,0.07);
+    --accent: #C8A96E;
+    --accent2: #8BA7C7;
+    --cream: #F0EDE6;
+    --text-primary: #E8E4DC;
+    --text-secondary: #9A9590;
+    --text-muted: #5A5650;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; font-size: 16px; }
+
+  body {
+    background: var(--black);
+    color: var(--text-primary);
+    font-family: 'Syne', sans-serif;
+    font-weight: 400;
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* NOISE OVERLAY */
+  body::before {
+    content: '';
+    position: fixed; inset: 0; z-index: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+
+  /* NAVIGATION */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.4rem 4rem;
+    border-bottom: 1px solid var(--muted-border);
+    background: rgba(6,6,8,0.88);
+    backdrop-filter: blur(20px);
+  }
+
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.15rem;
+    letter-spacing: 0.25em;
+    color: var(--cream);
+    text-transform: uppercase;
+  }
+
+  .nav-logo span {
+    color: var(--accent);
+  }
+
+  .nav-links {
+    display: flex; gap: 2.5rem; list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--accent); }
+
+  .nav-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    border: 1px solid rgba(200,169,110,0.3);
+    padding: 0.3rem 0.8rem;
+    border-radius: 2px;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 4rem 6rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-grid-bg {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(200,169,110,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(200,169,110,0.03) 1px, transparent 1px);
+    background-size: 80px 80px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black, transparent);
+  }
+
+  .hero-glow {
+    position: absolute;
+    width: 800px; height: 800px;
+    border-radius: 50%;
+    background: radial-gradient(ellipse, rgba(13,18,32,0.9) 0%, transparent 70%);
+    top: -200px; right: -200px;
+    pointer-events: none;
+  }
+
+  .hero-glow2 {
+    position: absolute;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(ellipse, rgba(200,169,110,0.05) 0%, transparent 70%);
+    bottom: 0; left: -100px;
+    pointer-events: none;
+  }
+
+  .hero-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    display: flex; align-items: center; gap: 1rem;
+    opacity: 0;
+    animation: fadeUp 1s 0.3s forwards;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    width: 40px; height: 1px;
+    background: var(--accent);
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(4.5rem, 10vw, 9rem);
+    font-weight: 300;
+    line-height: 0.92;
+    letter-spacing: -0.02em;
+    color: var(--cream);
+    margin-bottom: 0.2rem;
+    opacity: 0;
+    animation: fadeUp 1s 0.5s forwards;
+  }
+
+  .hero-title-bold {
+    font-weight: 700;
+    color: var(--cream);
+  }
+
+  .hero-title-accent {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+    font-weight: 300;
+    color: var(--text-secondary);
+    margin: 2rem 0 3rem;
+    max-width: 700px;
+    line-height: 1.5;
+    opacity: 0;
+    animation: fadeUp 1s 0.7s forwards;
+  }
+
+  .hero-meta {
+    display: flex; align-items: center; gap: 3rem;
+    opacity: 0;
+    animation: fadeUp 1s 0.9s forwards;
+  }
+
+  .hero-meta-item {
+    display: flex; flex-direction: column; gap: 0.3rem;
+  }
+
+  .hero-meta-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.2em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+  }
+
+  .hero-meta-value {
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--cream);
+    letter-spacing: 0.05em;
+  }
+
+  .hero-divider {
+    width: 1px; height: 40px;
+    background: var(--muted-border);
+  }
+
+  .hero-scroll-indicator {
+    position: absolute;
+    right: 4rem; bottom: 6rem;
+    display: flex; flex-direction: column;
+    align-items: center; gap: 0.8rem;
+    opacity: 0;
+    animation: fadeUp 1s 1.2s forwards;
+  }
+
+  .hero-scroll-indicator span {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.25em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    writing-mode: vertical-rl;
+  }
+
+  .hero-scroll-line {
+    width: 1px; height: 60px;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+    animation: scrollPulse 2.5s infinite;
+  }
+
+  /* SECTION BASE */
+  section {
+    padding: 8rem 4rem;
+    position: relative;
+  }
+
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    color: var(--accent);
+    text-transform: uppercase;
+    display: flex; align-items: center; gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .section-label::before {
+    content: '';
+    width: 28px; height: 1px;
+    background: var(--accent);
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--cream);
+    margin-bottom: 2rem;
+  }
+
+  .section-title em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .section-title strong {
+    font-weight: 700;
+  }
+
+  /* DIVIDER */
+  .hr-rule {
+    border: none;
+    height: 1px;
+    background: var(--muted-border);
+    margin: 0;
+  }
+
+  /* INTRO / MANIFESTO */
+  .intro {
+    background: var(--deep);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: start;
+  }
+
+  .intro-left {}
+
+  .intro-body {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem;
+    font-weight: 300;
+    line-height: 1.75;
+    color: var(--text-primary);
+    max-width: 540px;
+  }
+
+  .intro-body p + p {
+    margin-top: 1.5rem;
+  }
+
+  .intro-right {
+    padding-top: 6rem;
+  }
+
+  .manifesto-block {
+    border-left: 2px solid var(--accent);
+    padding-left: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .manifesto-block blockquote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-style: italic;
+    font-weight: 300;
+    line-height: 1.5;
+    color: var(--cream);
+    margin-bottom: 1rem;
+  }
+
+  .manifesto-block cite {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    font-style: normal;
+  }
+
+  .belief-list {
+    display: flex; flex-direction: column; gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .belief-item {
+    display: grid;
+    grid-template-columns: 28px 1fr;
+    gap: 1rem;
+    align-items: start;
+  }
+
+  .belief-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--accent);
+    padding-top: 0.2rem;
+  }
+
+  .belief-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+  }
+
+  /* STATS BAND */
+  .stats-band {
+    background: var(--steel);
+    border-top: 1px solid var(--muted-border);
+    border-bottom: 1px solid var(--muted-border);
+    padding: 4rem;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0;
+  }
+
+  .stat-item {
+    padding: 0 3rem;
+    border-right: 1px solid var(--muted-border);
+    display: flex; flex-direction: column; gap: 0.5rem;
+  }
+
+  .stat-item:first-child { padding-left: 0; }
+  .stat-item:last-child { border-right: none; }
+
+  .stat-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.5rem;
+    font-weight: 300;
+    color: var(--cream);
+    line-height: 1;
+  }
+
+  .stat-number span {
+    color: var(--accent);
+    font-style: italic;
+  }
+
+  .stat-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.18em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+  }
+
+  /* ORIGIN STORY */
+  .origin {
+    background: var(--black);
+  }
+
+  .origin-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .origin-body {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    font-weight: 300;
+    line-height: 1.85;
+    color: var(--text-secondary);
+  }
+
+  .origin-body p + p { margin-top: 1.8rem; }
+
+  .origin-body strong {
+    color: var(--cream);
+    font-weight: 600;
+  }
+
+  .origin-body em {
+    color: var(--accent);
+    font-style: italic;
+  }
+
+  .name-reveal {
+    margin: 4rem 0;
+    padding: 3rem;
+    border: 1px solid rgba(200,169,110,0.15);
+    background: rgba(200,169,110,0.03);
+    position: relative;
+  }
+
+  .name-reveal::before {
+    content: 'THE NAME';
+    position: absolute;
+    top: -0.6rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.3em;
+    color: var(--accent);
+    background: var(--black);
+    padding: 0 1rem;
+  }
+
+  .name-decode {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+    margin-bottom: 1.5rem;
+  }
+
+  .name-char {
+    display: flex; flex-direction: column;
+    align-items: center;
+    padding: 0 1.2rem;
+    border-right: 1px solid var(--muted-border);
+  }
+
+  .name-char:last-child { border-right: none; }
+
+  .name-letter {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--cream);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .name-from {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    text-transform: uppercase;
+  }
+
+  .name-origin-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--text-muted);
+  }
+
+  /* SUBSIDIARIES */
+  .subsidiaries {
+    background: var(--deep);
+  }
+
+  .subs-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 4rem;
+  }
+
+  .subs-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5px;
+    background: var(--muted-border);
+    border: 1px solid var(--muted-border);
+  }
+
+  .sub-card {
+    background: var(--deep);
+    padding: 3rem;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.4s;
+    cursor: default;
+  }
+
+  .sub-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 0;
+    background: var(--accent);
+    transition: height 0.4s;
+  }
+
+  .sub-card:hover::before { height: 100%; }
+  .sub-card:hover { background: var(--steel); }
+
+  .sub-card.featured {
+    grid-column: span 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  .sub-index {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+  }
+
+  .sub-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1.3rem;
+    letter-spacing: 0.05em;
+    color: var(--cream);
+    margin-bottom: 0.3rem;
+  }
+
+  .sub-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+  }
+
+  .sub-desc {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.02rem;
+    line-height: 1.75;
+    color: var(--text-secondary);
+  }
+
+  .sub-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+    padding: 0.3rem 0.8rem;
+    border: 1px solid var(--muted-border);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.15em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+  }
+
+  .sub-status.live {
+    border-color: rgba(74, 180, 120, 0.3);
+    color: #4ab478;
+  }
+
+  .sub-status.live::before {
+    content: '';
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: #4ab478;
+    animation: pulse 2s infinite;
+  }
+
+  .sub-status.building::before {
+    content: '';
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--accent);
+    animation: pulse 2s infinite;
+  }
+
+  .sub-status.building {
+    border-color: rgba(200,169,110,0.3);
+    color: var(--accent);
+  }
+
+  .sub-features {
+    display: flex; flex-direction: column; gap: 0.8rem;
+    margin-top: 1.5rem;
+  }
+
+  .sub-feature {
+    display: flex; align-items: flex-start; gap: 0.8rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.4;
+  }
+
+  .sub-feature::before {
+    content: '—';
+    color: var(--accent);
+    flex-shrink: 0;
+    font-family: 'Syne', sans-serif;
+  }
+
+  /* LABS SECTION */
+  .labs {
+    background: var(--black);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .labs-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+
+  .labs-visual {
+    position: relative;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .labs-ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(200,169,110,0.12);
+  }
+
+  .labs-ring-1 { width: 340px; height: 340px; animation: rotateSlow 30s linear infinite; }
+  .labs-ring-2 { width: 240px; height: 240px; border-style: dashed; animation: rotateSlow 20s linear infinite reverse; }
+  .labs-ring-3 { width: 140px; height: 140px; animation: rotateSlow 15s linear infinite; }
+
+  .labs-core {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+  }
+
+  .labs-core-letter {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 4rem;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+    display: block;
+  }
+
+  .labs-core-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.25em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    display: block;
+    margin-top: 0.5rem;
+  }
+
+  .labs-node {
+    position: absolute;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+
+  /* LEADERSHIP */
+  .leadership {
+    background: var(--deep);
+  }
+
+  .leadership-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    margin-top: 3rem;
+  }
+
+  .leader-card {
+    padding: 2.5rem;
+    border: 1px solid var(--muted-border);
+    position: relative;
+  }
+
+  .leader-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 2.5rem; right: 2.5rem;
+    height: 1px;
+    background: linear-gradient(to right, var(--accent), transparent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.5s;
+  }
+
+  .leader-card:hover::after { transform: scaleX(1); }
+
+  .leader-avatar {
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(200,169,110,0.15), rgba(200,169,110,0.05));
+    border: 1px solid rgba(200,169,110,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+  }
+
+  .leader-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--cream);
+    margin-bottom: 0.25rem;
+    letter-spacing: 0.05em;
+  }
+
+  .leader-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .leader-bio {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+  }
+
+  /* VISION / PILLARS */
+  .vision {
+    background: var(--steel);
+    text-align: center;
+  }
+
+  .vision-inner {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .vision-statement {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--cream);
+    margin: 3rem 0;
+  }
+
+  .vision-pillars {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-top: 4rem;
+    background: var(--muted-border);
+    border: 1px solid var(--muted-border);
+  }
+
+  .pillar {
+    background: var(--steel);
+    padding: 2.5rem;
+    text-align: left;
+  }
+
+  .pillar-icon {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.5rem;
+    color: var(--accent);
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .pillar-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    color: var(--cream);
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+  }
+
+  .pillar-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.98rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+  }
+
+  /* STRUCTURE CHART */
+  .structure {
+    background: var(--black);
+  }
+
+  .structure-tree {
+    margin-top: 4rem;
+    position: relative;
+  }
+
+  .tree-root {
+    text-align: center;
+    margin-bottom: 0;
+  }
+
+  .tree-root-box {
+    display: inline-block;
+    padding: 1.5rem 3rem;
+    border: 1px solid rgba(200,169,110,0.4);
+    background: rgba(200,169,110,0.05);
+    position: relative;
+  }
+
+  .tree-root-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    letter-spacing: 0.15em;
+    color: var(--cream);
+    text-transform: uppercase;
+  }
+
+  .tree-root-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-top: 0.3rem;
+  }
+
+  .tree-connector {
+    width: 1px;
+    height: 3rem;
+    background: rgba(200,169,110,0.3);
+    margin: 0 auto;
+  }
+
+  .tree-h-line {
+    height: 1px;
+    background: rgba(200,169,110,0.2);
+    margin: 0 5%;
+    position: relative;
+  }
+
+  .tree-branches {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    margin-top: 0;
+    background: rgba(200,169,110,0.1);
+  }
+
+  .tree-branch-connector {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .tree-branch-connector .vline {
+    width: 1px;
+    height: 2rem;
+    background: rgba(200,169,110,0.2);
+  }
+
+  .tree-node {
+    background: var(--deep);
+    padding: 2rem;
+    border-top: 2px solid var(--accent);
+    text-align: left;
+  }
+
+  .tree-node-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    color: var(--cream);
+    text-transform: uppercase;
+    margin-bottom: 0.3rem;
+  }
+
+  .tree-node-type {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.15em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+  }
+
+  /* MARKET OPPORTUNITY */
+  .market {
+    background: var(--deep);
+  }
+
+  .market-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--muted-border);
+    border: 1px solid var(--muted-border);
+    margin-top: 3rem;
+  }
+
+  .market-item {
+    background: var(--deep);
+    padding: 2.5rem;
+  }
+
+  .market-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem;
+    font-weight: 300;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .market-desc {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+  }
+
+  .market-source {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.12em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-top: 0.8rem;
+  }
+
+  /* CONTACT / CLOSING */
+  .closing {
+    background: var(--black);
+    text-align: center;
+    padding: 10rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .closing-glow {
+    position: absolute;
+    width: 700px; height: 700px;
+    border-radius: 50%;
+    background: radial-gradient(ellipse, rgba(200,169,110,0.04) 0%, transparent 70%);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  .closing-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 8vw, 7rem);
+    font-weight: 300;
+    line-height: 0.95;
+    color: var(--cream);
+    margin-bottom: 2rem;
+  }
+
+  .closing-title em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .closing-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-style: italic;
+    color: var(--text-secondary);
+    margin-bottom: 3rem;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .closing-contacts {
+    display: flex;
+    justify-content: center;
+    gap: 4rem;
+    margin-top: 3rem;
+  }
+
+  .contact-item {
+    display: flex; flex-direction: column; gap: 0.4rem;
+  }
+
+  .contact-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.2em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+  }
+
+  .contact-value {
+    font-family: 'Syne', sans-serif;
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: var(--accent);
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--deep);
+    border-top: 1px solid var(--muted-border);
+    padding: 2rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 0.9rem;
+    letter-spacing: 0.2em;
+    color: var(--cream);
+    text-transform: uppercase;
+  }
+
+  .footer-copy {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.12em;
+    color: var(--text-muted);
+  }
+
+  .footer-conf {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    border: 1px solid rgba(200,169,110,0.2);
+    padding: 0.3rem 0.8rem;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  @keyframes rotateSlow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+
+  /* INTERSECTION OBSERVER FADE */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.9s ease, transform 0.9s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  /* SERVICES */
+  .services { background: var(--steel); }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--muted-border);
+    border: 1px solid var(--muted-border);
+    margin-top: 3rem;
+  }
+
+  .service-card {
+    background: var(--steel);
+    padding: 2.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.4s;
+    cursor: default;
+  }
+
+  .service-card:hover { background: var(--deep); }
+
+  .service-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    height: 2px; width: 0;
+    background: var(--accent);
+    transition: width 0.5s;
+  }
+
+  .service-card:hover::after { width: 100%; }
+
+  .service-icon {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.5rem;
+    color: var(--accent);
+    margin-bottom: 1.2rem;
+    display: block;
+  }
+
+  .service-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.06em;
+    color: var(--cream);
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+  }
+
+  .service-desc {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.02rem;
+    line-height: 1.75;
+    color: var(--text-secondary);
+  }
+
+  .service-cta-card {
+    background: rgba(200,169,110,0.04);
+    border: 1px solid rgba(200,169,110,0.12);
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 1.5rem;
+  }
+
+  .service-cta-quote {
+    border-left: 2px solid var(--accent);
+    padding-left: 1.5rem;
+  }
+
+  .service-cta-quote p {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.2rem;
+    color: var(--cream);
+    line-height: 1.55;
+  }
+
+  .service-cta-link {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.22em;
+    color: var(--accent);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+
+  .service-cta-link:hover { color: var(--cream); }
+
+  /* CLIENT PROJECTS */
+  .projects { background: var(--black); }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--muted-border);
+    border: 1px solid var(--muted-border);
+    margin-top: 3rem;
+  }
+
+  .project-card {
+    background: var(--black);
+    padding: 3rem;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.4s;
+    cursor: default;
+  }
+
+  .project-card:hover { background: var(--deep); }
+
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 0;
+    background: var(--accent);
+    transition: height 0.4s;
+  }
+
+  .project-card:hover::before { height: 100%; }
+
+  .project-index {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+
+  .project-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1.2rem;
+    letter-spacing: 0.04em;
+    color: var(--cream);
+    margin-bottom: 0.3rem;
+  }
+
+  .project-client {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.15em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+  }
+
+  .project-type {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--accent);
+    margin-bottom: 1.2rem;
+  }
+
+  .project-desc {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    line-height: 1.75;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+  }
+
+  .project-url {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+    text-decoration: none;
+    text-transform: lowercase;
+    transition: color 0.3s;
+  }
+
+  .project-url:hover { color: var(--cream); }
+
+  .project-upcoming {
+    border-top: 2px solid var(--accent);
+  }
+
+  @media (max-width: 900px) {
+    nav { padding: 1.2rem 2rem; }
+    section { padding: 5rem 2rem; }
+    .hero { padding: 0 2rem 5rem; }
+    .intro { grid-template-columns: 1fr; gap: 3rem; }
+    .intro-right { padding-top: 0; }
+    .stats-band { grid-template-columns: 1fr 1fr; gap: 2rem; padding: 3rem 2rem; }
+    .stat-item { border-right: none; padding: 0; }
+    .services-grid { grid-template-columns: 1fr; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .leadership-grid { grid-template-columns: 1fr; }
+    .vision-pillars { grid-template-columns: 1fr; }
+    .subs-grid { grid-template-columns: 1fr; }
+    .sub-card.featured { grid-column: span 1; grid-template-columns: 1fr; }
+    .market-grid { grid-template-columns: 1fr; }
+    .closing-contacts { flex-direction: column; gap: 2rem; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; }
+    .nav-links { display: none; }
+    .tree-branches { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+  <div class="nav-logo">ECADEL <span>GROUP</span></div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#subsidiaries">Portfolio</a></li>
+    <li><a href="#leadership">Leadership</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-badge">Kampala, Uganda · Est. 2026</div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+
+  <p class="hero-eyebrow">Digital Infrastructure &amp; Systems</p>
+
+  <h1 class="hero-title">
+    <span class="hero-title-bold">ECADEL</span><br>
+    <span class="hero-title-accent">Group Limited</span>
+  </h1>
+
+  <p class="hero-subtitle">
+    We do not build products.<br>We build the infrastructure of tomorrow's Africa — and the world it will lead.
+  </p>
+
+  <div class="hero-meta">
+    <div class="hero-meta-item">
+      <span class="hero-meta-label">Headquarters</span>
+      <span class="hero-meta-value">Kampala, Uganda</span>
+    </div>
+    <div class="hero-divider"></div>
+    <div class="hero-meta-item">
+      <span class="hero-meta-label">Founded</span>
+      <span class="hero-meta-value">2026</span>
+    </div>
+    <div class="hero-divider"></div>
+    <div class="hero-meta-item">
+      <span class="hero-meta-label">Subsidiaries</span>
+      <span class="hero-meta-value">5 Active</span>
+    </div>
+    <div class="hero-divider"></div>
+    <div class="hero-meta-item">
+      <span class="hero-meta-label">Focus</span>
+      <span class="hero-meta-value">Africa &amp; Global</span>
+    </div>
+  </div>
+
+  <div class="hero-scroll-indicator">
+    <span>Scroll</span>
+    <div class="hero-scroll-line"></div>
+  </div>
+</section>
+
+<hr class="hr-rule">
+
+<!-- INTRO / MANIFESTO -->
+<section class="intro" id="about">
+  <div class="intro-left reveal">
+    <div class="section-label">Who We Are</div>
+    <h2 class="section-title">A new kind of<br><em>technology institution</em></h2>
+    <div class="intro-body">
+      <p>ECADEL GROUP LIMITED is a digital infrastructure and systems conglomerate headquartered in Kampala, Uganda. We are builders of foundational technology — platforms, tools, and intelligence systems that do not follow existing categories, but create new ones.</p>
+      <p>Our portfolio spans five distinct subsidiaries: a business operating system for African SMEs, an agentic AI extended-brain platform, a road safety infrastructure layer, a city-intelligence and local discovery network, and a consequence intelligence platform designed to transform how governments and corporations make decisions.</p>
+      <p>We build for Africa first — because Africa's problems are the world's hardest problems, and the companies that solve them will define the next century of global technology.</p>
+      <p>Beyond our subsidiary portfolio, ECADEL GROUP delivers client-facing technology services — mobile and web development, custom software, hosting, technology consultancy, and AI training and integration — for organisations across Africa and beyond.</p>
+    </div>
+  </div>
+
+  <div class="intro-right reveal reveal-delay-2">
+    <div class="manifesto-block">
+      <blockquote>"The infrastructure that shapes a civilization is never built by those waiting to be invited. It is built by those who saw the gap and refused to look away."</blockquote>
+      <cite>— ECADEL GROUP · Founding Manifesto</cite>
+    </div>
+
+    <div class="belief-list">
+      <div class="belief-item">
+        <span class="belief-num">01</span>
+        <p class="belief-text">Africa is not an emerging market. It is the next great technology frontier — and we intend to build its foundations.</p>
+      </div>
+      <div class="belief-item">
+        <span class="belief-num">02</span>
+        <p class="belief-text">The most valuable technology does not improve what exists. It makes the previous way of doing things look like the absence of a solution.</p>
+      </div>
+      <div class="belief-item">
+        <span class="belief-num">03</span>
+        <p class="belief-text">Every system we build carries a responsibility: to work for the people who need it most, not only for those who can afford to pay the most.</p>
+      </div>
+      <div class="belief-item">
+        <span class="belief-num">04</span>
+        <p class="belief-text">We are a conglomerate not because we lost focus — but because the problems worth solving are multiple, interconnected, and urgent.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="hr-rule">
+
+<!-- STATS -->
+<div class="stats-band">
+  <div class="stat-item reveal">
+    <div class="stat-number">5<span>+</span></div>
+    <div class="stat-label">Subsidiary Platforms</div>
+  </div>
+  <div class="stat-item reveal reveal-delay-1">
+    <div class="stat-number"><span>$</span>2.3<span>T</span></div>
+    <div class="stat-label">Combined Addressable Market</div>
+  </div>
+  <div class="stat-item reveal reveal-delay-2">
+    <div class="stat-number">1<span>B+</span></div>
+    <div class="stat-label">People We Build For</div>
+  </div>
+  <div class="stat-item reveal reveal-delay-3">
+    <div class="stat-number"><span>∞</span></div>
+    <div class="stat-label">Appetite for What's Possible</div>
+  </div>
+  <div class="stat-item reveal reveal-delay-4">
+    <div class="stat-number">4<span>+</span></div>
+    <div class="stat-label">Client Projects Delivered</div>
+  </div>
+</div>
+
+<hr class="hr-rule">
+
+<!-- ORIGIN STORY -->
+<section class="origin">
+  <div class="origin-inner reveal">
+    <div class="section-label" style="justify-content:center;">The Origin</div>
+    <h2 class="section-title" style="text-align:center;">Built from <em>name</em>,<br>driven by <strong>purpose</strong></h2>
+
+    <div class="name-reveal">
+      <div class="name-decode">
+        <div class="name-char">
+          <span class="name-letter">E</span>
+          <span class="name-from">Ecaat</span>
+        </div>
+        <div class="name-char">
+          <span class="name-letter">C</span>
+          <span class="name-from">Catherine</span>
+        </div>
+        <div class="name-char">
+          <span class="name-letter">A</span>
+          <span class="name-from">Ademun</span>
+        </div>
+        <div class="name-char">
+          <span class="name-letter">D</span>
+          <span class="name-from">—</span>
+        </div>
+        <div class="name-char">
+          <span class="name-letter">E</span>
+          <span class="name-from">—</span>
+        </div>
+        <div class="name-char">
+          <span class="name-letter">L</span>
+          <span class="name-from">—</span>
+        </div>
+      </div>
+      <p class="name-origin-label">A name crafted from the founders themselves — hidden in plain sight</p>
+    </div>
+
+    <div class="origin-body">
+      <p>ECADEL was not named by a branding agency or generated by an algorithm. The name was <em>crafted</em> — assembled from the syllables and initials of the two people who built it: <strong>Wilson Ecaat</strong> and <strong>Catherine Ademun</strong>. A permanent, invisible inscription of identity in the institution they are building together.</p>
+      <p>The company was registered in Uganda in 2026, after a journey through the Uganda Registration Services Bureau that tested patience and resolve — and produced a name that tells a story no competitor can claim. A name that sounds like a global technology institution. A name that carries a legacy, even before the legacy is fully written.</p>
+      <p>What began as a solo founder's drive to build systems that solve real problems in the real Africa became something larger: a conglomerate thesis. Five companies. Five layers of infrastructure. One coherent mission.</p>
+      <p><em>Build the systems Africa runs on. Then let Africa show the world what's possible.</em></p>
+    </div>
+  </div>
+</section>
+
+<hr class="hr-rule">
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-label reveal">What We Deliver</div>
+  <h2 class="section-title reveal">Services &amp; <em>Capabilities</em></h2>
+
+  <div class="intro-body reveal" style="max-width:680px; margin-bottom:0.5rem;">
+    <p>Beyond our own platform subsidiaries, ECADEL GROUP LIMITED delivers world-class technology services to clients across Africa and beyond — from early-stage startups to established organisations. We bring the same institutional-grade thinking to every client engagement, regardless of scale or sector.</p>
+  </div>
+
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <span class="service-icon">◰</span>
+      <div class="service-name">Software Development</div>
+      <p class="service-desc">Custom enterprise software, internal tools, APIs, and backend systems — built with precision, security, and long-term maintainability at the core. We build software that works in the real world, not just in demos.</p>
+    </div>
+    <div class="service-card reveal reveal-delay-1">
+      <span class="service-icon">⬡</span>
+      <div class="service-name">Mobile &amp; Web Development</div>
+      <p class="service-desc">Premium web applications, e-commerce platforms, organisational portals, and mobile apps for iOS and Android — designed with craft and engineered to perform. From MVP to full-scale production systems.</p>
+    </div>
+    <div class="service-card reveal reveal-delay-2">
+      <span class="service-icon">◈</span>
+      <div class="service-name">Hosting &amp; Domain Registration</div>
+      <p class="service-desc">Reliable cloud hosting, domain registration and management, SSL, uptime monitoring, and ongoing infrastructure support — so your platforms are always available when your customers need them.</p>
+    </div>
+    <div class="service-card reveal">
+      <span class="service-icon">◎</span>
+      <div class="service-name">Technology Consultancy</div>
+      <p class="service-desc">Strategic technology advisory for organisations navigating digital transformation. System architecture reviews, vendor selection, product roadmapping, and team structure — we help you build the right thing, the right way.</p>
+    </div>
+    <div class="service-card reveal reveal-delay-1">
+      <span class="service-icon">⟁</span>
+      <div class="service-name">AI Training &amp; Integration</div>
+      <p class="service-desc">Custom AI model training, intelligent workflow automation, and AI integration into existing products and operations. Practical, grounded intelligence — from chatbots and copilots to full agentic system design — delivered and production-ready.</p>
+    </div>
+    <div class="service-cta-card reveal reveal-delay-2">
+      <div class="service-cta-quote">
+        <p>"Every engagement we take is an infrastructure decision. We build things that outlast the brief."</p>
+      </div>
+      <a href="#contact" class="service-cta-link">Start a Project →</a>
+    </div>
+  </div>
+</section>
+
+<hr class="hr-rule">
+
+<!-- STRUCTURE -->
+<section class="structure" id="structure">
+  <div class="section-label reveal">Group Architecture</div>
+  <h2 class="section-title reveal">One group.<br><em>Five systems.</em></h2>
+
+  <div class="structure-tree reveal">
+    <div class="tree-root">
+      <div class="tree-root-box">
+        <div class="tree-root-name">ECADEL GROUP LIMITED</div>
+        <div class="tree-root-sub">Kampala, Uganda · Digital Infrastructure &amp; Systems</div>
+      </div>
+    </div>
+    <div class="tree-connector"></div>
+
+    <div style="display:grid; grid-template-columns: repeat(5,1fr); gap:1px; background:rgba(200,169,110,0.1); border:1px solid rgba(200,169,110,0.1);">
+      <div class="tree-node">
+        <div class="tree-node-name">Smart Business Book</div>
+        <div class="tree-node-type">SME Operating System</div>
+      </div>
+      <div class="tree-node">
+        <div class="tree-node-name">PAME AI</div>
+        <div class="tree-node-type">Agentic Intelligence</div>
+      </div>
+      <div class="tree-node">
+        <div class="tree-node-name">SafeRoad UG</div>
+        <div class="tree-node-type">Safety Infrastructure</div>
+      </div>
+      <div class="tree-node">
+        <div class="tree-node-name">Hapa</div>
+        <div class="tree-node-type">City Intelligence Layer</div>
+      </div>
+      <div class="tree-node">
+        <div class="tree-node-name">Meridian</div>
+        <div class="tree-node-type">Consequence Intelligence</div>
+      </div>
+    </div>
+
+    <div style="margin-top:1px; background:rgba(200,169,110,0.05); border:1px solid rgba(200,169,110,0.1); border-top:none; padding:1.5rem 2rem; display:flex; justify-content:center;">
+      <div style="text-align:center;">
+        <div style="font-family:'JetBrains Mono',monospace; font-size:0.6rem; letter-spacing:0.2em; color:var(--accent); text-transform:uppercase; margin-bottom:0.3rem;">Powered by</div>
+        <div style="font-family:'Syne',sans-serif; font-weight:700; font-size:0.9rem; letter-spacing:0.15em; color:var(--cream);">ECADEL LABS</div>
+        <div style="font-family:'JetBrains Mono',monospace; font-size:0.55rem; letter-spacing:0.12em; color:var(--text-muted); margin-top:0.2rem;">Research &amp; Innovation Engine</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="hr-rule">
+
+<!-- SUBSIDIARIES -->
+<section class="subsidiaries" id="subsidiaries">
+  <div class="subs-header reveal">
+    <div>
+      <div class="section-label">Portfolio</div>
+      <h2 class="section-title">Five companies.<br><em>Five categories.</em></h2>
+    </div>
+  </div>
+
+  <div class="subs-grid">
+    <!-- SBB - Featured -->
+    <div class="sub-card featured reveal">
+      <div>
+        <div class="sub-index">01 / 05 — Live</div>
+        <div class="sub-name">SMART BUSINESS BOOK</div>
+        <div class="sub-tagline">"The Operating System for African SMEs"</div>
+        <div class="sub-desc">
+          Most African small businesses run on pen, paper, and memory. Smart Business Book replaces all three — with a zero-accounting-knowledge platform that handles bookkeeping, invoicing, POS, mobile money integration, cash forecasting, and employee collaboration, entirely offline-first.
+        </div>
+        <div class="sub-status live">Live at sbb.finance</div>
+      </div>
+      <div style="padding-top:1rem;">
+        <div class="sub-features">
+          <div class="sub-feature">Powered by Kiongozi AI — built on Claude Sonnet/Opus</div>
+          <div class="sub-feature">MTN and AirTel mobile money integration, built in</div>
+          <div class="sub-feature">Offline-first architecture — works without internet</div>
+          <div class="sub-feature">Zero accounting knowledge required to operate</div>
+          <div class="sub-feature">Free to start — four-tier UGX pricing structure</div>
+          <div class="sub-feature">Multilingual-ready for diverse African teams</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAME AI -->
+    <div class="sub-card reveal">
+      <div class="sub-index">02 / 05 — Building</div>
+      <div class="sub-name">PAME AI</div>
+      <div class="sub-tagline">"Your Agentic Extended Brain"</div>
+      <div class="sub-desc">
+        PAME AI is not a chatbot or an assistant. It is an agentic extended-brain platform — with persistent memory architecture, a brain graph system, and a clone-and-share widget feature that makes intelligence portable. You don't use PAME. PAME grows with you.
+      </div>
+      <div class="sub-status building">In Development</div>
+    </div>
+
+    <!-- SafeRoad -->
+    <div class="sub-card reveal reveal-delay-1">
+      <div class="sub-index">03 / 05 — Regulatory</div>
+      <div class="sub-name">SAFEROAD UG</div>
+      <div class="sub-tagline">"Infrastructure for Road Safety"</div>
+      <div class="sub-desc">
+        Uganda loses thousands of lives to road accidents every year. SafeRoad UG is building the digital infrastructure layer that addresses this — a road safety platform awaiting regulatory approval to deploy at scale across Uganda's transport systems.
+      </div>
+      <div class="sub-status building">Awaiting Regulatory Approval</div>
+    </div>
+
+    <!-- Hapa -->
+    <div class="sub-card reveal">
+      <div class="sub-index">04 / 05 — Building</div>
+      <div class="sub-name">HAPA</div>
+      <div class="sub-tagline">"Where You Are — And Everything That Means"</div>
+      <div class="sub-desc">
+        Google has places. Instagram has moments. Hapa owns where you are. A city-intelligence and local discovery platform built for African urban reality — with a social graph anchored to location, a cultural intelligence layer, local creator economy, and mobile money commerce. Launching in Kampala first.
+      </div>
+      <div class="sub-status building">Pre-Launch · Kampala</div>
+    </div>
+
+    <!-- Meridian - Featured -->
+    <div class="sub-card featured reveal">
+      <div>
+        <div class="sub-index">05 / 05 — Concept</div>
+        <div class="sub-name">MERIDIAN</div>
+        <div class="sub-tagline">"Consequence Intelligence Platform"</div>
+        <div class="sub-desc">
+          The world has spent three decades building AI that answers questions. No one has built the tool that maps the consequences of decisions before they are made — across economic, social, political, environmental, technical, and human systems simultaneously, in real time.
+          <br><br>
+          Meridian is that tool. Not a prediction engine. Not a risk platform. A living, dynamic consequence map — a new category of human capability called Consequence Intelligence.
+        </div>
+        <div class="sub-status building">Playbook Stage · Seeking Seed</div>
+      </div>
+      <div style="padding-top:1rem;">
+        <div class="sub-features">
+          <div class="sub-feature">Five-layer consequence engine architecture</div>
+          <div class="sub-feature">Seven specialized domain AI agents communicating in real time</div>
+          <div class="sub-feature">Point-of-no-return detection — the moment a decision becomes irreversible</div>
+          <div class="sub-feature">Targets: Finance Ministries, Development Banks, Enterprise CSOs</div>
+          <div class="sub-feature">Africa-first beachhead: East/West African government pilots in Year 1</div>
+          <div class="sub-feature">$60M–$150M ARR target by Year 5 — category leadership</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="hr-rule">
+
+<!-- CLIENT PROJECTS -->
+<section class="projects" id="projects">
+  <div class="subs-header reveal">
+    <div>
+      <div class="section-label">Client Work</div>
+      <h2 class="section-title">Built for <em>clients</em>,<br>built to <strong>last</strong>.</h2>
+    </div>
+    <p style="max-width:380px; font-family:'Cormorant Garamond',serif; font-size:1.05rem; color:var(--text-secondary); line-height:1.75;">
+      Every client project we deliver carries the same standard we apply to our own subsidiaries: precision engineering, premium design, and infrastructure that holds under real-world conditions.
+    </p>
+  </div>
+
+  <div class="projects-grid">
+    <div class="project-card reveal">
+      <div class="project-index">01 — Live</div>
+      <div class="project-name">Simon Sharp Products</div>
+      <div class="project-client">Client · Simon Sharp, Founder</div>
+      <div class="project-type">Mini E-Commerce Platform</div>
+      <p class="project-desc">A clean, high-performing online storefront for Simon Sharp's product brand. Full e-commerce functionality — product catalogue, cart, and checkout — delivered with a premium user experience that positions the brand alongside much larger players in the market.</p>
+      <a href="https://simonsharpproducts.com" target="_blank" class="project-url">simonsharpproducts.com ↗</a>
+    </div>
+
+    <div class="project-card reveal reveal-delay-1">
+      <div class="project-index">02 — Live</div>
+      <div class="project-name">Einstein Rising Canada</div>
+      <div class="project-client">Client · Derek J Lobo, President</div>
+      <div class="project-type">Complete Organisation Management System</div>
+      <p class="project-desc">A comprehensive portal and public-facing website for Einstein Rising Canada — managing the full operational lifecycle of the organisation. Member management, programme tracking, donor reporting, and administrative workflows, all in one integrated system built to institutional standard.</p>
+      <a href="https://einsteinrisingcanada.org" target="_blank" class="project-url">einsteinrisingcanada.org ↗</a>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-index">03 — Live</div>
+      <div class="project-name">Bunyonyi Luxury Resort</div>
+      <div class="project-client">Client · Precious, Resort Manager</div>
+      <div class="project-type">Premium Resort Website &amp; Bookings Management</div>
+      <p class="project-desc">A complete digital presence for one of Uganda's premier luxury resort destinations on Lake Bunyonyi. A visually striking website that captures the essence of the resort experience, paired with a full bookings management system that streamlines reservations and eliminates friction for guests and operations staff alike.</p>
+      <a href="https://bunyonyiluxuryresort.com" target="_blank" class="project-url">bunyonyiluxuryresort.com ↗</a>
+    </div>
+
+    <div class="project-card project-upcoming reveal reveal-delay-1">
+      <div class="project-index">04 — In Development · Launching Soon</div>
+      <div class="project-name">Ambrosoli Creations</div>
+      <div class="project-client">Client · Ambrose, Founder</div>
+      <div class="project-type">Premium Handcraft E-Commerce Platform</div>
+      <p class="project-desc">A flagship e-commerce platform for Ambrosoli Creations — makers of handcrafted premium bags. Built to carry the brand's artisanal identity into the digital space: custom product showcases, seamless checkout, and a shopping experience that honours the craft and intention behind every piece. Launching soon.</p>
+      <span class="sub-status building" style="margin-top:0;">ambrosolicreations.com · In Development</span>
+    </div>
+  </div>
+</section>
+
+<hr class="hr-rule">
+
+<!-- ECADEL LABS -->
+<section class="labs" id="labs">
+  <div class="labs-inner">
+    <div class="reveal">
+      <div class="section-label">The Engine</div>
+      <h2 class="section-title">ECADEL <em>LABS</em></h2>
+      <div class="intro-body" style="max-width:100%;">
+        <p>Every great conglomerate has a research engine that powers everything built above it. For ECADEL GROUP, that engine is ECADEL LABS.</p>
+        <p style="margin-top:1.5rem;">ECADEL LABS is our research and innovation institution — the place where ideas are stress-tested before they become subsidiaries, where technical foundations are built that every platform in the group shares, and where we publish work that positions ECADEL at the frontier of African technology thinking.</p>
+        <p style="margin-top:1.5rem;">The Lab partners with universities, attracts grants from development finance institutions, and trains the next generation of African engineers and researchers in the systems and disciplines that ECADEL GROUP is pioneering.</p>
+      </div>
+      <div class="sub-features" style="margin-top:2rem;">
+        <div class="sub-feature">Cross-subsidiary research and shared technical infrastructure</div>
+        <div class="sub-feature">University and academic institution partnerships</div>
+        <div class="sub-feature">Grant pathways: African Development Bank, Gates Foundation, USAID</div>
+        <div class="sub-feature">Talent pipeline for ECADEL GROUP subsidiaries</div>
+        <div class="sub-feature">Published research on African technology systems</div>
+      </div>
+    </div>
+
+    <div class="labs-visual reveal reveal-delay-2">
+      <div class="labs-ring labs-ring-1"></div>
+      <div class="labs-ring labs-ring-2"></div>
+      <div class="labs-ring labs-ring-3"></div>
+      <div class="labs-core">
+        <span class="labs-core-letter">ΛΣ</span>
+        <span class="labs-core-label">ECADEL LABS</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="hr-rule">
+
+<!-- VISION -->
+<section class="vision">
+  <div class="vision-inner reveal">
+    <div class="section-label" style="justify-content:center;">The Vision</div>
+    <h2 class="section-title" style="text-align:center;">What we are<br><em>actually building</em></h2>
+
+    <p class="vision-statement">
+      "We are not building apps. We are building the digital infrastructure that Africa's next economy runs on — and proving, one system at a time, that the most important technology companies of the next fifty years will be born on this continent."
+    </p>
+
+    <div class="vision-pillars">
+      <div class="pillar">
+        <span class="pillar-icon">⬡</span>
+        <div class="pillar-name">Infrastructure First</div>
+        <p class="pillar-text">Every product we build is a layer — not a feature. SBB is financial infrastructure. Hapa is social infrastructure. Meridian is decision infrastructure. We build foundations, not applications.</p>
+      </div>
+      <div class="pillar">
+        <span class="pillar-icon">◈</span>
+        <div class="pillar-name">Africa as Laboratory</div>
+        <p class="pillar-text">Africa's complexity — mobile money, informal economies, multilingual markets, offline-first reality — is not a constraint. It is the training ground for systems that work everywhere.</p>
+      </div>
+      <div class="pillar">
+        <span class="pillar-icon">◎</span>
+        <div class="pillar-name">Category Creation</div>
+        <p class="pillar-text">We do not enter existing markets. Kiongozi AI, PAME's brain graph, Meridian's consequence engine — each of these creates a category that did not exist before we built it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="hr-rule">
+
+<!-- MARKET OPPORTUNITY -->
+<section class="market">
+  <div class="section-label reveal">Market Opportunity</div>
+  <h2 class="section-title reveal">The scale of<br><em>what we are addressing</em></h2>
+
+  <div class="market-grid">
+    <div class="market-item reveal">
+      <div class="market-number">$2.3T</div>
+      <div class="market-desc">Annual cost of poor policy decisions globally — the primary market Meridian addresses with Consequence Intelligence</div>
+      <div class="market-source">World Economic Forum Reference</div>
+    </div>
+    <div class="market-item reveal reveal-delay-1">
+      <div class="market-number">60M+</div>
+      <div class="market-desc">African SMEs operating without formal financial management tools — the core addressable market for Smart Business Book</div>
+      <div class="market-source">African Development Bank Data</div>
+    </div>
+    <div class="market-item reveal reveal-delay-2">
+      <div class="market-number">$680B</div>
+      <div class="market-desc">Global management consulting market that Meridian is positioned to partially absorb as Consequence Intelligence becomes a recognized discipline</div>
+      <div class="market-source">2025 Industry Analysis</div>
+    </div>
+    <div class="market-item reveal">
+      <div class="market-number">1.4B</div>
+      <div class="market-desc">African population — the underserved market that every ECADEL subsidiary is built to serve, starting in East Africa</div>
+      <div class="market-source">UN Population Division 2025</div>
+    </div>
+    <div class="market-item reveal reveal-delay-1">
+      <div class="market-number">$115B</div>
+      <div class="market-desc">Business intelligence and analytics market that ECADEL's data platforms — Meridian, PAME, SBB — all participate in as infrastructure layers</div>
+      <div class="market-source">BI Market Report 2025</div>
+    </div>
+    <div class="market-item reveal reveal-delay-2">
+      <div class="market-number">3,000+</div>
+      <div class="market-desc">Road fatalities annually in Uganda — the human cost that SafeRoad UG is designed to reduce through digital safety infrastructure</div>
+      <div class="market-source">Uganda Police Road Safety Report</div>
+    </div>
+  </div>
+</section>
+
+<hr class="hr-rule">
+
+<!-- LEADERSHIP -->
+<section class="leadership" id="leadership">
+  <div class="section-label reveal">Leadership</div>
+  <h2 class="section-title reveal">The people<br><em>behind the systems</em></h2>
+
+  <div class="leadership-grid">
+    <div class="leader-card reveal">
+      <div class="leader-avatar">WE</div>
+      <div class="leader-name">Wilson Ecaat</div>
+      <div class="leader-title">Founder · Lead Developer · AI Architect</div>
+      <div class="leader-bio">
+        The solo architect behind ECADEL's entire portfolio — Wilson has independently designed, built, and launched three production-ready platforms while simultaneously developing two others at the conceptual and playbook stage. His work spans AI architecture, systems engineering, product design, go-to-market strategy, and investor relations. He is the kind of builder who does not wait for a team before starting — he builds the foundations first, then builds the team around them.
+      </div>
+    </div>
+
+    <div class="leader-card reveal reveal-delay-1">
+      <div class="leader-avatar">CA</div>
+      <div class="leader-name">Catherine Ademun</div>
+      <div class="leader-title">Co-Founder · ECADEL Group</div>
+      <div class="leader-bio">
+        Catherine is the other half of the name that became the institution. Her identity is woven into ECADEL at the most fundamental level — not as a footnote or a supporting role, but as a founding truth. The company carries her forward in every letter of its name, in every system it builds, and in every person it serves. The full story of Catherine's role within ECADEL Group is still being written — as it should be.
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="hr-rule">
+
+<!-- CLOSING -->
+<section class="closing" id="contact">
+  <div class="closing-glow"></div>
+  <div class="reveal">
+    <div class="section-label" style="justify-content:center;">Join the Build</div>
+    <h2 class="closing-title">
+      The infrastructure<br>of <em>tomorrow</em><br>starts here.
+    </h2>
+    <p class="closing-sub">
+      Whether you are an investor, a partner, a client, or someone who wants to build with us — the conversation starts with one message.
+    </p>
+
+    <div class="closing-contacts">
+      <div class="contact-item">
+        <span class="contact-label">Group Inquiries</span>
+        <span class="contact-value">ecadelgroup@ecadelgroup.com</span>
+      </div>
+      <div class="contact-item">
+        <span class="contact-label">Investment</span>
+        <span class="contact-value">invest@ecadelgroup.com</span>
+      </div>
+      <div class="contact-item">
+        <span class="contact-label">Website</span>
+        <span class="contact-value">ecadelgroup.com</span>
+      </div>
+      <div class="contact-item">
+        <span class="contact-label">Headquarters</span>
+        <span class="contact-value">Kampala, Uganda</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">ECADEL GROUP LIMITED</div>
+  <div class="footer-copy">© 2026 ECADEL GROUP LIMITED · Kampala, Uganda · ecadelgroup.com · All Rights Reserved</div>
+  <div class="footer-conf">Company Profile v1.2</div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
