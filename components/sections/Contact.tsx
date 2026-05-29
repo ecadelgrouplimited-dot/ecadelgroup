@@ -5,10 +5,10 @@ import { motion, useInView } from "framer-motion";
 import { Mail, MapPin, Send } from "lucide-react";
 
 const contactEmails = [
-  { label: "General Inquiries", email: "ecadelgroup@ecadelgroup.com" },
-  { label: "Partnerships", email: "partnerships@ecadelgroup.com" },
-  { label: "Investors", email: "invest@ecadelgroup.com" },
-  { label: "Media", email: "media@ecadelgroup.com" },
+  { label: "General Inquiries", email: "ecadel@ecadelgroup.com" },
+  { label: "Partnerships", email: "ecadel@ecadelgroup.com" },
+  { label: "Investors", email: "ecadel@ecadelgroup.com" },
+  { label: "Media", email: "ecadel@ecadelgroup.com" },
 ];
 
 export default function Contact() {
@@ -22,10 +22,26 @@ export default function Contact() {
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setLoading(true);
+    setError("");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) throw new Error("failed");
+      setSubmitted(true);
+    } catch {
+      setError("Something went wrong. Please email us directly at ecadel@ecadelgroup.com");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -184,13 +200,31 @@ export default function Contact() {
                   />
                 </div>
 
+                {error && (
+                  <p className="text-red-400/80 text-xs leading-relaxed border border-red-400/20 bg-red-400/5 px-4 py-3">
+                    {error}
+                  </p>
+                )}
+
                 <button
                   type="submit"
-                  className="w-full flex items-center justify-center gap-2 px-6 py-4 bg-emerald-deep text-softwhite text-sm font-medium tracking-wide hover:bg-emerald-glow transition-all duration-300"
+                  disabled={loading}
+                  className="w-full flex items-center justify-center gap-2 px-6 py-4 bg-emerald-deep text-softwhite text-sm font-medium tracking-wide hover:bg-emerald-glow transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed"
                   style={{ boxShadow: "0 0 24px rgba(200,169,110,0.25)" }}
                 >
-                  <Send size={14} />
-                  Submit Inquiry
+                  {loading ? (
+                    <>
+                      <svg className="animate-spin" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
+                      </svg>
+                      Sending…
+                    </>
+                  ) : (
+                    <>
+                      <Send size={14} />
+                      Submit Inquiry
+                    </>
+                  )}
                 </button>
               </form>
             )}
