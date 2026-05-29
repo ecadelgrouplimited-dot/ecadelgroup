@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import CookieBanner from "@/components/CookieBanner";
 
@@ -141,6 +142,7 @@ const schemaOrg = {
       sameAs: [
         "https://sbb.finance",
         "https://pame.cc",
+        "https://x.com/ecadelgroup",
       ],
     },
 
@@ -216,6 +218,16 @@ export default function RootLayout({
       <body>
         {children}
         <CookieBanner />
+        {/* PAME AI Brain Clone — intelligent chat widget */}
+        <Script
+          src="https://pame.cc/api/clone/widget.js"
+          data-slug="ecadel-group"
+          data-position="bottom-right"
+          data-label="💬 Chat with me"
+          data-delay="0"
+          data-theme="dark"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );

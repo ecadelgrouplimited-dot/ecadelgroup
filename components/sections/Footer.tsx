@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { Twitter, Linkedin, Github } from "lucide-react";
+import { Twitter } from "lucide-react";
 
 const footerLinks = {
   Company: [
@@ -54,16 +54,26 @@ export default function Footer() {
               Kampala, Uganda.
             </p>
             <div className="flex items-center gap-3 mt-6">
-              {[Twitter, Linkedin, Github].map((Icon, i) => (
-                <a
-                  key={i}
-                  href="#"
-                  className="w-8 h-8 flex items-center justify-center border border-white/8 text-platinum/40 hover:text-softwhite hover:border-emerald-deep/40 transition-all duration-200"
-                  aria-label="Social link"
-                >
-                  <Icon size={13} />
-                </a>
-              ))}
+              {/* X (Twitter) */}
+              <a
+                href="https://x.com/ecadelgroup"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="ECADEL GROUP on X"
+                className="w-8 h-8 flex items-center justify-center border border-white/8 text-platinum/40 hover:text-softwhite hover:border-emerald-deep/40 transition-all duration-200"
+              >
+                <Twitter size={13} />
+              </a>
+              {/* LinkedIn — coming soon */}
+              <span
+                title="LinkedIn coming soon"
+                className="w-8 h-8 flex items-center justify-center border border-white/5 text-platinum/20 cursor-not-allowed select-none"
+              >
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/>
+                  <circle cx="4" cy="4" r="2"/>
+                </svg>
+              </span>
             </div>
           </div>
 

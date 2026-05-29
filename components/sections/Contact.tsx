@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
-import { Mail, MapPin, Send } from "lucide-react";
+import { Mail, MapPin, Phone, Send } from "lucide-react";
 
 const contactEmails = [
   { label: "General Inquiries", email: "ecadel@ecadelgroup.com" },
@@ -96,6 +96,33 @@ export default function Contact() {
                   </div>
                 </div>
               ))}
+            </div>
+
+            {/* phone / WhatsApp */}
+            <div className="flex items-start gap-4 mb-4">
+              <Phone size={13} className="text-emerald-deep mt-1 flex-shrink-0" />
+              <div>
+                <div className="text-platinum/40 text-[10px] tracking-[0.2em] uppercase mb-0.5">
+                  Phone &amp; WhatsApp
+                </div>
+                <div className="flex items-center gap-3 flex-wrap">
+                  <a
+                    href="tel:+256760512691"
+                    className="text-platinum/70 text-sm hover:text-softwhite transition-colors duration-200"
+                  >
+                    +256 760 512 691
+                  </a>
+                  <span className="text-platinum/20 text-xs">·</span>
+                  <a
+                    href="https://wa.me/256760512691"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-emerald-glow/70 text-sm hover:text-emerald-glow transition-colors duration-200"
+                  >
+                    WhatsApp →
+                  </a>
+                </div>
+              </div>
             </div>
 
             {/* location */}
