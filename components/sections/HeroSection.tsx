@@ -43,7 +43,7 @@ function IntelligenceCanvas() {
 
     const CONNECT_DIST = 160;
 
-    function draw(t: number) {
+    function draw(_t: number) {
       if (!ctx || !canvas) return;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 

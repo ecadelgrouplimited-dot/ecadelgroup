@@ -6,7 +6,7 @@ import {
   ArrowRight, Shield, Brain, MapPin, Activity, AlertTriangle,
   BarChart3, Car, Zap, Wallet, FileText, Users, Cpu,
   Globe, TrendingUp, Building2, Receipt, GitBranch, Share2,
-  Compass, Heart, Camera,
+  Compass, Heart,
 } from "lucide-react";
 
 // ─── SafeRoad ────────────────────────────────────────────────────────────────
@@ -409,7 +409,7 @@ export default function FlagshipProjects() {
         <motion.p initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ duration: 0.6, delay: 0.2 }}
           className="text-platinum/50 max-w-2xl text-base leading-relaxed mb-24">
           Each subsidiary operates in a distinct infrastructure domain. Together they form the foundation
-          of ECADEL GROUP LIMITED's mission: building the systems that run the institutions, businesses,
+          of ECADEL GROUP LIMITED&apos;s mission: building the systems that run the institutions, businesses,
           and infrastructure of modern Africa.
         </motion.p>
 
