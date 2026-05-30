@@ -459,7 +459,7 @@ export default function FutureVision() {
               ))}
 
               {/* Platform nodes */}
-              {PLATFORM_NODES.map((node, i) => (
+              {PLATFORM_NODES.map((node) => (
                 <g key={node.label}>
                   {/* Connector line */}
                   <line
