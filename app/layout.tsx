@@ -223,11 +223,71 @@ export default function RootLayout({
           src="https://pame.cc/api/clone/widget.js"
           data-slug="ecadel-group"
           data-position="bottom-right"
-          data-label="💬 Chat with me"
+          data-label="◆ Ask ECADEL AI"
           data-delay="0"
           data-theme="dark"
           strategy="afterInteractive"
         />
+        {/* Widget brand override — applies ECADEL gold/dark theme to the PAME button */}
+        <Script id="pame-brand-override" strategy="lazyOnload">{`
+          (function() {
+            var GOLD = '#C8A96E';
+            var BG   = 'rgba(6,6,8,0.97)';
+            var BORDER = 'rgba(200,169,110,0.42)';
+            var SHADOW = '0 0 28px rgba(200,169,110,0.18), 0 8px 32px rgba(0,0,0,0.55)';
+
+            function restyle(el) {
+              if (!el || el._ecadelStyled) return;
+              el._ecadelStyled = true;
+              el.style.cssText += [
+                'background:' + BG + ' !important',
+                'background-image:none !important',
+                'background-color:' + BG + ' !important',
+                'border:1px solid ' + BORDER + ' !important',
+                'border-radius:3px !important',
+                'color:' + GOLD + ' !important',
+                'box-shadow:' + SHADOW + ' !important',
+                'font-family:"Space Grotesk",sans-serif !important',
+                'font-size:12px !important',
+                'font-weight:600 !important',
+                'letter-spacing:0.1em !important',
+                'text-transform:uppercase !important',
+                'backdrop-filter:blur(16px) !important',
+                '-webkit-backdrop-filter:blur(16px) !important',
+              ].join(';');
+              el.querySelectorAll('*').forEach(function(c) {
+                c.style.setProperty('color', GOLD, 'important');
+                c.style.setProperty('fill', GOLD, 'important');
+                c.style.setProperty('background', 'transparent', 'important');
+              });
+            }
+
+            function findWidget() {
+              /* Strategy 1 — data attribute */
+              document.querySelectorAll('[data-slug="ecadel-group"]').forEach(restyle);
+              /* Strategy 2 — known class patterns */
+              ['pame','clone','widget-btn','chat-btn','chat-bubble'].forEach(function(k){
+                document.querySelectorAll('[class*="'+k+'"],[id*="'+k+'"]').forEach(restyle);
+              });
+              /* Strategy 3 — fixed-position bottom-right element with high z-index */
+              Array.from(document.querySelectorAll('body > div, body > button, body > a')).forEach(function(el){
+                try {
+                  var s = window.getComputedStyle(el);
+                  if (s.position === 'fixed' && parseInt(s.zIndex) > 900) restyle(el);
+                } catch(e){}
+              });
+            }
+
+            /* Run on mutations + timed fallbacks */
+            var obs = new MutationObserver(function(){ setTimeout(findWidget, 150); });
+            function start() {
+              obs.observe(document.body, { childList:true, subtree:true });
+              [800,2000,4000,8000].forEach(function(t){ setTimeout(findWidget, t); });
+            }
+            if (document.body) { start(); }
+            else { document.addEventListener('DOMContentLoaded', start); }
+          })();
+        `}</Script>
       </body>
     </html>
   );
