@@ -43,7 +43,7 @@ export default function MarqueeStrip() {
       >
         {repeated.map((item, i) => (
           <span key={i} className="flex items-center">
-            <span className="font-display text-xs tracking-[0.22em] uppercase text-platinum/40 hover:text-platinum/70 transition-colors duration-200 cursor-default">
+            <span className="font-display text-xs tracking-[0.22em] uppercase text-platinum/65 hover:text-platinum/70 transition-colors duration-200 cursor-default">
               {item}
             </span>
             <Separator />

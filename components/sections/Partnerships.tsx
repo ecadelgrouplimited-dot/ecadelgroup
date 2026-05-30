@@ -76,7 +76,7 @@ export default function Partnerships() {
             initial={{ opacity: 0 }}
             animate={inView ? { opacity: 1 } : {}}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-platinum/50 max-w-md text-sm leading-relaxed"
+            className="text-platinum/72 max-w-md text-sm leading-relaxed"
           >
             ECADEL GROUP LIMITED is positioned to partner with the institutions and
             organisations that shape African infrastructure — from national
@@ -96,12 +96,12 @@ export default function Partnerships() {
               <div
                 className="w-10 h-10 flex items-center justify-center border border-white/5 mb-6 group-hover:border-emerald-deep/30 group-hover:bg-emerald-deep/5 transition-all duration-300"
               >
-                <cat.icon size={16} className="text-platinum/40 group-hover:text-emerald-deep transition-colors duration-300" />
+                <cat.icon size={16} className="text-platinum/65 group-hover:text-emerald-deep transition-colors duration-300" />
               </div>
               <h3 className="font-display font-semibold text-softwhite text-sm mb-3 tracking-wide">
                 {cat.title}
               </h3>
-              <p className="text-platinum/40 text-xs leading-relaxed">{cat.desc}</p>
+              <p className="text-platinum/65 text-xs leading-relaxed">{cat.desc}</p>
               <div className="absolute bottom-0 left-0 h-px w-0 bg-emerald-deep group-hover:w-full transition-all duration-500" />
             </motion.div>
           ))}
@@ -118,7 +118,7 @@ export default function Partnerships() {
               <h3 className="font-display font-semibold text-softwhite text-sm mb-3 tracking-wide">
                 Become a Partner
               </h3>
-              <p className="text-platinum/50 text-xs leading-relaxed">
+              <p className="text-platinum/72 text-xs leading-relaxed">
                 Ready to build Africa&apos;s intelligence infrastructure together?
               </p>
             </div>

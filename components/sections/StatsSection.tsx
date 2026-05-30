@@ -77,7 +77,7 @@ export default function StatsSection() {
                 <CountUp target={stat.value} suffix={stat.suffix} active={inView} />
               </div>
               <div className="font-display font-semibold text-softwhite text-sm mb-2 tracking-wide">{stat.label}</div>
-              <div className="text-platinum/35 text-xs leading-relaxed">{stat.description}</div>
+              <div className="text-platinum/56 text-xs leading-relaxed">{stat.description}</div>
             </motion.div>
           ))}
         </div>

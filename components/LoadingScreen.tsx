@@ -95,7 +95,7 @@ export default function LoadingScreen() {
                 transition={{ duration: 0.08 }}
               />
             </div>
-            <p className="text-platinum/25 text-[10px] tracking-[0.3em] uppercase mt-4 font-display">
+            <p className="text-platinum/42 text-[10px] tracking-[0.3em] uppercase mt-4 font-display">
               Initialising Systems
             </p>
           </motion.div>

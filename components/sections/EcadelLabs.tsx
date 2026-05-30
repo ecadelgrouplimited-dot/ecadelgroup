@@ -219,7 +219,7 @@ export default function EcadelLabs() {
               For ECADEL GROUP, that engine is <span className="text-softwhite/80">ECADEL LABS</span>.
             </p>
 
-            <p className="text-platinum/45 leading-relaxed mb-10">
+            <p className="text-platinum/68 leading-relaxed mb-10">
               ECADEL LABS is our research and innovation institution — the place where ideas are
               stress-tested before they become subsidiaries, where shared technical foundations are
               built that every platform in the group runs on, and where we publish work that
@@ -239,13 +239,13 @@ export default function EcadelLabs() {
                     className="flex items-start gap-4 group"
                   >
                     <div className="w-9 h-9 flex items-center justify-center border border-white/8 group-hover:border-emerald-deep/40 group-hover:bg-emerald-deep/8 transition-all duration-300 flex-shrink-0 mt-0.5">
-                      <Icon size={14} className="text-platinum/35 group-hover:text-emerald-deep transition-colors duration-300" />
+                      <Icon size={14} className="text-platinum/56 group-hover:text-emerald-deep transition-colors duration-300" />
                     </div>
                     <div>
                       <div className="font-display font-semibold text-softwhite text-sm mb-1 tracking-wide">
                         {pillar.title}
                       </div>
-                      <p className="text-platinum/40 text-xs leading-relaxed">
+                      <p className="text-platinum/65 text-xs leading-relaxed">
                         {pillar.desc}
                       </p>
                     </div>
@@ -261,7 +261,7 @@ export default function EcadelLabs() {
               transition={{ duration: 0.6, delay: 0.75 }}
               className="border border-white/5 bg-white/2 p-6 mb-8"
             >
-              <div className="text-[9px] tracking-[0.3em] uppercase text-platinum/25 font-display mb-3">
+              <div className="text-[9px] tracking-[0.3em] uppercase text-platinum/42 font-display mb-3">
                 Target Grant Partners
               </div>
               <div className="flex flex-wrap gap-3">
@@ -274,7 +274,7 @@ export default function EcadelLabs() {
                 ].map((g) => (
                   <span
                     key={g}
-                    className="text-[10px] tracking-[0.12em] uppercase text-platinum/40 border border-white/6 px-3 py-1 hover:border-emerald-deep/30 hover:text-platinum/65 transition-all duration-200"
+                    className="text-[10px] tracking-[0.12em] uppercase text-platinum/65 border border-white/6 px-3 py-1 hover:border-emerald-deep/30 hover:text-platinum/65 transition-all duration-200"
                   >
                     {g}
                   </span>
@@ -342,7 +342,7 @@ export default function EcadelLabs() {
               <div className="font-display font-semibold text-softwhite text-xs tracking-wide mb-1">
                 {stat.label}
               </div>
-              <div className="text-platinum/30 text-[10px] leading-relaxed">
+              <div className="text-platinum/50 text-[10px] leading-relaxed">
                 {stat.sub}
               </div>
             </div>

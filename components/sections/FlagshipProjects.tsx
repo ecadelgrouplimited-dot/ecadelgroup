@@ -32,7 +32,7 @@ function SafeRoadMockup() {
           <div className="w-2 h-2 rounded-full bg-yellow-500/50" />
           <div className="w-2 h-2 rounded-full bg-green-500/50" />
         </div>
-        <div className="flex-1 text-center text-[10px] text-platinum/30 font-mono">SafeRoad — National Intelligence Dashboard</div>
+        <div className="flex-1 text-center text-[10px] text-platinum/50 font-mono">SafeRoad — National Intelligence Dashboard</div>
       </div>
       <div className="relative h-48 bg-obsidian overflow-hidden">
         <svg className="absolute inset-0 w-full h-full opacity-10">
@@ -66,7 +66,7 @@ function SafeRoadMockup() {
         ].map((s) => (
           <div key={s.label} className="px-3 py-3">
             <div className="font-mono text-base font-bold" style={{ color: s.color }}>{s.value}</div>
-            <div className="text-platinum/30 text-[9px] uppercase tracking-wide mt-0.5">{s.label}</div>
+            <div className="text-platinum/50 text-[9px] uppercase tracking-wide mt-0.5">{s.label}</div>
           </div>
         ))}
       </div>
@@ -96,7 +96,7 @@ function SBBMockup() {
           <div className="w-4 h-4 rounded bg-emerald-deep/80 flex items-center justify-center">
             <span className="text-[7px] font-bold text-white font-mono">SBB</span>
           </div>
-          <span className="text-[10px] text-platinum/50 font-mono">Smart Business Book — Dashboard</span>
+          <span className="text-[10px] text-platinum/72 font-mono">Smart Business Book — Dashboard</span>
         </div>
         <div className="flex items-center gap-1.5">
           <div className="w-1.5 h-1.5 rounded-full bg-emerald-deep animate-pulse" />
@@ -110,7 +110,7 @@ function SBBMockup() {
           { label: "Net This Month", value: "UGX 2,105,000", change: "+8.1%", up: true },
         ].map((card) => (
           <div key={card.label} className="bg-obsidian/60 p-2.5 border border-white/5">
-            <div className="text-platinum/35 text-[8px] uppercase tracking-wider mb-1">{card.label}</div>
+            <div className="text-platinum/56 text-[8px] uppercase tracking-wider mb-1">{card.label}</div>
             <div className="font-mono text-[11px] font-bold text-softwhite leading-none">{card.value}</div>
             <div className={`text-[9px] mt-1 ${card.up ? "text-emerald-glow" : "text-red-400/80"}`}>{card.change}</div>
           </div>
@@ -119,7 +119,7 @@ function SBBMockup() {
       <div className="grid grid-cols-5 h-[calc(100%-7.5rem)]">
         <div className="col-span-3 border-r border-white/5 overflow-hidden">
           <div className="px-3 py-2 border-b border-white/5">
-            <span className="text-[9px] tracking-[0.2em] uppercase text-platinum/30 font-display">Recent Transactions</span>
+            <span className="text-[9px] tracking-[0.2em] uppercase text-platinum/50 font-display">Recent Transactions</span>
           </div>
           {[
             { label: "MTN Mobile Money", amount: "+580,000", time: "09:14", type: "in" },
@@ -130,7 +130,7 @@ function SBBMockup() {
             <div key={i} className="flex items-center justify-between px-3 py-2 border-b border-white/3 hover:bg-white/2">
               <div>
                 <div className="text-[10px] text-softwhite/80">{tx.label}</div>
-                <div className="text-[8px] text-platinum/30 font-mono">{tx.time}</div>
+                <div className="text-[8px] text-platinum/50 font-mono">{tx.time}</div>
               </div>
               <span className={`font-mono text-[10px] font-semibold ${tx.type === "in" ? "text-emerald-glow" : "text-red-400/80"}`}>
                 {tx.amount}
@@ -140,7 +140,7 @@ function SBBMockup() {
         </div>
         <div className="col-span-2 flex flex-col">
           <div className="px-3 py-2 border-b border-white/5">
-            <span className="text-[9px] tracking-[0.2em] uppercase text-platinum/30 font-display">Kiongozi AI</span>
+            <span className="text-[9px] tracking-[0.2em] uppercase text-platinum/50 font-display">Kiongozi AI</span>
           </div>
           <div className="flex-1 p-2.5 space-y-2 overflow-hidden">
             <div className="bg-white/5 rounded-sm px-2.5 py-2">
@@ -180,7 +180,7 @@ function PAMEMockup() {
           <div className="w-2 h-2 rounded-full bg-yellow-500/50" />
           <div className="w-2 h-2 rounded-full bg-green-500/50" />
         </div>
-        <div className="flex-1 text-center text-[10px] text-platinum/30 font-mono">PAME AI — Brain Graph</div>
+        <div className="flex-1 text-center text-[10px] text-platinum/50 font-mono">PAME AI — Brain Graph</div>
       </div>
       <div className="relative h-48 bg-obsidian overflow-hidden flex items-center justify-center">
         <svg className="absolute inset-0 w-full h-full">
@@ -236,7 +236,7 @@ function PAMEMockup() {
         ].map((s) => (
           <div key={s.label} className="px-3 py-3">
             <div className="font-mono text-base font-bold" style={{ color: s.color }}>{s.value}</div>
-            <div className="text-platinum/30 text-[9px] uppercase tracking-wide mt-0.5">{s.label}</div>
+            <div className="text-platinum/50 text-[9px] uppercase tracking-wide mt-0.5">{s.label}</div>
           </div>
         ))}
       </div>
@@ -265,7 +265,7 @@ function HapaMockup() {
           <div className="w-2 h-2 rounded-full bg-yellow-500/50" />
           <div className="w-2 h-2 rounded-full bg-green-500/50" />
         </div>
-        <div className="flex-1 text-center text-[10px] text-platinum/30 font-mono">Hapa — Kampala City Intelligence</div>
+        <div className="flex-1 text-center text-[10px] text-platinum/50 font-mono">Hapa — Kampala City Intelligence</div>
       </div>
       <div className="relative h-48 bg-obsidian overflow-hidden">
         {/* City grid map */}
@@ -313,7 +313,7 @@ function HapaMockup() {
         ].map((s) => (
           <div key={s.label} className="px-3 py-3">
             <div className="font-mono text-base font-bold" style={{ color: s.color }}>{s.value}</div>
-            <div className="text-platinum/30 text-[9px] uppercase tracking-wide mt-0.5">{s.label}</div>
+            <div className="text-platinum/50 text-[9px] uppercase tracking-wide mt-0.5">{s.label}</div>
           </div>
         ))}
       </div>
@@ -342,7 +342,7 @@ function MeridianMockup() {
           <div className="w-2 h-2 rounded-full bg-yellow-500/50" />
           <div className="w-2 h-2 rounded-full bg-green-500/50" />
         </div>
-        <div className="flex-1 text-center text-[10px] text-platinum/30 font-mono">Meridian — Consequence Intelligence Platform</div>
+        <div className="flex-1 text-center text-[10px] text-platinum/50 font-mono">Meridian — Consequence Intelligence Platform</div>
       </div>
       <div className="relative h-48 bg-obsidian overflow-hidden">
         <svg className="absolute inset-0 w-full h-full">
@@ -368,7 +368,7 @@ function MeridianMockup() {
         {[{label:"Scenarios Modelled",value:"847"},{label:"Risk Index",value:"72.4"},{label:"Foresight Horizon",value:"18mo"}].map((s)=>(
           <div key={s.label} className="px-3 py-3">
             <div className="font-mono text-base font-bold text-emerald-glow">{s.value}</div>
-            <div className="text-platinum/30 text-[9px] uppercase tracking-wide mt-0.5">{s.label}</div>
+            <div className="text-platinum/50 text-[9px] uppercase tracking-wide mt-0.5">{s.label}</div>
           </div>
         ))}
       </div>
@@ -407,7 +407,7 @@ export default function FlagshipProjects() {
         </motion.h2>
 
         <motion.p initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-platinum/50 max-w-2xl text-base leading-relaxed mb-24">
+          className="text-platinum/72 max-w-2xl text-base leading-relaxed mb-24">
           Each subsidiary operates in a distinct infrastructure domain. Together they form the foundation
           of ECADEL GROUP LIMITED&apos;s mission: building the systems that run the institutions, businesses,
           and infrastructure of modern Africa.
@@ -426,10 +426,10 @@ export default function FlagshipProjects() {
             <h3 className="font-display font-bold text-3xl md:text-4xl text-softwhite mb-4 leading-tight">
               National Road Safety<br />Intelligence Platform
             </h3>
-            <p className="text-platinum/55 leading-relaxed mb-4">
+            <p className="text-platinum/74 leading-relaxed mb-4">
               Uganda loses thousands of lives to road accidents every year. SafeRoad UG is building the digital infrastructure layer that addresses this — a road safety platform awaiting regulatory approval to deploy at scale across Uganda&apos;s transport systems.
             </p>
-            <p className="text-platinum/40 text-sm leading-relaxed mb-8">
+            <p className="text-platinum/65 text-sm leading-relaxed mb-8">
               Real-time fleet intelligence, AI-powered driver scoring, and government-grade operational dashboards built for national scale.
             </p>
             <div className="grid grid-cols-2 gap-3 mb-10">
@@ -466,11 +466,11 @@ export default function FlagshipProjects() {
             <h3 className="font-display font-bold text-3xl md:text-4xl text-softwhite mb-4 leading-tight">
               The Business Operating<br />System for Africa
             </h3>
-            <p className="text-platinum/55 leading-relaxed mb-5">
+            <p className="text-platinum/74 leading-relaxed mb-5">
               Smart Business Book (SBB) is a full-stack financial control and operations platform
               built for African SMEs, NGOs, and institutions. Powered by Kiongozi AI — built on Claude Sonnet/Opus. Offline-first. Zero accounting knowledge required.
             </p>
-            <p className="text-platinum/40 text-sm leading-relaxed mb-8">
+            <p className="text-platinum/65 text-sm leading-relaxed mb-8">
               MTN and Airtel mobile money integration built in. Free to start — four-tier UGX pricing. Live across Uganda and beyond.
             </p>
             <div className="grid grid-cols-2 gap-3 mb-8">
@@ -489,7 +489,7 @@ export default function FlagshipProjects() {
               ].map((s) => (
                 <div key={s.label} className="bg-carbon px-4 py-3 text-center">
                   <div className="font-display font-bold text-lg text-softwhite">{s.value}</div>
-                  <div className="text-platinum/35 text-[9px] uppercase tracking-wider">{s.label}</div>
+                  <div className="text-platinum/56 text-[9px] uppercase tracking-wider">{s.label}</div>
                 </div>
               ))}
             </div>
@@ -499,7 +499,7 @@ export default function FlagshipProjects() {
                 Visit sbb.finance <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform duration-200" />
               </a>
               <a href="#contact"
-                className="text-sm text-platinum/40 hover:text-platinum/70 transition-colors duration-200">
+                className="text-sm text-platinum/65 hover:text-platinum/70 transition-colors duration-200">
                 Enterprise Inquiry →
               </a>
             </div>
@@ -519,10 +519,10 @@ export default function FlagshipProjects() {
             <h3 className="font-display font-bold text-3xl md:text-4xl text-softwhite mb-4 leading-tight">
               Your Agentic<br />Extended Brain
             </h3>
-            <p className="text-platinum/55 leading-relaxed mb-5">
+            <p className="text-platinum/74 leading-relaxed mb-5">
               PAME AI is not a chatbot or an assistant. It is an agentic extended-brain platform — with persistent memory architecture, a brain graph system, and a clone-and-share widget feature that makes intelligence portable.
             </p>
-            <p className="text-platinum/40 text-sm leading-relaxed mb-8">
+            <p className="text-platinum/65 text-sm leading-relaxed mb-8">
               You don&apos;t use PAME. PAME grows with you.
             </p>
             <div className="grid grid-cols-2 gap-3 mb-8">
@@ -538,7 +538,7 @@ export default function FlagshipProjects() {
                 className="group inline-flex items-center gap-2 text-sm text-emerald-glow border-b border-emerald-deep/40 pb-0.5 hover:border-emerald-glow transition-all duration-200">
                 Visit pame.cc <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform duration-200" />
               </a>
-              <a href="#contact" className="text-sm text-platinum/40 hover:text-platinum/70 transition-colors duration-200">
+              <a href="#contact" className="text-sm text-platinum/65 hover:text-platinum/70 transition-colors duration-200">
                 Enterprise Inquiry →
               </a>
             </div>
@@ -565,10 +565,10 @@ export default function FlagshipProjects() {
             <h3 className="font-display font-bold text-3xl md:text-4xl text-softwhite mb-4 leading-tight">
               Where You Are — And<br />Everything That Means
             </h3>
-            <p className="text-platinum/55 leading-relaxed mb-5">
+            <p className="text-platinum/74 leading-relaxed mb-5">
               Google has places. Instagram has moments. Hapa owns where you are. A city-intelligence and local discovery platform built for African urban reality — with a social graph anchored to location, a cultural intelligence layer, local creator economy, and mobile money commerce.
             </p>
-            <p className="text-platinum/40 text-sm leading-relaxed mb-8">
+            <p className="text-platinum/65 text-sm leading-relaxed mb-8">
               Launching in Kampala first.
             </p>
             <div className="grid grid-cols-2 gap-3 mb-10">
@@ -590,7 +590,7 @@ export default function FlagshipProjects() {
           className="grid lg:grid-cols-2 gap-12 items-center">
           <div>
             <div className="flex items-center gap-3 mb-3">
-              <div className="w-8 h-8 flex items-center justify-center border border-white/10 text-platinum/50">
+              <div className="w-8 h-8 flex items-center justify-center border border-white/10 text-platinum/72">
                 <Brain size={14} className="text-platinum/60" />
               </div>
               <PlatformBadge label="05 / 05 — MERIDIAN · Playbook Stage · Seeking Seed" />
@@ -598,10 +598,10 @@ export default function FlagshipProjects() {
             <h3 className="font-display font-bold text-3xl md:text-4xl text-softwhite mb-4 leading-tight">
               Consequence Intelligence<br />Platform
             </h3>
-            <p className="text-platinum/55 leading-relaxed mb-5">
+            <p className="text-platinum/74 leading-relaxed mb-5">
               The world has spent three decades building AI that answers questions. No one has built the tool that maps the consequences of decisions before they are made — across economic, social, political, environmental, technical, and human systems simultaneously, in real time.
             </p>
-            <p className="text-platinum/40 text-sm leading-relaxed mb-8">
+            <p className="text-platinum/65 text-sm leading-relaxed mb-8">
               Meridian is that tool. Not a prediction engine. Not a risk platform. A living, dynamic consequence map — a new category of human capability called Consequence Intelligence.
             </p>
             <div className="space-y-3 mb-10">

@@ -241,7 +241,7 @@ export default function HeroSection() {
               <div className="font-display font-bold text-2xl text-softwhite mb-1">
                 {stat.value}
               </div>
-              <div className="text-platinum/40 text-xs tracking-wide uppercase">
+              <div className="text-platinum/65 text-xs tracking-wide uppercase">
                 {stat.label}
               </div>
             </div>
@@ -254,7 +254,7 @@ export default function HeroSection() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.4, duration: 0.6 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-platinum/30"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-platinum/50"
       >
         <span className="text-[10px] tracking-[0.3em] uppercase">Scroll</span>
         <ChevronDown size={16} className="animate-bounce" />

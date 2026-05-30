@@ -79,7 +79,7 @@ function FocusCard({
       <h3 className="font-display font-semibold text-softwhite text-base mb-3 leading-snug group-hover:text-white transition-colors duration-200">
         {area.title}
       </h3>
-      <p className="text-platinum/45 text-sm leading-relaxed">{area.description}</p>
+      <p className="text-platinum/68 text-sm leading-relaxed">{area.description}</p>
       <div className="absolute bottom-0 left-0 h-px w-0 bg-emerald-deep group-hover:w-full transition-all duration-500" />
     </motion.div>
   );
@@ -105,7 +105,7 @@ export default function StrategicFocus() {
             <br /><span style={{ color: "#C8A96E" }}>One Mission.</span>
           </motion.h2>
           <motion.p initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-platinum/50 max-w-md text-sm leading-relaxed">
+            className="text-platinum/72 max-w-md text-sm leading-relaxed">
             From the roads African people travel to the businesses they run, from the governments
             that serve them to the NGOs that support them — ECADEL GROUP LIMITED builds the intelligence
             systems that make every domain function with clarity and precision.

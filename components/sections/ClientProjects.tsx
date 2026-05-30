@@ -106,7 +106,7 @@ export default function ClientProjects() {
             initial={{ opacity: 0 }}
             animate={inView ? { opacity: 1 } : {}}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-platinum/50 max-w-md text-sm leading-relaxed"
+            className="text-platinum/72 max-w-md text-sm leading-relaxed"
           >
             Every client project we deliver carries the same standard we apply to our own
             subsidiaries: precision engineering, premium design, and infrastructure that
@@ -131,7 +131,7 @@ export default function ClientProjects() {
 
               {/* header */}
               <div className="flex items-start justify-between mb-6">
-                <div className="font-display text-[10px] tracking-[0.25em] uppercase text-platinum/25">
+                <div className="font-display text-[10px] tracking-[0.25em] uppercase text-platinum/42">
                   {project.index} / 04
                 </div>
                 <StatusBadge status={project.status} />
@@ -141,7 +141,7 @@ export default function ClientProjects() {
                 {project.name}
               </h3>
 
-              <div className="text-[10px] tracking-[0.18em] uppercase text-platinum/30 font-display mb-1">
+              <div className="text-[10px] tracking-[0.18em] uppercase text-platinum/50 font-display mb-1">
                 {project.client}
               </div>
 
@@ -149,7 +149,7 @@ export default function ClientProjects() {
                 {project.type}
               </div>
 
-              <p className="text-platinum/50 text-sm leading-relaxed mb-6">
+              <p className="text-platinum/72 text-sm leading-relaxed mb-6">
                 {project.description}
               </p>
 
@@ -158,7 +158,7 @@ export default function ClientProjects() {
                 {project.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="text-[9px] tracking-[0.15em] uppercase text-platinum/25 border border-white/5 px-2 py-0.5"
+                    className="text-[9px] tracking-[0.15em] uppercase text-platinum/42 border border-white/5 px-2 py-0.5"
                   >
                     {tag}
                   </span>
@@ -177,7 +177,7 @@ export default function ClientProjects() {
                   <ArrowUpRight size={12} />
                 </a>
               ) : (
-                <span className="text-xs text-platinum/30 font-display tracking-wider">
+                <span className="text-xs text-platinum/50 font-display tracking-wider">
                   {project.url} · Launching Soon
                 </span>
               )}

@@ -71,7 +71,7 @@ export default function Contact() {
               <br />
               <span style={{ color: "#C8A96E" }}>Together</span>
             </h2>
-              <p className="text-platinum/55 leading-relaxed mb-12">
+              <p className="text-platinum/74 leading-relaxed mb-12">
               Whether you need a website, a mobile app, a custom software system,
               AI integration, or a technology partner for the long term — we want
               to hear from you. ECADEL GROUP LIMITED builds for clients and
@@ -84,7 +84,7 @@ export default function Contact() {
                 <div key={c.email} className="flex items-start gap-4">
                   <Mail size={13} className="text-emerald-deep mt-1 flex-shrink-0" />
                   <div>
-                    <div className="text-platinum/40 text-[10px] tracking-[0.2em] uppercase mb-0.5">
+                    <div className="text-platinum/65 text-[10px] tracking-[0.2em] uppercase mb-0.5">
                       {c.label}
                     </div>
                     <a
@@ -102,7 +102,7 @@ export default function Contact() {
             <div className="flex items-start gap-4 mb-4">
               <Phone size={13} className="text-emerald-deep mt-1 flex-shrink-0" />
               <div>
-                <div className="text-platinum/40 text-[10px] tracking-[0.2em] uppercase mb-0.5">
+                <div className="text-platinum/65 text-[10px] tracking-[0.2em] uppercase mb-0.5">
                   Phone &amp; WhatsApp
                 </div>
                 <div className="flex items-center gap-3 flex-wrap">
@@ -112,7 +112,7 @@ export default function Contact() {
                   >
                     +256 760 512 691
                   </a>
-                  <span className="text-platinum/20 text-xs">·</span>
+                  <span className="text-platinum/38 text-xs">·</span>
                   <a
                     href="https://wa.me/256760512691"
                     target="_blank"
@@ -126,7 +126,7 @@ export default function Contact() {
             </div>
 
             {/* location */}
-            <div className="flex items-center gap-3 text-platinum/50 text-sm">
+            <div className="flex items-center gap-3 text-platinum/72 text-sm">
               <MapPin size={13} className="text-emerald-deep flex-shrink-0" />
               <span>Kampala, Uganda</span>
             </div>
@@ -146,7 +146,7 @@ export default function Contact() {
                 <h3 className="font-display font-semibold text-softwhite text-xl mb-3">
                   Inquiry Received
                 </h3>
-                <p className="text-platinum/50 text-sm max-w-xs">
+                <p className="text-platinum/72 text-sm max-w-xs">
                   Thank you for reaching out. Our team will respond within 48
                   hours.
                 </p>
@@ -155,7 +155,7 @@ export default function Contact() {
               <form onSubmit={handleSubmit} className="space-y-5">
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-[10px] tracking-[0.25em] uppercase text-platinum/40 mb-2">
+                    <label className="block text-[10px] tracking-[0.25em] uppercase text-platinum/65 mb-2">
                       Full Name *
                     </label>
                     <input
@@ -167,7 +167,7 @@ export default function Contact() {
                     />
                   </div>
                   <div>
-                    <label className="block text-[10px] tracking-[0.25em] uppercase text-platinum/40 mb-2">
+                    <label className="block text-[10px] tracking-[0.25em] uppercase text-platinum/65 mb-2">
                       Organisation *
                     </label>
                     <input
@@ -181,7 +181,7 @@ export default function Contact() {
                 </div>
 
                 <div>
-                  <label className="block text-[10px] tracking-[0.25em] uppercase text-platinum/40 mb-2">
+                  <label className="block text-[10px] tracking-[0.25em] uppercase text-platinum/65 mb-2">
                     Email Address *
                   </label>
                   <input
@@ -195,7 +195,7 @@ export default function Contact() {
                 </div>
 
                 <div>
-                  <label className="block text-[10px] tracking-[0.25em] uppercase text-platinum/40 mb-2">
+                  <label className="block text-[10px] tracking-[0.25em] uppercase text-platinum/65 mb-2">
                     Inquiry Type
                   </label>
                   <select
@@ -214,7 +214,7 @@ export default function Contact() {
                 </div>
 
                 <div>
-                  <label className="block text-[10px] tracking-[0.25em] uppercase text-platinum/40 mb-2">
+                  <label className="block text-[10px] tracking-[0.25em] uppercase text-platinum/65 mb-2">
                     Message *
                   </label>
                   <textarea

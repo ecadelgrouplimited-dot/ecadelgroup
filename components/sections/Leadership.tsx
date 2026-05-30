@@ -164,9 +164,9 @@ function LeaderCard({
         <div className="flex items-start justify-between mb-1">
           <h3 className="font-display font-bold text-softwhite text-2xl">{leader.name}</h3>
         </div>
-        <p className="text-platinum/40 text-xs tracking-[0.15em] uppercase mb-5">{leader.title}</p>
+        <p className="text-platinum/65 text-xs tracking-[0.15em] uppercase mb-5">{leader.title}</p>
         <div className="w-10 h-px mb-5" style={{ background: leader.accentColor }} />
-        <p className="text-platinum/50 text-sm leading-relaxed">{leader.bio}</p>
+        <p className="text-platinum/72 text-sm leading-relaxed">{leader.bio}</p>
       </div>
     </motion.div>
   );
@@ -214,7 +214,7 @@ export default function Leadership() {
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           transition={{ duration: 0.6, delay: 0.25 }}
-          className="text-platinum/45 text-sm max-w-lg mb-16 leading-relaxed"
+          className="text-platinum/68 text-sm max-w-lg mb-16 leading-relaxed"
         >
           ECADEL GROUP LIMITED is led by founders who combine deep technical expertise with
           strategic operational discipline — building for generations, not quarters.

@@ -174,7 +174,7 @@ export default function CompanyOverview() {
                 <span className="text-softwhite/70">Hapa</span> for city intelligence and local discovery,
                 and <span className="text-softwhite/70">Meridian</span> for consequence intelligence.
               </p>
-            <p className="text-platinum/45 leading-relaxed">
+            <p className="text-platinum/68 leading-relaxed">
               We are not a software agency. We are not a startup. We are a
               long-term technology institution — building the foundational systems
               that will define how African governments, enterprises, and
@@ -209,7 +209,7 @@ export default function CompanyOverview() {
               <h3 className="font-display font-semibold text-softwhite text-lg mb-4 tracking-wide">
                 {pillar.label}
               </h3>
-              <p className="text-platinum/50 text-sm leading-relaxed">
+              <p className="text-platinum/72 text-sm leading-relaxed">
                 {pillar.text}
               </p>
             </div>

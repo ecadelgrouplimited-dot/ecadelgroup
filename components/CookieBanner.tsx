@@ -64,7 +64,7 @@ export default function CookieBanner() {
               <p className="text-softwhite/90 text-sm font-display font-medium mb-0.5">
                 This site uses cookies
               </p>
-              <p className="text-platinum/45 text-xs leading-relaxed">
+              <p className="text-platinum/68 text-xs leading-relaxed">
                 We use strictly necessary cookies and optional analytics cookies to improve your
                 experience.{" "}
                 <Link
@@ -80,7 +80,7 @@ export default function CookieBanner() {
             <div className="flex items-center gap-2 flex-shrink-0">
               <button
                 onClick={decline}
-                className="px-4 py-2 text-xs text-platinum/50 hover:text-softwhite border border-white/8 hover:border-white/15 transition-all duration-200 tracking-wide"
+                className="px-4 py-2 text-xs text-platinum/72 hover:text-softwhite border border-white/8 hover:border-white/15 transition-all duration-200 tracking-wide"
               >
                 Decline
               </button>
@@ -93,7 +93,7 @@ export default function CookieBanner() {
               </button>
               <button
                 onClick={decline}
-                className="p-1.5 text-platinum/30 hover:text-platinum/70 transition-colors"
+                className="p-1.5 text-platinum/50 hover:text-platinum/70 transition-colors"
                 aria-label="Dismiss"
               >
                 <X size={14} />

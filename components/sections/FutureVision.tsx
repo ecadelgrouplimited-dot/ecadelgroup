@@ -67,7 +67,7 @@ export default function FutureVision() {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.25 }}
-          className="text-platinum/55 text-lg leading-relaxed max-w-3xl mx-auto mb-20"
+          className="text-platinum/74 text-lg leading-relaxed max-w-3xl mx-auto mb-20"
         >
           ECADEL GROUP LIMITED is not building for this decade alone. Our roadmap
           extends to a future where Africa operates on a fully sovereign,
@@ -114,7 +114,7 @@ export default function FutureVision() {
                     <div className="text-[10px] font-mono text-emerald-glow mt-1">{item}</div>
                   </div>
                 ) : (
-                  <div className="text-[9px] text-platinum/30 mx-3 text-center max-w-[70px]">{item}</div>
+                  <div className="text-[9px] text-platinum/50 mx-3 text-center max-w-[70px]">{item}</div>
                 )}
                 {i < 5 && i % 2 === 0 && (
                   <div className="w-12 h-px bg-emerald-deep/30 mx-1" />

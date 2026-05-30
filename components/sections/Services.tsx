@@ -71,7 +71,7 @@ function ServiceCard({
 
       <div className="flex items-start gap-4 mb-5">
         <div className="w-11 h-11 flex items-center justify-center border border-white/8 group-hover:border-emerald-deep/40 group-hover:bg-emerald-deep/8 transition-all duration-300 flex-shrink-0">
-          <Icon size={16} className="text-platinum/40 group-hover:text-emerald-deep transition-colors duration-300" />
+          <Icon size={16} className="text-platinum/65 group-hover:text-emerald-deep transition-colors duration-300" />
         </div>
         <div
           className="font-display font-bold text-[10px] tracking-[0.2em] text-emerald-deep/60 group-hover:text-emerald-deep transition-colors duration-300 pt-3"
@@ -84,7 +84,7 @@ function ServiceCard({
       <h3 className="font-display font-semibold text-softwhite text-base mb-3 leading-snug tracking-wide group-hover:text-white transition-colors duration-200">
         {svc.title}
       </h3>
-      <p className="text-platinum/45 text-sm leading-relaxed mb-5">
+      <p className="text-platinum/68 text-sm leading-relaxed mb-5">
         {svc.description}
       </p>
 
@@ -92,7 +92,7 @@ function ServiceCard({
         {svc.tags.map((tag) => (
           <span
             key={tag}
-            className="text-[9px] tracking-[0.18em] uppercase text-platinum/30 border border-white/5 px-2 py-0.5"
+            className="text-[9px] tracking-[0.18em] uppercase text-platinum/50 border border-white/5 px-2 py-0.5"
           >
             {tag}
           </span>
@@ -137,7 +137,7 @@ export default function Services() {
             initial={{ opacity: 0 }}
             animate={inView ? { opacity: 1 } : {}}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-platinum/50 max-w-md text-sm leading-relaxed"
+            className="text-platinum/72 max-w-md text-sm leading-relaxed"
           >
             Beyond our platform subsidiaries, ECADEL GROUP delivers world-class
             technology services to clients across Africa and beyond — bringing the same
@@ -163,7 +163,7 @@ export default function Services() {
               <blockquote className="font-serif text-softwhite/80 text-lg leading-relaxed italic mb-4">
                 &ldquo;Every engagement is an infrastructure decision. We build things that outlast the brief.&rdquo;
               </blockquote>
-              <cite className="text-[10px] tracking-[0.2em] uppercase text-platinum/35 not-italic font-display">
+              <cite className="text-[10px] tracking-[0.2em] uppercase text-platinum/56 not-italic font-display">
                 — ECADEL GROUP · Service Philosophy
               </cite>
             </div>

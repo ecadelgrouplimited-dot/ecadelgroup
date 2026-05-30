@@ -24,10 +24,10 @@ const config: Config = {
           deep: "#0D1220",
         },
         // Text
-        platinum: "#9A9590",    // secondary text (warm)
+        platinum: "#C8C4BE",    // secondary text (warm) — lifted from #9A9590 for readability
         softwhite: "#F0EDE6",   // primary text — warm cream
         cream: "#F0EDE6",
-        muted: "#5A5650",
+        muted: "#7A7670",       // lifted from #5A5650 for readability
       },
       fontFamily: {
         sans: ["var(--font-inter)", "system-ui", "sans-serif"],

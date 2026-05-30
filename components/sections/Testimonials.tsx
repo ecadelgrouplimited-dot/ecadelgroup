@@ -134,7 +134,7 @@ export default function Testimonials() {
                     <div className="font-display font-semibold text-softwhite text-base tracking-wide">
                       {t.name}
                     </div>
-                    <div className="text-platinum/45 text-xs tracking-wide mt-0.5">
+                    <div className="text-platinum/68 text-xs tracking-wide mt-0.5">
                       {t.title} · {t.org}
                     </div>
                     <div
@@ -152,14 +152,14 @@ export default function Testimonials() {
             <div className="flex items-center gap-3 mt-10">
               <button
                 onClick={prev}
-                className="w-10 h-10 flex items-center justify-center border border-white/8 text-platinum/40 hover:border-emerald-deep/50 hover:text-emerald-glow transition-all duration-200"
+                className="w-10 h-10 flex items-center justify-center border border-white/8 text-platinum/65 hover:border-emerald-deep/50 hover:text-emerald-glow transition-all duration-200"
                 aria-label="Previous testimonial"
               >
                 <ChevronLeft size={16} />
               </button>
               <button
                 onClick={next}
-                className="w-10 h-10 flex items-center justify-center border border-white/8 text-platinum/40 hover:border-emerald-deep/50 hover:text-emerald-glow transition-all duration-200"
+                className="w-10 h-10 flex items-center justify-center border border-white/8 text-platinum/65 hover:border-emerald-deep/50 hover:text-emerald-glow transition-all duration-200"
                 aria-label="Next testimonial"
               >
                 <ChevronRight size={16} />
@@ -192,7 +192,7 @@ export default function Testimonials() {
 
           {/* right panel — index of all clients */}
           <div className="lg:col-span-4 p-8 md:p-10">
-            <div className="text-[9px] tracking-[0.3em] uppercase text-platinum/25 font-display mb-6">
+            <div className="text-[9px] tracking-[0.3em] uppercase text-platinum/42 font-display mb-6">
               All Clients
             </div>
             <div className="space-y-1">
@@ -208,14 +208,14 @@ export default function Testimonials() {
                 >
                   <div
                     className={`font-display font-semibold text-sm tracking-wide transition-colors duration-200 ${
-                      i === current ? "text-softwhite" : "text-platinum/40 group-hover:text-platinum/65"
+                      i === current ? "text-softwhite" : "text-platinum/65 group-hover:text-platinum/65"
                     }`}
                   >
                     {item.name}
                   </div>
                   <div
                     className={`text-[9px] tracking-[0.15em] uppercase mt-0.5 transition-colors duration-200 ${
-                      i === current ? "text-emerald-glow" : "text-platinum/20"
+                      i === current ? "text-emerald-glow" : "text-platinum/38"
                     }`}
                   >
                     {item.title} · {item.org}
@@ -226,7 +226,7 @@ export default function Testimonials() {
 
             {/* bottom note */}
             <div className="mt-8 pt-6 border-t border-white/5">
-              <p className="text-[10px] text-platinum/25 leading-relaxed font-display tracking-wide">
+              <p className="text-[10px] text-platinum/42 leading-relaxed font-display tracking-wide">
                 Real words from real clients — every project built with the same standard we apply to our own platforms.
               </p>
             </div>

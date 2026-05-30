@@ -67,7 +67,7 @@ export default function WhyAfrica() {
             <br />
             <span style={{ color: "#C8A96E" }}>Designed for Reality</span>
           </h2>
-          <p className="text-platinum/55 text-lg leading-relaxed">
+          <p className="text-platinum/74 text-lg leading-relaxed">
             The African continent is not a market to be served by adapted foreign
             technology. It is a civilisation requiring original intelligence
             infrastructure — built by Africans, for Africa, at African scale.
@@ -96,7 +96,7 @@ export default function WhyAfrica() {
               <h3 className="font-display font-semibold text-softwhite text-xl mb-4 leading-snug">
                 {item.title}
               </h3>
-              <p className="text-platinum/50 text-sm leading-relaxed">
+              <p className="text-platinum/72 text-sm leading-relaxed">
                 {item.description}
               </p>
               <div className="absolute bottom-0 left-0 h-px w-0 bg-emerald-deep group-hover:w-full transition-all duration-500" />

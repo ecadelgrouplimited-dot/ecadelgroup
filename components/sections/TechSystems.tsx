@@ -130,7 +130,7 @@ export default function TechSystems() {
             transition={{ duration: 0.8, delay: 0.3 }}
             className="lg:w-1/2 glass border border-white/5 p-4"
           >
-            <div className="text-[10px] text-platinum/30 font-mono mb-2 tracking-wider">
+            <div className="text-[10px] text-platinum/50 font-mono mb-2 tracking-wider">
               SYSTEM ARCHITECTURE — OVERVIEW
             </div>
             <ArchDiagram />
@@ -153,7 +153,7 @@ export default function TechSystems() {
               <h3 className="font-display font-semibold text-softwhite text-sm mb-3 tracking-wide">
                 {tech.title}
               </h3>
-              <p className="text-platinum/40 text-xs leading-relaxed">{tech.desc}</p>
+              <p className="text-platinum/65 text-xs leading-relaxed">{tech.desc}</p>
               <div className="absolute bottom-0 left-0 h-px w-0 bg-emerald-deep group-hover:w-full transition-all duration-500" />
             </motion.div>
           ))}
