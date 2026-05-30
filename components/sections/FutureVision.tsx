@@ -445,9 +445,9 @@ export default function FutureVision() {
               ))}
 
               {/* Data flow pulses on rings */}
-              {RINGS.slice(0, 3).map((ring, i) => (
+              {RINGS.slice(0, 3).map((ring, idx) => (
                 <circle
-                  key={`pulse-${i}`}
+                  key={`pulse-${idx}`}
                   cx={200 + ring.r} cy="200" r="3"
                   fill="#C8A96E"
                   opacity="0.8"
