@@ -1,0 +1,1466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VPS Management Guide — ECADEL GROUP LIMITED</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black:   #060608;
+    --deep:    #0A0C12;
+    --navy:    #0D1220;
+    --steel:   #141928;
+    --graphite:#1A1F2E;
+    --muted-border: rgba(255,255,255,0.07);
+    --accent:  #C8A96E;
+    --accent2: #8BA7C7;
+    --green:   #4ab478;
+    --red:     #e05555;
+    --amber:   #D4A24C;
+    --cream:   #F0EDE6;
+    --text-primary:   #E8E4DC;
+    --text-secondary: #9A9590;
+    --text-muted:     #5A5650;
+  }
+
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; font-size:16px; }
+
+  body {
+    background: var(--black);
+    color: var(--text-primary);
+    font-family: 'Syne', sans-serif;
+    font-weight: 400;
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* ── NOISE ── */
+  body::before {
+    content:'';
+    position:fixed; inset:0; z-index:0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events:none;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:1.2rem 4rem;
+    border-bottom:1px solid var(--muted-border);
+    background:rgba(6,6,8,0.92);
+    backdrop-filter:blur(20px);
+  }
+  .nav-logo { font-family:'Syne',sans-serif; font-weight:800; font-size:1rem; letter-spacing:0.22em; color:var(--cream); text-transform:uppercase; }
+  .nav-logo span { color:var(--accent); }
+  .nav-badge { font-family:'JetBrains Mono',monospace; font-size:0.58rem; letter-spacing:0.12em; color:var(--accent); border:1px solid rgba(200,169,110,0.3); padding:0.3rem 0.8rem; }
+  .doc-type { font-family:'JetBrains Mono',monospace; font-size:0.58rem; letter-spacing:0.18em; color:var(--text-muted); text-transform:uppercase; }
+
+  /* ── COVER ── */
+  .cover {
+    min-height:100vh;
+    display:flex; flex-direction:column; justify-content:flex-end;
+    padding:0 4rem 6rem;
+    position:relative; overflow:hidden;
+    border-bottom:1px solid var(--muted-border);
+  }
+  .cover-grid {
+    position:absolute; inset:0;
+    background-image:
+      linear-gradient(rgba(200,169,110,0.03) 1px, transparent 1px),
+      linear-gradient(90deg,rgba(200,169,110,0.03) 1px,transparent 1px);
+    background-size:80px 80px;
+    mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black,transparent);
+  }
+  .cover-label { font-family:'JetBrains Mono',monospace; font-size:0.62rem; letter-spacing:0.3em; color:var(--accent); text-transform:uppercase; margin-bottom:2rem; display:flex; align-items:center; gap:1rem; }
+  .cover-label::before { content:''; width:40px; height:1px; background:var(--accent); }
+  .cover-title { font-family:'Cormorant Garamond',serif; font-size:clamp(4rem,9vw,8rem); font-weight:300; line-height:0.92; letter-spacing:-0.02em; color:var(--cream); margin-bottom:0.2rem; }
+  .cover-title strong { font-weight:700; }
+  .cover-title em { font-style:italic; color:var(--accent); }
+  .cover-sub { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:clamp(1rem,2vw,1.5rem); font-weight:300; color:var(--text-secondary); margin:2rem 0 3rem; max-width:600px; line-height:1.6; }
+  .cover-meta { display:flex; align-items:center; gap:3rem; }
+  .cover-meta-item { display:flex; flex-direction:column; gap:0.3rem; }
+  .cover-meta-label { font-family:'JetBrains Mono',monospace; font-size:0.55rem; letter-spacing:0.2em; color:var(--text-muted); text-transform:uppercase; }
+  .cover-meta-value { font-family:'Syne',sans-serif; font-weight:600; font-size:0.85rem; color:var(--cream); }
+  .cover-divider { width:1px; height:36px; background:var(--muted-border); }
+
+  /* ── SIDEBAR TOC ── */
+  .toc-sidebar {
+    position:fixed; left:0; top:0; bottom:0; width:260px;
+    background:var(--deep); border-right:1px solid var(--muted-border);
+    padding:6rem 0 2rem;
+    overflow-y:auto; z-index:50;
+    display:none;
+  }
+  .toc-sidebar.show { display:block; }
+  .toc-chapter { padding:0.6rem 2rem; font-family:'JetBrains Mono',monospace; font-size:0.6rem; letter-spacing:0.2em; color:var(--text-muted); text-transform:uppercase; }
+  .toc-link { display:block; padding:0.5rem 2rem; font-family:'Syne',sans-serif; font-size:0.8rem; color:var(--text-secondary); text-decoration:none; border-left:2px solid transparent; transition:all 0.2s; }
+  .toc-link:hover { color:var(--cream); border-left-color:var(--accent); background:rgba(200,169,110,0.04); }
+
+  /* ── SECTIONS ── */
+  section { padding:7rem 4rem; position:relative; }
+  section:nth-child(even) { background:var(--deep); }
+  section:nth-child(odd) { background:var(--black); }
+
+  .chapter-label { font-family:'JetBrains Mono',monospace; font-size:0.58rem; letter-spacing:0.3em; color:var(--accent); text-transform:uppercase; display:flex; align-items:center; gap:1rem; margin-bottom:1.2rem; }
+  .chapter-label::before { content:''; width:28px; height:1px; background:var(--accent); }
+  .chapter-num { font-family:'Cormorant Garamond',serif; font-size:clamp(2.5rem,5vw,4rem); font-weight:300; line-height:1.1; color:var(--cream); margin-bottom:0.5rem; }
+  .chapter-num em { font-style:italic; color:var(--accent); }
+  .chapter-num strong { font-weight:700; }
+  .chapter-intro { font-family:'Cormorant Garamond',serif; font-size:1.15rem; font-weight:300; line-height:1.85; color:var(--text-secondary); max-width:700px; margin-bottom:3rem; }
+
+  .hr-rule { border:none; height:1px; background:var(--muted-border); margin:0; }
+
+  /* ── CONTENT BLOCKS ── */
+  h3 { font-family:'Syne',sans-serif; font-weight:700; font-size:1rem; letter-spacing:0.08em; color:var(--cream); text-transform:uppercase; margin:2.5rem 0 1rem; }
+  h4 { font-family:'Syne',sans-serif; font-weight:600; font-size:0.85rem; letter-spacing:0.06em; color:var(--accent); text-transform:uppercase; margin:2rem 0 0.8rem; }
+
+  p { font-family:'Cormorant Garamond',serif; font-size:1.05rem; line-height:1.8; color:var(--text-secondary); margin-bottom:1.2rem; max-width:780px; }
+  p strong { color:var(--cream); font-weight:600; }
+  p em { color:var(--accent); font-style:italic; }
+
+  /* ── CODE BLOCKS ── */
+  .code-block {
+    background:var(--navy);
+    border:1px solid var(--muted-border);
+    border-left:3px solid var(--accent);
+    padding:1.5rem 2rem;
+    margin:1.2rem 0 1.8rem;
+    position:relative;
+    overflow-x:auto;
+  }
+  .code-block .code-label {
+    position:absolute; top:-0.6rem; left:1.5rem;
+    font-family:'JetBrains Mono',monospace; font-size:0.55rem;
+    letter-spacing:0.2em; color:var(--accent);
+    background:var(--navy); padding:0 0.6rem;
+    text-transform:uppercase;
+  }
+  .code-block pre {
+    font-family:'JetBrains Mono',monospace;
+    font-size:0.82rem; line-height:1.75;
+    color:var(--text-primary); white-space:pre; overflow-x:auto;
+  }
+  .code-block pre .cmd { color:#C8A96E; }
+  .code-block pre .comment { color:var(--text-muted); }
+  .code-block pre .output { color:#4ab478; }
+  .code-block pre .error { color:#e05555; }
+  .code-block pre .flag { color:#8BA7C7; }
+  .code-block pre .path { color:#D4B97E; }
+
+  code { font-family:'JetBrains Mono',monospace; font-size:0.8rem; color:var(--accent); background:rgba(200,169,110,0.08); padding:0.15rem 0.4rem; }
+
+  /* ── CALLOUT BOXES ── */
+  .callout {
+    padding:1.5rem 2rem;
+    margin:1.5rem 0;
+    border-left:3px solid;
+    position:relative;
+  }
+  .callout-icon { font-family:'JetBrains Mono',monospace; font-size:0.62rem; letter-spacing:0.2em; text-transform:uppercase; margin-bottom:0.6rem; display:block; }
+  .callout p { margin:0; font-size:0.98rem; }
+  .callout.warning { background:rgba(212,162,76,0.06); border-color:var(--amber); }
+  .callout.warning .callout-icon { color:var(--amber); }
+  .callout.danger  { background:rgba(224,85,85,0.06);  border-color:var(--red); }
+  .callout.danger  .callout-icon { color:var(--red); }
+  .callout.success { background:rgba(74,180,120,0.06); border-color:var(--green); }
+  .callout.success .callout-icon { color:var(--green); }
+  .callout.info    { background:rgba(139,167,199,0.06); border-color:var(--accent2); }
+  .callout.info    .callout-icon { color:var(--accent2); }
+
+  /* ── TABLES ── */
+  .data-table { width:100%; border-collapse:collapse; margin:1.5rem 0; }
+  .data-table th { font-family:'JetBrains Mono',monospace; font-size:0.6rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--accent); padding:0.8rem 1.2rem; border-bottom:1px solid var(--accent); text-align:left; background:rgba(200,169,110,0.04); }
+  .data-table td { font-family:'JetBrains Mono',monospace; font-size:0.78rem; color:var(--text-secondary); padding:0.8rem 1.2rem; border-bottom:1px solid var(--muted-border); vertical-align:top; }
+  .data-table td:first-child { color:var(--cream); font-weight:500; }
+  .data-table tr:last-child td { border-bottom:none; }
+  .data-table tr:hover td { background:rgba(255,255,255,0.02); }
+
+  /* ── STEP LIST ── */
+  .steps { display:flex; flex-direction:column; gap:0; margin:1.5rem 0; }
+  .step { display:grid; grid-template-columns:48px 1fr; gap:1.5rem; padding:1.5rem 0; border-bottom:1px solid var(--muted-border); }
+  .step:last-child { border-bottom:none; }
+  .step-num { font-family:'Cormorant Garamond',serif; font-size:2rem; font-weight:700; color:rgba(200,169,110,0.3); line-height:1; padding-top:0.2rem; }
+  .step-content h4 { margin:0 0 0.5rem; font-size:0.88rem; }
+  .step-content p { margin:0; font-size:0.98rem; }
+
+  /* ── GRID CARDS ── */
+  .card-grid { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--muted-border); border:1px solid var(--muted-border); margin:1.5rem 0; }
+  .card { background:var(--deep); padding:2rem; }
+  .card-title { font-family:'Syne',sans-serif; font-weight:700; font-size:0.85rem; letter-spacing:0.08em; color:var(--cream); text-transform:uppercase; margin-bottom:0.6rem; }
+  .card-body { font-family:'Cormorant Garamond',serif; font-size:0.98rem; line-height:1.7; color:var(--text-secondary); }
+
+  /* ── ARCHITECTURE DIAGRAM ── */
+  .arch-diagram {
+    background:var(--navy);
+    border:1px solid var(--muted-border);
+    padding:2.5rem;
+    margin:2rem 0;
+    font-family:'JetBrains Mono',monospace;
+    font-size:0.78rem;
+    line-height:2;
+    color:var(--text-secondary);
+  }
+  .arch-box { color:var(--cream); }
+  .arch-arrow { color:var(--accent); }
+  .arch-label { color:var(--text-muted); }
+  .arch-live { color:var(--green); }
+
+  /* ── STATUS PILLS ── */
+  .pill { display:inline-flex; align-items:center; gap:0.4rem; font-family:'JetBrains Mono',monospace; font-size:0.58rem; letter-spacing:0.12em; text-transform:uppercase; padding:0.2rem 0.6rem; }
+  .pill.live { color:var(--green); border:1px solid rgba(74,180,120,0.3); }
+  .pill.live::before { content:''; width:5px; height:5px; border-radius:50%; background:var(--green); animation:pulse 2s infinite; }
+  .pill.warn { color:var(--amber); border:1px solid rgba(212,162,76,0.3); }
+  .pill.off  { color:var(--text-muted); border:1px solid var(--muted-border); }
+
+  /* ── QUICK REF ── */
+  .quick-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--muted-border); border:1px solid var(--muted-border); margin:1.5rem 0; }
+  .quick-item { background:var(--steel); padding:1.5rem; }
+  .quick-label { font-family:'JetBrains Mono',monospace; font-size:0.55rem; letter-spacing:0.2em; color:var(--text-muted); text-transform:uppercase; margin-bottom:0.5rem; }
+  .quick-value { font-family:'JetBrains Mono',monospace; font-size:0.78rem; color:var(--accent); word-break:break-all; }
+
+  /* ── FOOTER ── */
+  footer {
+    background:var(--deep); border-top:1px solid var(--muted-border);
+    padding:2rem 4rem;
+    display:flex; justify-content:space-between; align-items:center;
+  }
+  .footer-logo { font-family:'Syne',sans-serif; font-weight:800; font-size:0.85rem; letter-spacing:0.2em; color:var(--cream); text-transform:uppercase; }
+  .footer-copy { font-family:'JetBrains Mono',monospace; font-size:0.55rem; letter-spacing:0.12em; color:var(--text-muted); }
+  .footer-ver { font-family:'JetBrains Mono',monospace; font-size:0.55rem; letter-spacing:0.12em; color:var(--accent); border:1px solid rgba(200,169,110,0.2); padding:0.25rem 0.7rem; }
+
+  /* ── REVEAL ── */
+  .reveal { opacity:0; transform:translateY(24px); transition:opacity 0.8s ease,transform 0.8s ease; }
+  .reveal.visible { opacity:1; transform:translateY(0); }
+  .reveal-delay-1 { transition-delay:0.1s; }
+  .reveal-delay-2 { transition-delay:0.2s; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.7)} }
+
+  @media print {
+    nav { display:none; }
+    section { padding:4rem 3rem; }
+    .cover { min-height:auto; padding:4rem 3rem 5rem; }
+    body::before { display:none; }
+    .reveal { opacity:1; transform:none; }
+  }
+
+  @media (max-width:900px) {
+    nav { padding:1rem 2rem; }
+    section { padding:5rem 2rem; }
+    .cover { padding:0 2rem 5rem; }
+    .card-grid { grid-template-columns:1fr; }
+    .quick-grid { grid-template-columns:1fr 1fr; }
+    .cover-meta { flex-wrap:wrap; gap:1.5rem; }
+    footer { flex-direction:column; gap:1rem; text-align:center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">ECADEL <span>GROUP</span></div>
+  <div class="doc-type">VPS Management Guide</div>
+  <div class="nav-badge">Internal Document</div>
+</nav>
+
+<!-- ══════════════════════════════════════════════════════════ COVER -->
+<section class="cover" id="cover">
+  <div class="cover-grid"></div>
+  <div class="cover-label">ECADEL GROUP LIMITED — Internal Documentation</div>
+  <h1 class="cover-title">
+    VPS <strong>Management</strong><br><em>Guide</em>
+  </h1>
+  <p class="cover-sub">
+    Everything your team needs to manage, maintain, deploy to, secure, and troubleshoot the ECADEL production server — from first connection to emergency recovery.
+  </p>
+  <div class="cover-meta">
+    <div class="cover-meta-item">
+      <span class="cover-meta-label">Server</span>
+      <span class="cover-meta-value">72.62.185.212</span>
+    </div>
+    <div class="cover-divider"></div>
+    <div class="cover-meta-item">
+      <span class="cover-meta-label">Location</span>
+      <span class="cover-meta-value">France — Paris</span>
+    </div>
+    <div class="cover-divider"></div>
+    <div class="cover-meta-item">
+      <span class="cover-meta-label">OS</span>
+      <span class="cover-meta-value">Ubuntu 24.04 LTS</span>
+    </div>
+    <div class="cover-divider"></div>
+    <div class="cover-meta-item">
+      <span class="cover-meta-label">Provider</span>
+      <span class="cover-meta-value">Hostinger KVM4</span>
+    </div>
+    <div class="cover-divider"></div>
+    <div class="cover-meta-item">
+      <span class="cover-meta-label">Version</span>
+      <span class="cover-meta-value">1.0 — May 2026</span>
+    </div>
+  </div>
+</section>
+<hr class="hr-rule">
+
+<!-- ══════════════════════════════════════════════════════════ CH1: SERVER OVERVIEW -->
+<section id="overview">
+  <div class="chapter-label reveal">Chapter One</div>
+  <h2 class="chapter-num reveal">Server <em>Overview</em></h2>
+  <p class="chapter-intro reveal">
+    Before managing a VPS you must understand what it is, what is running on it, and how all the pieces connect. This chapter gives the full picture of our production server.
+  </p>
+
+  <h3>What is a VPS?</h3>
+  <p>A <strong>Virtual Private Server (VPS)</strong> is a dedicated slice of a physical server, with guaranteed CPU, RAM, and disk allocated exclusively to us. Unlike shared hosting, we have full root access — meaning we can install anything, configure everything, and take full responsibility for security and uptime.</p>
+  <p>Our VPS runs <strong>Ubuntu 24.04 LTS</strong> — a Linux operating system. Everything we do is through the Linux command line.</p>
+
+  <h3>Our Server Specifications</h3>
+  <table class="data-table">
+    <thead><tr><th>Resource</th><th>Value</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>IP Address</td><td>72.62.185.212</td><td>Never changes — this is where all traffic arrives</td></tr>
+      <tr><td>Location</td><td>France — Paris</td><td>Hostinger data centre, EU</td></tr>
+      <tr><td>OS</td><td>Ubuntu 24.04 LTS</td><td>LTS = Long Term Support, supported until 2029</td></tr>
+      <tr><td>CPU Cores</td><td>4 vCPUs</td><td>Each Next.js app uses ~1 core under normal load</td></tr>
+      <tr><td>RAM</td><td>16 GB</td><td>More than enough for several projects simultaneously</td></tr>
+      <tr><td>Disk</td><td>200 GB SSD</td><td>Currently using ~11 GB</td></tr>
+      <tr><td>Bandwidth</td><td>16 TB/month</td><td>Current usage: ~0.003 TB/month</td></tr>
+      <tr><td>SSH User</td><td>root</td><td>Full administrator access</td></tr>
+      <tr><td>Provider Panel</td><td>hpanel.hostinger.com</td><td>VPS ID: 1713793</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Architecture — How It All Fits Together</h3>
+  <p>A visitor opening <code>ecadelgroup.com</code> in their browser triggers a chain of software that must all be working correctly for the page to load:</p>
+
+  <div class="arch-diagram reveal">
+    <div style="color:var(--text-muted); margin-bottom:1rem;">── Request flow: browser → your screen ──────────────────────────</div>
+    <br>
+    <span class="arch-box">  [ Browser ]</span>
+    <br>
+    <span class="arch-arrow">       ↓  DNS lookup → 72.62.185.212</span>
+    <br><br>
+    <span class="arch-box">  [ Nginx ]</span><span class="arch-label">  — port 80/443 — web server &amp; reverse proxy</span>
+    <br>
+    <span class="arch-label">    Terminates SSL. Redirects HTTP → HTTPS.</span>
+    <br>
+    <span class="arch-label">    Routes ecadelgroup.com → localhost:3000</span>
+    <br><br>
+    <span class="arch-arrow">       ↓  proxied request</span>
+    <br><br>
+    <span class="arch-box">  [ PM2 ]</span><span class="arch-label">  — process manager — keeps Node.js alive</span>
+    <br>
+    <span class="arch-label">    Process name: "ecadelgroup"</span>
+    <br>
+    <span class="arch-label">    Auto-restarts on crash. Survives server reboots.</span>
+    <br><br>
+    <span class="arch-arrow">       ↓  manages</span>
+    <br><br>
+    <span class="arch-box">  [ Next.js ]</span><span class="arch-live">  ● port 3000 — LIVE</span>
+    <br>
+    <span class="arch-label">    Serves the ECADEL GROUP website</span>
+    <br>
+    <span class="arch-label">    Files at: /var/www/ecadelgroup/</span>
+    <br><br>
+    <div style="color:var(--text-muted);">── Security layer ───────────────────────────────────────────────</div>
+    <br>
+    <span class="arch-box">  [ UFW Firewall ]</span><span class="arch-label">  — allows only ports 22, 80, 443</span>
+    <br>
+    <span class="arch-box">  [ Fail2ban ]</span><span class="arch-label">  — bans IPs after 3 failed SSH attempts</span>
+    <br>
+    <span class="arch-box">  [ MonarX ]</span><span class="arch-label">  — Hostinger malware scanner, real-time</span>
+  </div>
+
+  <h3>Port Map</h3>
+  <table class="data-table">
+    <thead><tr><th>Port</th><th>Service</th><th>Exposed Publicly?</th><th>Purpose</th></tr></thead>
+    <tbody>
+      <tr><td>22</td><td>SSH</td><td>Yes (UFW allowed)</td><td>Server administration access</td></tr>
+      <tr><td>80</td><td>Nginx HTTP</td><td>Yes (UFW allowed)</td><td>Redirects all traffic to HTTPS</td></tr>
+      <tr><td>443</td><td>Nginx HTTPS</td><td>Yes (UFW allowed)</td><td>Serves all websites with SSL</td></tr>
+      <tr><td>3000</td><td>Next.js (ecadelgroup)</td><td>No — internal only</td><td>The actual app, proxied through Nginx</td></tr>
+      <tr><td>3001+</td><td>Future projects</td><td>No — internal only</td><td>Each new project gets the next port</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Key File Locations</h3>
+  <table class="data-table">
+    <thead><tr><th>Path</th><th>What It Is</th></tr></thead>
+    <tbody>
+      <tr><td>/var/www/ecadelgroup/</td><td>The ECADEL website codebase (cloned from GitHub)</td></tr>
+      <tr><td>/var/www/ecadelgroup/.env.local</td><td>SMTP credentials — secret, never in GitHub</td></tr>
+      <tr><td>/etc/nginx/sites-available/ecadelgroup.com</td><td>Nginx config for ecadelgroup.com</td></tr>
+      <tr><td>/etc/nginx/sites-enabled/</td><td>Symlinks to active Nginx configs</td></tr>
+      <tr><td>/etc/letsencrypt/live/ecadelgroup.com/</td><td>SSL certificate files</td></tr>
+      <tr><td>/root/.ssh/authorized_keys</td><td>SSH public keys allowed to log in</td></tr>
+      <tr><td>/root/.pm2/logs/</td><td>PM2 application logs</td></tr>
+      <tr><td>/var/log/nginx/</td><td>Nginx access and error logs</td></tr>
+      <tr><td>/etc/fail2ban/jail.local</td><td>Fail2ban configuration</td></tr>
+      <tr><td>/etc/monarx-agent.conf</td><td>Hostinger malware scanner config</td></tr>
+    </tbody>
+  </table>
+</section>
+<hr class="hr-rule">
+
+<!-- ══════════════════════════════════════════════════════════ CH2: SSH ACCESS -->
+<section id="ssh">
+  <div class="chapter-label reveal">Chapter Two</div>
+  <h2 class="chapter-num reveal">Accessing the <em>Server</em></h2>
+  <p class="chapter-intro reveal">SSH (Secure Shell) is the encrypted tunnel through which all server management happens. Understanding it is the foundation of everything else in this guide.</p>
+
+  <div class="callout danger">
+    <span class="callout-icon">⚠ Security Rule</span>
+    <p>The server uses <strong>key-based SSH only</strong>. Password authentication has been disabled. Never share your private key. If a key is compromised, remove it from the server immediately.</p>
+  </div>
+
+  <h3>Method 1 — SSH from Terminal (Primary Method)</h3>
+  <p>This requires your SSH private key to be set up on your machine. Team members must have their public key added to the server by an administrator first.</p>
+
+  <div class="code-block">
+    <span class="code-label">Terminal — connect to server</span>
+    <pre><span class="cmd">ssh root@72.62.185.212</span>
+
+<span class="comment"># If you have multiple SSH keys, specify the correct one:</span>
+<span class="cmd">ssh -i ~/.ssh/your_private_key root@72.62.185.212</span>
+
+<span class="comment"># For the lead developer (ECADEL key configured):</span>
+<span class="cmd">ssh root@72.62.185.212</span>  <span class="comment"># uses ~/.ssh/ecadelgroup_github automatically</span></pre>
+  </div>
+
+  <h3>Method 2 — Hostinger Browser Terminal (Backup Method)</h3>
+  <p>Always available via the Hostinger hPanel even when SSH is unavailable. Go to: <strong>hpanel.hostinger.com → VPS → srv1713793.hstgr.cloud → Terminal button</strong>. This bypasses SSH entirely and connects directly through Hostinger's infrastructure.</p>
+
+  <div class="callout info">
+    <span class="callout-icon">ℹ When to use the browser terminal</span>
+    <p>Use Hostinger's terminal when: SSH is not responding, the server is under a load attack, you are locked out, or you are away from your usual machine and don't have your SSH key.</p>
+  </div>
+
+  <h3>Adding a New Team Member's SSH Key</h3>
+  <p>Every team member who needs server access must generate their own SSH key pair. They give you their <strong>public key</strong> only. You add it to the server. They keep their private key secret.</p>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-content">
+        <h4>Team member generates a key pair on their machine</h4>
+        <div class="code-block" style="margin-top:0.8rem;">
+          <pre><span class="cmd">ssh-keygen -t ed25519 -C "their.email@example.com"</span>
+<span class="comment"># Press Enter for default location (~/.ssh/id_ed25519)</span>
+<span class="comment"># Set a passphrase for extra security</span>
+<span class="cmd">cat ~/.ssh/id_ed25519.pub</span>  <span class="comment"># They send you this output</span></pre>
+        </div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-content">
+        <h4>You add their public key to the server</h4>
+        <div class="code-block" style="margin-top:0.8rem;">
+          <pre><span class="comment"># SSH into the server, then:</span>
+<span class="cmd">echo "ssh-ed25519 AAAA...their_key... their@email.com" >> /root/.ssh/authorized_keys</span>
+<span class="cmd">cat /root/.ssh/authorized_keys</span>  <span class="comment"># Verify it's there</span></pre>
+        </div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-content">
+        <h4>They test the connection</h4>
+        <div class="code-block" style="margin-top:0.8rem;">
+          <pre><span class="cmd">ssh root@72.62.185.212</span>
+<span class="output"># Expected: Welcome to Ubuntu 24.04 LTS...</span></pre>
+        </div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">04</div>
+      <div class="step-content">
+        <h4>Removing access (when someone leaves)</h4>
+        <div class="code-block" style="margin-top:0.8rem;">
+          <pre><span class="cmd">nano /root/.ssh/authorized_keys</span>
+<span class="comment"># Delete the line containing their key, save (Ctrl+O, Ctrl+X)</span></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h3>Essential Linux Commands for Beginners</h3>
+  <p>If you are new to Linux, these are the commands you will use most often. Everything runs as <code>root</code> (full administrator).</p>
+
+  <table class="data-table">
+    <thead><tr><th>Command</th><th>What It Does</th><th>Example</th></tr></thead>
+    <tbody>
+      <tr><td>ls</td><td>List files in a directory</td><td><code>ls /var/www/</code></td></tr>
+      <tr><td>ls -la</td><td>List files with details and hidden files</td><td><code>ls -la /root/.ssh/</code></td></tr>
+      <tr><td>cd</td><td>Change directory</td><td><code>cd /var/www/ecadelgroup</code></td></tr>
+      <tr><td>pwd</td><td>Print current directory</td><td><code>pwd</code></td></tr>
+      <tr><td>cat</td><td>Display file contents</td><td><code>cat /etc/nginx/sites-available/ecadelgroup.com</code></td></tr>
+      <tr><td>nano</td><td>Edit a file in the terminal</td><td><code>nano /var/www/ecadelgroup/.env.local</code></td></tr>
+      <tr><td>mkdir -p</td><td>Create directory (and parents)</td><td><code>mkdir -p /var/www/newproject</code></td></tr>
+      <tr><td>rm -rf</td><td>Delete file or folder permanently</td><td><code>rm -rf /tmp/unwanted</code></td></tr>
+      <tr><td>cp</td><td>Copy a file</td><td><code>cp file.conf file.conf.bak</code></td></tr>
+      <tr><td>mv</td><td>Move or rename a file</td><td><code>mv old.conf new.conf</code></td></tr>
+      <tr><td>ps aux</td><td>List all running processes</td><td><code>ps aux | grep nginx</code></td></tr>
+      <tr><td>top / htop</td><td>Live CPU/memory monitor (press q to quit)</td><td><code>htop</code></td></tr>
+      <tr><td>df -h</td><td>Check disk space</td><td><code>df -h</code></td></tr>
+      <tr><td>free -h</td><td>Check RAM usage</td><td><code>free -h</code></td></tr>
+      <tr><td>tail -f</td><td>Watch a log file in real-time</td><td><code>tail -f /var/log/nginx/error.log</code></td></tr>
+      <tr><td>grep</td><td>Search text in files or output</td><td><code>grep "error" /var/log/nginx/error.log</code></td></tr>
+      <tr><td>Ctrl + C</td><td>Stop a running command</td><td>—</td></tr>
+      <tr><td>Ctrl + D / exit</td><td>Log out of SSH session</td><td>—</td></tr>
+    </tbody>
+  </table>
+</section>
+<hr class="hr-rule">
+
+<!-- ══════════════════════════════════════════════════════════ CH3: PM2 -->
+<section id="pm2">
+  <div class="chapter-label reveal">Chapter Three</div>
+  <h2 class="chapter-num reveal">PM2 — <em>Process Manager</em></h2>
+  <p class="chapter-intro reveal">PM2 is the software that keeps our Next.js applications running. Without PM2, if the app crashed or the server rebooted, the website would go offline and stay offline until someone manually restarted it. PM2 prevents that.</p>
+
+  <h3>Understanding PM2</h3>
+  <p>Think of PM2 as a supervisor. It watches our Next.js application at all times. If it crashes, PM2 restarts it automatically. When the server reboots, PM2 starts all saved processes automatically. It also collects logs so we can see what happened and when.</p>
+
+  <h3>Checking the Status of All Applications</h3>
+  <div class="code-block">
+    <span class="code-label">Check PM2 status</span>
+    <pre><span class="cmd">pm2 status</span>
+
+<span class="comment"># You should see something like:</span>
+<span class="output">┌─────┬──────────────┬─────────┬──────────┬────────┬──────┬───────────┐
+│ id  │ name         │ mode    │ pid      │ uptime │ ↺    │ status    │
+├─────┼──────────────┼─────────┼──────────┼────────┼──────┼───────────┤
+│ 0   │ ecadelgroup  │ fork    │ 1422     │ 6h     │ 0    │ online    │
+└─────┴──────────────┴─────────┴──────────┴────────┴──────┴───────────┘</span>
+
+<span class="comment"># Status should be "online". Restart count (↺) should be 0 or low.</span>
+<span class="comment"># High restart count means the app is crashing repeatedly.</span></pre>
+  </div>
+
+  <h3>Common PM2 Commands</h3>
+  <table class="data-table">
+    <thead><tr><th>Command</th><th>What It Does</th></tr></thead>
+    <tbody>
+      <tr><td><code>pm2 status</code></td><td>Show all running processes and their health</td></tr>
+      <tr><td><code>pm2 restart ecadelgroup</code></td><td>Restart the ecadelgroup application</td></tr>
+      <tr><td><code>pm2 stop ecadelgroup</code></td><td>Stop the application (site goes offline)</td></tr>
+      <tr><td><code>pm2 start ecadelgroup</code></td><td>Start a stopped application</td></tr>
+      <tr><td><code>pm2 reload ecadelgroup</code></td><td>Zero-downtime restart (keeps connections alive)</td></tr>
+      <tr><td><code>pm2 logs ecadelgroup</code></td><td>Show live logs (press Ctrl+C to stop)</td></tr>
+      <tr><td><code>pm2 logs ecadelgroup --lines 50</code></td><td>Show last 50 log lines and exit</td></tr>
+      <tr><td><code>pm2 delete ecadelgroup</code></td><td>Remove process from PM2 entirely</td></tr>
+      <tr><td><code>pm2 save</code></td><td>Save current process list (run after any changes)</td></tr>
+      <tr><td><code>pm2 resurrect</code></td><td>Restore saved processes (used after full restart)</td></tr>
+      <tr><td><code>pm2 monit</code></td><td>Live dashboard showing CPU/memory per process</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Starting a New Application with PM2</h3>
+  <p>When adding a new project to the server, you register it with PM2 like this:</p>
+  <div class="code-block">
+    <span class="code-label">Register a new project</span>
+    <pre><span class="comment"># Navigate to the project directory first</span>
+<span class="cmd">cd /var/www/newproject</span>
+
+<span class="comment"># Start the application — give it a unique name and port</span>
+<span class="cmd">pm2 start npm --name "newproject" -- start -- --port 3001</span>
+
+<span class="comment"># Save so it survives reboots</span>
+<span class="cmd">pm2 save</span>
+
+<span class="comment"># Verify it started correctly</span>
+<span class="cmd">pm2 status</span>
+<span class="cmd">pm2 logs newproject --lines 20</span></pre>
+  </div>
+
+  <h3>Reading PM2 Logs</h3>
+  <p>Logs are split into two files per application. Both live in <code>/root/.pm2/logs/</code>:</p>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-title">Output log (stdout)</div>
+      <div class="card-body">Normal application output — server start messages, page requests, API calls. File: <code>ecadelgroup-out.log</code></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Error log (stderr)</div>
+      <div class="card-body">Errors, crashes, warnings. This is the first place to look when something is wrong. File: <code>ecadelgroup-error.log</code></div>
+    </div>
+  </div>
+
+  <div class="code-block">
+    <span class="code-label">Reading logs</span>
+    <pre><span class="comment"># Watch live logs (both stdout and stderr)</span>
+<span class="cmd">pm2 logs ecadelgroup</span>
+
+<span class="comment"># Read the last 100 error lines</span>
+<span class="cmd">pm2 logs ecadelgroup --lines 100 --err --nostream</span>
+
+<span class="comment"># Read log files directly</span>
+<span class="cmd">tail -50 /root/.pm2/logs/ecadelgroup-error.log</span>
+<span class="cmd">tail -50 /root/.pm2/logs/ecadelgroup-out.log</span>
+
+<span class="comment"># Clear logs (if they grow too large)</span>
+<span class="cmd">pm2 flush ecadelgroup</span></pre>
+  </div>
+</section>
+<hr class="hr-rule">
+
+<!-- ══════════════════════════════════════════════════════════ CH4: NGINX -->
+<section id="nginx">
+  <div class="chapter-label reveal">Chapter Four</div>
+  <h2 class="chapter-num reveal">Nginx — <em>Web Server</em></h2>
+  <p class="chapter-intro reveal">Nginx is the public-facing web server. It receives all incoming traffic on ports 80 and 443, handles SSL, and routes each domain to the correct Next.js application running on the server.</p>
+
+  <h3>How Nginx Routing Works</h3>
+  <p>Nginx uses configuration files called <strong>server blocks</strong> — one per domain. Each file lives in <code>/etc/nginx/sites-available/</code> and is "enabled" by creating a symlink in <code>/etc/nginx/sites-enabled/</code>.</p>
+
+  <h3>Common Nginx Commands</h3>
+  <table class="data-table">
+    <thead><tr><th>Command</th><th>What It Does</th></tr></thead>
+    <tbody>
+      <tr><td><code>nginx -t</code></td><td>Test configuration for syntax errors — ALWAYS run before reload</td></tr>
+      <tr><td><code>systemctl reload nginx</code></td><td>Reload config without dropping connections (preferred)</td></tr>
+      <tr><td><code>systemctl restart nginx</code></td><td>Full restart — briefly drops connections</td></tr>
+      <tr><td><code>systemctl status nginx</code></td><td>Check if Nginx is running and see recent log lines</td></tr>
+      <tr><td><code>systemctl stop nginx</code></td><td>Stop Nginx (site goes offline)</td></tr>
+      <tr><td><code>systemctl start nginx</code></td><td>Start Nginx</td></tr>
+      <tr><td><code>systemctl enable nginx</code></td><td>Make Nginx start automatically on server boot</td></tr>
+    </tbody>
+  </table>
+
+  <h3>The ecadelgroup.com Configuration</h3>
+  <div class="code-block">
+    <span class="code-label">/etc/nginx/sites-available/ecadelgroup.com</span>
+    <pre><span class="comment"># HTTP — redirect everything to HTTPS</span>
+server {
+    listen 80;
+    server_name ecadelgroup.com www.ecadelgroup.com;
+    <span class="flag">return 301 https://$host$request_uri;</span>  <span class="comment"># certbot added this</span>
+}
+
+<span class="comment"># HTTPS — serve the actual site</span>
+server {
+    listen 443 ssl;
+    server_name <span class="path">ecadelgroup.com www.ecadelgroup.com</span>;
+
+    <span class="comment"># SSL certificates (managed by certbot)</span>
+    ssl_certificate     <span class="path">/etc/letsencrypt/live/ecadelgroup.com/fullchain.pem</span>;
+    ssl_certificate_key <span class="path">/etc/letsencrypt/live/ecadelgroup.com/privkey.pem</span>;
+
+    <span class="comment"># Proxy all requests to the Next.js app</span>
+    location / {
+        proxy_pass <span class="flag">http://localhost:3000</span>;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+}</pre>
+  </div>
+
+  <h3>Adding a New Domain / Project to Nginx</h3>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-content">
+        <h4>Create the Nginx config file</h4>
+        <div class="code-block" style="margin-top:0.8rem;">
+          <pre><span class="cmd">nano /etc/nginx/sites-available/newdomain.com</span></pre>
+        </div>
+        <p>Paste the server block template (see below), replacing <code>newdomain.com</code> and <code>3001</code> with your values.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-content">
+        <h4>Enable the site</h4>
+        <div class="code-block" style="margin-top:0.8rem;">
+          <pre><span class="cmd">ln -s /etc/nginx/sites-available/newdomain.com /etc/nginx/sites-enabled/</span></pre>
+        </div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-content">
+        <h4>Test and reload</h4>
+        <div class="code-block" style="margin-top:0.8rem;">
+          <pre><span class="cmd">nginx -t</span>  <span class="comment"># Must show "test is successful"</span>
+<span class="cmd">systemctl reload nginx</span></pre>
+        </div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">04</div>
+      <div class="step-content">
+        <h4>Get SSL certificate</h4>
+        <div class="code-block" style="margin-top:0.8rem;">
+          <pre><span class="cmd">certbot --nginx -d newdomain.com -d www.newdomain.com \
+  --non-interactive --agree-tos \
+  -m ecadel@ecadelgroup.com --redirect</span></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="code-block">
+    <span class="code-label">New project Nginx template (port 3001)</span>
+    <pre>server {
+    listen 80;
+    server_name <span class="path">newdomain.com www.newdomain.com</span>;
+
+    gzip on;
+    gzip_types text/plain text/css application/json application/javascript;
+
+    location / {
+        proxy_pass <span class="flag">http://localhost:3001</span>;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_cache_bypass $http_upgrade;
+    }
+}</pre>
+  </div>
+
+  <h3>Nginx Logs</h3>
+  <div class="code-block">
+    <span class="code-label">Reading Nginx logs</span>
+    <pre><span class="comment"># Access log — every request that reaches Nginx</span>
+<span class="cmd">tail -50 /var/log/nginx/access.log</span>
+
+<span class="comment"># Error log — connection failures, config errors, proxy errors</span>
+<span class="cmd">tail -50 /var/log/nginx/error.log</span>
+
+<span class="comment"># Watch error log live</span>
+<span class="cmd">tail -f /var/log/nginx/error.log</span>
+
+<span class="comment"># Common error: "connect() failed (111: Connection refused)"</span>
+<span class="comment"># This means the Next.js app is not running — restart PM2</span></pre>
+  </div>
+</section>
+<hr class="hr-rule">
+
+<!-- ══════════════════════════════════════════════════════════ CH5: DEPLOYMENT -->
+<section id="deployment">
+  <div class="chapter-label reveal">Chapter Five</div>
+  <h2 class="chapter-num reveal"><em>Deploying</em> Updates</h2>
+  <p class="chapter-intro reveal">Our deployment workflow is: write code locally → push to GitHub → pull on the server → build → restart. The deploy script automates the last three steps.</p>
+
+  <h3>Standard Deployment (Most Common)</h3>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-content">
+        <h4>On your local machine — push changes to GitHub</h4>
+        <div class="code-block" style="margin-top:0.8rem;">
+          <pre><span class="cmd">git add .</span>
+<span class="cmd">git commit -m "Describe what you changed"</span>
+<span class="cmd">git push</span></pre>
+        </div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-content">
+        <h4>SSH into the server</h4>
+        <div class="code-block" style="margin-top:0.8rem;">
+          <pre><span class="cmd">ssh root@72.62.185.212</span></pre>
+        </div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-content">
+        <h4>Run the deploy script</h4>
+        <div class="code-block" style="margin-top:0.8rem;">
+          <pre><span class="cmd">cd /var/www/ecadelgroup && ./deploy.sh</span></pre>
+        </div>
+        <p>The script runs: <code>git pull → npm install → npm run build → pm2 restart</code></p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">04</div>
+      <div class="step-content">
+        <h4>Verify the site is live</h4>
+        <div class="code-block" style="margin-top:0.8rem;">
+          <pre><span class="cmd">pm2 status</span>  <span class="comment"># Should show "online"</span>
+<span class="cmd">curl -s -o /dev/null -w "%{http_code}" https://ecadelgroup.com</span>
+<span class="output">200</span>  <span class="comment"># 200 = OK. If you see anything else, check logs.</span></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout warning">
+    <span class="callout-icon">⚠ Before Every Deployment</span>
+    <p>Always run <code>npx tsc --noEmit</code> on your local machine before pushing. A TypeScript error will fail the build on the server and take the site down during the build window.</p>
+  </div>
+
+  <h3>If the Build Fails</h3>
+  <div class="code-block">
+    <span class="code-label">Debugging a failed build</span>
+    <pre><span class="comment"># Run the build manually to see the full error output</span>
+<span class="cmd">cd /var/www/ecadelgroup</span>
+<span class="cmd">npm run build</span>
+
+<span class="comment"># Read the error carefully. Common causes:</span>
+<span class="comment">  - TypeScript type error in new code → fix locally, push, deploy again</span>
+<span class="comment">  - ESLint error (unused variable, unescaped entity) → fix and push</span>
+<span class="comment">  - package-lock.json conflict → run: git checkout -- package-lock.json</span>
+<span class="comment">  - Missing env var → check .env.local exists</span>
+
+<span class="comment"># The PREVIOUS build is still running during a failed deploy</span>
+<span class="comment"># so the site stays up until you fix and redeploy.</span></pre>
+  </div>
+
+  <h3>Updating Environment Variables</h3>
+  <p>The <code>.env.local</code> file on the server holds secrets like SMTP credentials. It is <strong>never committed to GitHub</strong>. To update it:</p>
+  <div class="code-block">
+    <span class="code-label">Editing environment variables on the server</span>
+    <pre><span class="cmd">nano /var/www/ecadelgroup/.env.local</span>
+<span class="comment"># Make changes, then Ctrl+O to save, Ctrl+X to exit</span>
+
+<span class="comment"># Restart the app to pick up new values</span>
+<span class="cmd">pm2 restart ecadelgroup</span>
+
+<span class="comment"># Current .env.local contents:</span>
+<span class="comment">SMTP_HOST=smtp.hostinger.com</span>
+<span class="comment">SMTP_PORT=465</span>
+<span class="comment">SMTP_USER=ecadel@ecadelgroup.com</span>
+<span class="comment">SMTP_PASS=[your email password]</span></pre>
+  </div>
+</section>
+<hr class="hr-rule">
+
+<!-- ══════════════════════════════════════════════════════════ CH6: SSL -->
+<section id="ssl">
+  <div class="chapter-label reveal">Chapter Six</div>
+  <h2 class="chapter-num reveal">SSL Certificates &amp; <em>HTTPS</em></h2>
+  <p class="chapter-intro reveal">SSL certificates encrypt the connection between the visitor's browser and our server. Without a valid certificate, browsers show a "Not Secure" warning. Our certificates are issued by Let's Encrypt and renew automatically.</p>
+
+  <h3>How Let's Encrypt Works</h3>
+  <p>Let's Encrypt is a free, automated certificate authority. It issues certificates valid for <strong>90 days</strong> and sets up a scheduled task (cron job) to renew them automatically at around 60 days. You should never need to manually renew unless something goes wrong.</p>
+
+  <h3>Checking Certificate Status</h3>
+  <div class="code-block">
+    <span class="code-label">SSL certificate management</span>
+    <pre><span class="comment"># List all certificates and their expiry dates</span>
+<span class="cmd">certbot certificates</span>
+<span class="output">Found the following certs:
+  Certificate Name: ecadelgroup.com
+    Domains: ecadelgroup.com www.ecadelgroup.com
+    Expiry Date: 2026-08-27 08:23:46+00:00 (VALID: 89 days)
+    Certificate Path: /etc/letsencrypt/live/ecadelgroup.com/fullchain.pem</span>
+
+<span class="comment"># Test the auto-renewal process (doesn't actually renew)</span>
+<span class="cmd">certbot renew --dry-run</span>
+
+<span class="comment"># Force manual renewal (only if within 30 days of expiry or expired)</span>
+<span class="cmd">certbot renew</span>
+<span class="cmd">systemctl reload nginx</span>
+
+<span class="comment"># Check when auto-renewal is scheduled</span>
+<span class="cmd">systemctl status certbot.timer</span></pre>
+  </div>
+
+  <h3>Getting a Certificate for a New Domain</h3>
+  <div class="code-block">
+    <span class="code-label">Issue certificate for a new domain</span>
+    <pre><span class="comment"># Prerequisites: DNS must already point to 72.62.185.212 AND</span>
+<span class="comment"># Nginx must be configured for the domain BEFORE running this</span>
+<span class="cmd">certbot --nginx \
+  -d newdomain.com \
+  -d www.newdomain.com \
+  --non-interactive \
+  --agree-tos \
+  -m ecadel@ecadelgroup.com \
+  --redirect</span>
+
+<span class="comment"># --redirect automatically adds HTTP→HTTPS redirect to Nginx config</span></pre>
+  </div>
+
+  <div class="callout warning">
+    <span class="callout-icon">⚠ DNS Must Point to the VPS First</span>
+    <p>Before running certbot, the domain's A record must already be pointing to <strong>72.62.185.212</strong>. Let's Encrypt verifies domain ownership by making an HTTP request to the domain — if DNS hasn't propagated, the certificate request will fail.</p>
+  </div>
+
+  <h3>SSL Troubleshooting</h3>
+  <table class="data-table">
+    <thead><tr><th>Symptom</th><th>Likely Cause</th><th>Fix</th></tr></thead>
+    <tbody>
+      <tr><td>"Certificate expired" in browser</td><td>Auto-renewal failed</td><td>Run <code>certbot renew && systemctl reload nginx</code></td></tr>
+      <tr><td>certbot renew fails</td><td>Port 80 blocked by firewall</td><td>Check <code>ufw status</code> — port 80 must be open during renewal</td></tr>
+      <tr><td>Certificate issued but site still HTTP</td><td>Nginx not reloaded after certbot</td><td>Run <code>systemctl reload nginx</code></td></tr>
+      <tr><td>Wrong domain on certificate</td><td>DNS had multiple A records</td><td>Remove extra A records, then renew</td></tr>
+    </tbody>
+  </table>
+</section>
+<hr class="hr-rule">
+
+<!-- ══════════════════════════════════════════════════════════ CH7: SECURITY -->
+<section id="security">
+  <div class="chapter-label reveal">Chapter Seven</div>
+  <h2 class="chapter-num reveal">Security &amp; <em>Hardening</em></h2>
+  <p class="chapter-intro reveal">A VPS exposed to the internet is probed constantly by automated bots. This chapter covers the security layers we have in place, what each one does, and how to manage them.</p>
+
+  <div class="callout danger">
+    <span class="callout-icon">⚠ Incident History — May 2026</span>
+    <p>Our server was compromised by a cryptocurrency miner (XMRig) via a leaked root password. This consumed 379% CPU and took the site offline. All sections in this chapter describe protections we put in place as a direct result. <strong>Never share passwords in chat applications or documents.</strong></p>
+  </div>
+
+  <h3>Security Layer 1 — UFW Firewall</h3>
+  <p>UFW (Uncomplicated Firewall) blocks all incoming traffic by default except for the three ports our services legitimately need. Anything else — including any port a malicious process might try to open — is automatically rejected.</p>
+
+  <div class="code-block">
+    <span class="code-label">UFW management</span>
+    <pre><span class="comment"># Check current firewall rules</span>
+<span class="cmd">ufw status verbose</span>
+<span class="output">Status: active
+To                         Action      From
+--                         ------      ----
+22/tcp                     ALLOW IN    Anywhere   (SSH)
+80/tcp                     ALLOW IN    Anywhere   (HTTP)
+443/tcp                    ALLOW IN    Anywhere   (HTTPS)</span>
+
+<span class="comment"># Allow a new port (e.g., when adding a new service)</span>
+<span class="cmd">ufw allow 8080/tcp</span>
+
+<span class="comment"># Block a port</span>
+<span class="cmd">ufw deny 8080/tcp</span>
+
+<span class="comment"># Block a specific IP permanently</span>
+<span class="cmd">ufw deny from 192.168.1.100</span>
+
+<span class="comment"># Check recent UFW activity in system logs</span>
+<span class="cmd">grep "UFW BLOCK" /var/log/syslog | tail -20</span></pre>
+  </div>
+
+  <h3>Security Layer 2 — Fail2ban</h3>
+  <p>Fail2ban monitors SSH login attempts. After <strong>3 failed attempts within 10 minutes</strong>, it bans the offending IP address for <strong>24 hours</strong>. This defeats brute-force attacks that try millions of password combinations.</p>
+
+  <div class="code-block">
+    <span class="code-label">Fail2ban management</span>
+    <pre><span class="comment"># Check current bans</span>
+<span class="cmd">fail2ban-client status sshd</span>
+<span class="output">Status for the jail: sshd
+|- Filter:  Currently banned: 3
+|  `- Banned IP list: 185.220.101.45 92.63.197.48 194.165.16.72</span>
+
+<span class="comment"># Unban a specific IP (e.g., if you locked yourself out)</span>
+<span class="cmd">fail2ban-client set sshd unbanip 185.220.101.45</span>
+
+<span class="comment"># Check fail2ban service is running</span>
+<span class="cmd">systemctl status fail2ban</span>
+
+<span class="comment"># View your configuration</span>
+<span class="cmd">cat /etc/fail2ban/jail.local</span>
+
+<span class="comment"># Restart fail2ban after config changes</span>
+<span class="cmd">systemctl restart fail2ban</span></pre>
+  </div>
+
+  <h3>Security Layer 3 — SSH Key Authentication</h3>
+  <p>Password-based SSH login is <strong>permanently disabled</strong>. Only those with an authorized SSH private key can log in. This means even if someone knows our server's IP and username, they cannot gain access without the key file.</p>
+
+  <div class="code-block">
+    <span class="code-label">Verify SSH hardening is in place</span>
+    <pre><span class="cmd">grep -E "PasswordAuthentication|PermitRootLogin" /etc/ssh/sshd_config</span>
+<span class="output">PasswordAuthentication no
+PermitRootLogin prohibit-password</span>
+<span class="comment"># "no" and "prohibit-password" are the correct secure values</span>
+
+<span class="comment"># View who is authorized to log in</span>
+<span class="cmd">cat /root/.ssh/authorized_keys</span></pre>
+  </div>
+
+  <h3>Security Layer 4 — MonarX Malware Scanner</h3>
+  <p>Hostinger's MonarX agent scans the server continuously for known malware signatures, PHP shells, cryptocurrency miners, and suspicious file modifications. It reports findings to the Hostinger hPanel.</p>
+
+  <div class="code-block">
+    <span class="code-label">MonarX scanner management</span>
+    <pre><span class="comment"># Check if the agent is running</span>
+<span class="cmd">systemctl status monarx-agent</span>
+
+<span class="comment"># Restart the agent if it's not active</span>
+<span class="cmd">systemctl restart monarx-agent</span>
+
+<span class="comment"># View agent configuration</span>
+<span class="cmd">cat /etc/monarx-agent.conf</span>
+
+<span class="comment"># The dashboard is at:</span>
+<span class="comment"># hpanel.hostinger.com → VPS → Security → Malware Scanner</span></pre>
+  </div>
+
+  <h3>Responding to a Security Incident</h3>
+  <p>If the server shows signs of compromise (high CPU from unknown processes, unexpected outbound traffic, files you didn't create), act immediately in this order:</p>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-content">
+        <h4>Identify the malicious processes</h4>
+        <div class="code-block" style="margin-top:0.8rem;">
+          <pre><span class="cmd">ps aux --sort=-%cpu | head -20</span>
+<span class="comment"># Look for processes you don't recognise at the top</span></pre>
+        </div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-content">
+        <h4>Kill malicious processes</h4>
+        <div class="code-block" style="margin-top:0.8rem;">
+          <pre><span class="cmd">kill -9 [PID]</span>
+<span class="comment"># Or by name:</span>
+<span class="cmd">pkill -9 -f processname</span></pre>
+        </div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-content">
+        <h4>Find and delete malware files</h4>
+        <div class="code-block" style="margin-top:0.8rem;">
+          <pre><span class="cmd">find /tmp /var/tmp /root /dev/shm -type f 2>/dev/null | grep -v proc</span>
+<span class="cmd">rm -rf /tmp/suspicious* /var/tmp/suspicious*</span></pre>
+        </div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">04</div>
+      <div class="step-content">
+        <h4>Check for persistence (cron jobs, startup scripts)</h4>
+        <div class="code-block" style="margin-top:0.8rem;">
+          <pre><span class="cmd">crontab -l</span>
+<span class="cmd">cat /root/.bashrc | tail -20</span>
+<span class="cmd">ls /etc/cron.d/ /etc/cron.daily/</span></pre>
+        </div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">05</div>
+      <div class="step-content">
+        <h4>Change all passwords and rotate SSH keys immediately</h4>
+        <div class="code-block" style="margin-top:0.8rem;">
+          <pre><span class="cmd">passwd root</span>
+<span class="comment"># Review and remove any unfamiliar keys:</span>
+<span class="cmd">nano /root/.ssh/authorized_keys</span></pre>
+        </div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">06</div>
+      <div class="step-content">
+        <h4>Restore the site and run a full malware scan</h4>
+        <div class="code-block" style="margin-top:0.8rem;">
+          <pre><span class="cmd">pm2 restart ecadelgroup</span>
+<span class="cmd">systemctl restart monarx-agent</span>
+<span class="comment"># Then check the Hostinger panel for scan results</span></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<hr class="hr-rule">
+
+<!-- ══════════════════════════════════════════════════════════ CH8: MONITORING -->
+<section id="monitoring">
+  <div class="chapter-label reveal">Chapter Eight</div>
+  <h2 class="chapter-num reveal">Monitoring &amp; <em>Health Checks</em></h2>
+  <p class="chapter-intro reveal">Prevention is better than recovery. Running regular health checks means you catch problems before they become outages.</p>
+
+  <h3>Daily Health Check (2 minutes)</h3>
+  <div class="code-block">
+    <span class="code-label">Run these every morning to confirm everything is healthy</span>
+    <pre><span class="comment"># 1. Applications running?</span>
+<span class="cmd">pm2 status</span>
+<span class="comment"># All should show "online". Restart count should be low.</span>
+
+<span class="comment"># 2. CPU and memory OK?</span>
+<span class="cmd">free -h && uptime</span>
+<span class="comment"># Load average should be below 4.0 (we have 4 CPU cores)</span>
+
+<span class="comment"># 3. Disk not full?</span>
+<span class="cmd">df -h /</span>
+<span class="comment"># "Use%" should be below 80%</span>
+
+<span class="comment"># 4. Firewall active?</span>
+<span class="cmd">ufw status</span>
+<span class="comment"># Should show "Status: active"</span>
+
+<span class="comment"># 5. Any recent errors?</span>
+<span class="cmd">pm2 logs ecadelgroup --lines 20 --nostream 2>&1 | grep -i error | tail -10</span>
+<span class="cmd">tail -10 /var/log/nginx/error.log</span></pre>
+  </div>
+
+  <h3>Checking Server Resources</h3>
+  <div class="code-block">
+    <span class="code-label">Resource monitoring commands</span>
+    <pre><span class="comment"># CPU usage — top processes</span>
+<span class="cmd">ps aux --sort=-%cpu | head -10</span>
+
+<span class="comment"># Memory usage breakdown</span>
+<span class="cmd">free -h</span>
+<span class="output">               total    used    free    available
+Mem:            16Gi   1.2Gi  13.5Gi     14.5Gi   ← Good — lots of free RAM
+Swap:            0Bi    0Bi    0Bi</span>
+
+<span class="comment"># Disk usage by folder</span>
+<span class="cmd">du -sh /var/www/* /root/.pm2/logs/ /var/log/</span>
+
+<span class="comment"># Network connections (active connections to the server)</span>
+<span class="cmd">ss -tlnp</span>
+
+<span class="comment"># Who is currently logged in via SSH</span>
+<span class="cmd">who</span>
+<span class="cmd">last | head -10</span>  <span class="comment"># Recent login history</span></pre>
+  </div>
+
+  <h3>Checking the SSL Certificate Expiry</h3>
+  <div class="code-block">
+    <span class="code-label">Check certificate expiry from outside the server</span>
+    <pre><span class="comment"># From your local machine — checks the live certificate</span>
+<span class="cmd">echo | openssl s_client -connect ecadelgroup.com:443 2>/dev/null | openssl x509 -noout -dates</span>
+<span class="output">notBefore=May 29 08:23:46 2026 GMT
+notAfter=Aug 27 08:23:46 2026 GMT   ← Certificate expires on this date</span></pre>
+  </div>
+
+  <h3>Hostinger Panel Monitoring</h3>
+  <p>The Hostinger hPanel shows CPU, memory, disk usage, and traffic graphs over time. Check it weekly at <strong>hpanel.hostinger.com → VPS → Overview</strong>. A healthy server shows CPU below 20% in the graph with no sustained spikes.</p>
+
+  <div class="callout warning">
+    <span class="callout-icon">⚠ Warning Signs to Watch For</span>
+    <p>CPU consistently above 50% · Memory usage above 80% · Disk usage above 80% · PM2 restart count growing rapidly · Any process you don't recognise in <code>ps aux</code> using high CPU · Outbound traffic spike in the Hostinger panel</p>
+  </div>
+</section>
+<hr class="hr-rule">
+
+<!-- ══════════════════════════════════════════════════════════ CH9: MULTI-PROJECT -->
+<section id="multiproject">
+  <div class="chapter-label reveal">Chapter Nine</div>
+  <h2 class="chapter-num reveal">Hosting <em>Multiple Projects</em></h2>
+  <p class="chapter-intro reveal">Our VPS is designed to host several projects simultaneously. Each project gets its own directory, PM2 process name, port number, and Nginx configuration. They run independently — one project failing does not affect the others.</p>
+
+  <h3>Port Allocation (Always Increment by 1)</h3>
+  <table class="data-table">
+    <thead><tr><th>Port</th><th>Project</th><th>Domain</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>3000</td><td>ecadelgroup</td><td>ecadelgroup.com</td><td><span class="pill live">Live</span></td></tr>
+      <tr><td>3001</td><td>(next project)</td><td>—</td><td><span class="pill off">Available</span></td></tr>
+      <tr><td>3002</td><td>(future)</td><td>—</td><td><span class="pill off">Available</span></td></tr>
+      <tr><td>3003</td><td>(future)</td><td>—</td><td><span class="pill off">Available</span></td></tr>
+    </tbody>
+  </table>
+
+  <h3>Adding a New Project — Complete Checklist</h3>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-content">
+        <h4>Create project directory and clone the repo</h4>
+        <div class="code-block" style="margin-top:0.8rem;">
+          <pre><span class="cmd">mkdir -p /var/www/projectname</span>
+<span class="cmd">cd /var/www/projectname</span>
+<span class="cmd">git clone git@github.com:ecadelgrouplimited-dot/repo.git .</span></pre>
+        </div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-content">
+        <h4>Create environment variables file if needed</h4>
+        <div class="code-block" style="margin-top:0.8rem;">
+          <pre><span class="cmd">nano /var/www/projectname/.env.local</span>
+<span class="cmd">chmod 600 /var/www/projectname/.env.local</span></pre>
+        </div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-content">
+        <h4>Install dependencies and build</h4>
+        <div class="code-block" style="margin-top:0.8rem;">
+          <pre><span class="cmd">npm install</span>
+<span class="cmd">npm run build</span></pre>
+        </div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">04</div>
+      <div class="step-content">
+        <h4>Register with PM2 on the next available port</h4>
+        <div class="code-block" style="margin-top:0.8rem;">
+          <pre><span class="cmd">pm2 start npm --name "projectname" -- start -- --port 3001</span>
+<span class="cmd">pm2 save</span></pre>
+        </div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">05</div>
+      <div class="step-content">
+        <h4>Create Nginx config and enable it</h4>
+        <div class="code-block" style="margin-top:0.8rem;">
+          <pre><span class="cmd">nano /etc/nginx/sites-available/projectdomain.com</span>
+<span class="comment"># Paste the template from Chapter 4, update domain and port</span>
+<span class="cmd">ln -s /etc/nginx/sites-available/projectdomain.com /etc/nginx/sites-enabled/</span>
+<span class="cmd">nginx -t && systemctl reload nginx</span></pre>
+        </div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">06</div>
+      <div class="step-content">
+        <h4>Point DNS to the VPS and get SSL</h4>
+        <div class="code-block" style="margin-top:0.8rem;">
+          <pre><span class="comment"># In your DNS provider: add A record → 72.62.185.212</span>
+<span class="comment"># Wait for DNS to propagate (check with: dig +short projectdomain.com A @8.8.8.8)</span>
+<span class="cmd">certbot --nginx -d projectdomain.com -d www.projectdomain.com \
+  --non-interactive --agree-tos -m ecadel@ecadelgroup.com --redirect</span></pre>
+        </div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">07</div>
+      <div class="step-content">
+        <h4>Create a deploy.sh script in the project directory</h4>
+        <div class="code-block" style="margin-top:0.8rem;">
+          <pre><span class="cmd">cp /var/www/ecadelgroup/deploy.sh /var/www/projectname/deploy.sh</span>
+<span class="cmd">nano /var/www/projectname/deploy.sh</span>
+<span class="comment"># Update PROJECT_DIR and PROCESS_NAME variables</span></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<hr class="hr-rule">
+
+<!-- ══════════════════════════════════════════════════════════ CH10: TROUBLESHOOTING -->
+<section id="troubleshooting">
+  <div class="chapter-label reveal">Chapter Ten</div>
+  <h2 class="chapter-num reveal"><em>Troubleshooting</em> Guide</h2>
+  <p class="chapter-intro reveal">When something goes wrong, work through this chapter systematically before panicking. Most issues have straightforward fixes.</p>
+
+  <h3>The Site is Down — Diagnosis Flow</h3>
+  <div class="code-block">
+    <span class="code-label">Diagnosis sequence — run in order until you find the issue</span>
+    <pre><span class="comment"># Step 1: Is the server reachable at all?</span>
+<span class="cmd">ping -c 3 72.62.185.212</span>
+<span class="comment"># If ping fails → contact Hostinger support, server may be offline</span>
+
+<span class="comment"># Step 2: Is Nginx running?</span>
+<span class="cmd">systemctl is-active nginx</span>
+<span class="comment"># If "inactive" → systemctl start nginx</span>
+
+<span class="comment"># Step 3: Is the Next.js app running?</span>
+<span class="cmd">pm2 status</span>
+<span class="comment"># If "stopped" or "errored" → pm2 restart ecadelgroup</span>
+
+<span class="comment"># Step 4: Is the app responding locally?</span>
+<span class="cmd">curl -o /dev/null -w "%{http_code}" http://localhost:3000</span>
+<span class="comment"># 200 = fine. 000 = app not responding → check pm2 logs</span>
+
+<span class="comment"># Step 5: Is CPU / memory overloaded?</span>
+<span class="cmd">ps aux --sort=-%cpu | head -5</span>
+<span class="comment"># If anything unknown using >50% CPU → likely malware, see Chapter 7</span>
+
+<span class="comment"># Step 6: Is the firewall blocking traffic?</span>
+<span class="cmd">ufw status</span>
+<span class="comment"># Ports 80 and 443 must show "ALLOW"</span>
+
+<span class="comment"># Step 7: Any recent errors?</span>
+<span class="cmd">tail -30 /var/log/nginx/error.log</span>
+<span class="cmd">pm2 logs ecadelgroup --lines 30 --nostream</span></pre>
+  </div>
+
+  <h3>Common Problems & Fixes</h3>
+  <table class="data-table">
+    <thead><tr><th>Problem</th><th>Symptom</th><th>Fix</th></tr></thead>
+    <tbody>
+      <tr><td>App crashed</td><td>PM2 shows "errored" or high restart count</td><td><code>pm2 restart ecadelgroup && pm2 logs ecadelgroup</code></td></tr>
+      <tr><td>Build failed on deploy</td><td>deploy.sh exits with error</td><td>Run <code>npm run build</code> manually to read the full error</td></tr>
+      <tr><td>Git pull blocked</td><td>"Your local changes would be overwritten"</td><td><code>git checkout -- package-lock.json && git pull</code></td></tr>
+      <tr><td>502 Bad Gateway</td><td>Nginx running but app is not</td><td><code>pm2 restart ecadelgroup</code></td></tr>
+      <tr><td>SSL certificate error</td><td>Browser shows "Not Secure"</td><td><code>certbot renew && systemctl reload nginx</code></td></tr>
+      <tr><td>Disk full</td><td>Build fails, logs stop writing</td><td><code>df -h</code> to check, <code>pm2 flush</code> to clear logs, remove old builds</td></tr>
+      <tr><td>SSH "Permission denied"</td><td>Can't connect via SSH</td><td>Use Hostinger browser terminal; verify key in <code>authorized_keys</code></td></tr>
+      <tr><td>High CPU (no miner)</td><td>CPU above 80% sustained</td><td><code>ps aux --sort=-%cpu | head -10</code> to identify the process</td></tr>
+      <tr><td>Contact emails not sending</td><td>Form shows error or no email received</td><td>Check <code>.env.local</code> credentials; test with <code>pm2 logs ecadelgroup | grep SMTP</code></td></tr>
+      <tr><td>Nginx "test failed"</td><td><code>nginx -t</code> shows error</td><td>Read the error — usually a typo in the config file</td></tr>
+    </tbody>
+  </table>
+
+  <h3>How to Read an Error Log</h3>
+  <div class="code-block">
+    <span class="code-label">Example Nginx error — 502 Bad Gateway</span>
+    <pre><span class="error">2026/05/30 04:30:12 [error] 4851#4851: *1 connect() failed (111: Connection refused)
+while connecting to upstream, client: 18.237.43.125,
+server: ecadelgroup.com,
+upstream: "http://127.0.0.1:3000/"</span>
+
+<span class="comment"># Translation: Nginx tried to connect to the Next.js app on port 3000</span>
+<span class="comment"># but nothing was listening there — PM2 process had crashed.</span>
+<span class="comment"># Fix: pm2 restart ecadelgroup</span></pre>
+  </div>
+</section>
+<hr class="hr-rule">
+
+<!-- ══════════════════════════════════════════════════════════ CH11: QUICK REFERENCE -->
+<section id="quickref">
+  <div class="chapter-label reveal">Chapter Eleven</div>
+  <h2 class="chapter-num reveal">Quick <em>Reference</em></h2>
+  <p class="chapter-intro reveal">Everything you need at a glance — connection details, the most used commands, and emergency procedures.</p>
+
+  <h3>Server Connection Details</h3>
+  <div class="quick-grid">
+    <div class="quick-item">
+      <div class="quick-label">Server IP</div>
+      <div class="quick-value">72.62.185.212</div>
+    </div>
+    <div class="quick-item">
+      <div class="quick-label">SSH Command</div>
+      <div class="quick-value">ssh root@72.62.185.212</div>
+    </div>
+    <div class="quick-item">
+      <div class="quick-label">SSH Auth</div>
+      <div class="quick-value">Key-based only</div>
+    </div>
+    <div class="quick-item">
+      <div class="quick-label">Hostinger Panel</div>
+      <div class="quick-value">hpanel.hostinger.com</div>
+    </div>
+    <div class="quick-item">
+      <div class="quick-label">Browser Terminal</div>
+      <div class="quick-value">hpanel → VPS → Terminal</div>
+    </div>
+    <div class="quick-item">
+      <div class="quick-label">Primary Email</div>
+      <div class="quick-value">ecadel@ecadelgroup.com</div>
+    </div>
+    <div class="quick-item">
+      <div class="quick-label">Project Path</div>
+      <div class="quick-value">/var/www/ecadelgroup/</div>
+    </div>
+    <div class="quick-item">
+      <div class="quick-label">PM2 Process</div>
+      <div class="quick-value">ecadelgroup (port 3000)</div>
+    </div>
+    <div class="quick-item">
+      <div class="quick-label">GitHub Repo</div>
+      <div class="quick-value">ecadelgrouplimited-dot/ecadelgroup</div>
+    </div>
+  </div>
+
+  <h3>The 10 Commands You Will Use Most</h3>
+  <div class="code-block">
+    <span class="code-label">Most common VPS commands</span>
+    <pre><span class="comment"># 1. Deploy latest code</span>
+<span class="cmd">cd /var/www/ecadelgroup && ./deploy.sh</span>
+
+<span class="comment"># 2. Check everything is healthy</span>
+<span class="cmd">pm2 status && ufw status && df -h /</span>
+
+<span class="comment"># 3. Restart the app</span>
+<span class="cmd">pm2 restart ecadelgroup</span>
+
+<span class="comment"># 4. Read recent error logs</span>
+<span class="cmd">pm2 logs ecadelgroup --lines 50 --nostream</span>
+
+<span class="comment"># 5. Reload Nginx after a config change</span>
+<span class="cmd">nginx -t && systemctl reload nginx</span>
+
+<span class="comment"># 6. Check SSL certificate</span>
+<span class="cmd">certbot certificates</span>
+
+<span class="comment"># 7. Check who/what is using CPU</span>
+<span class="cmd">ps aux --sort=-%cpu | head -10</span>
+
+<span class="comment"># 8. Check disk space</span>
+<span class="cmd">df -h && du -sh /var/www/*</span>
+
+<span class="comment"># 9. Check fail2ban bans</span>
+<span class="cmd">fail2ban-client status sshd</span>
+
+<span class="comment"># 10. Test the site is responding</span>
+<span class="cmd">curl -s -o /dev/null -w "%{http_code}" https://ecadelgroup.com</span></pre>
+  </div>
+
+  <h3>Emergency Procedures</h3>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-title">Site is Down</div>
+      <div class="card-body">
+        1. SSH in or use Hostinger terminal<br>
+        2. <code>pm2 restart ecadelgroup</code><br>
+        3. If that fails: <code>pm2 logs ecadelgroup</code><br>
+        4. Check CPU: <code>ps aux --sort=-%cpu | head -5</code><br>
+        5. If miner detected: <code>pkill -9 -f xmrig</code>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Can't SSH In</div>
+      <div class="card-body">
+        1. Use Hostinger browser terminal (always works)<br>
+        2. Check if fail2ban banned you: <code>fail2ban-client status sshd</code><br>
+        3. Unban your IP: <code>fail2ban-client set sshd unbanip YOUR_IP</code><br>
+        4. Verify your key: <code>cat /root/.ssh/authorized_keys</code>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Disk Full</div>
+      <div class="card-body">
+        1. Check: <code>df -h</code><br>
+        2. Clear PM2 logs: <code>pm2 flush</code><br>
+        3. Clear old nginx logs: <code>logrotate -f /etc/logrotate.d/nginx</code><br>
+        4. Find large files: <code>du -sh /var/www/* /root/</code>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Suspected Compromise</div>
+      <div class="card-body">
+        1. Kill unknown processes: <code>pkill -9 -f [processname]</code><br>
+        2. Change root password: <code>passwd root</code><br>
+        3. Review authorized keys: <code>nano /root/.ssh/authorized_keys</code><br>
+        4. Run malware scan via Hostinger panel<br>
+        5. Report to team lead immediately
+      </div>
+    </div>
+  </div>
+
+  <h3>Team Rules — Non-Negotiable</h3>
+  <div class="callout danger">
+    <span class="callout-icon">⚠ Team Security Rules</span>
+    <p>
+      1. <strong>Never share server passwords in chat, email, or documents.</strong> Use SSH keys instead.<br><br>
+      2. <strong>Never disable the firewall to "test something"</strong> without re-enabling it immediately.<br><br>
+      3. <strong>Never run random scripts from the internet with <code>curl | bash</code></strong> without reading the script first.<br><br>
+      4. <strong>Always run <code>nginx -t</code></strong> before <code>systemctl reload nginx</code>. A failed test with a reload can take the site down.<br><br>
+      5. <strong>Never delete files you don't recognise</strong> until you've confirmed what they are — they might be critical system files.<br><br>
+      6. <strong>Always create a backup</strong> before making major configuration changes.
+    </p>
+  </div>
+</section>
+<hr class="hr-rule">
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">ECADEL GROUP LIMITED</div>
+  <div class="footer-copy">© 2026 ECADEL GROUP LIMITED · VPS Management Guide · Internal Use Only</div>
+  <div class="footer-ver">v1.0 · May 2026</div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
