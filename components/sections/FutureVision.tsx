@@ -453,7 +453,7 @@ export default function FutureVision() {
                   opacity="0.8"
                   style={{
                     transformOrigin: "200px 200px",
-                    animation: `spin ${ring.dur * 0.7}s ${i * 2}s linear infinite`,
+                    animation: `spin ${ring.dur * 0.7}s ${idx * 2}s linear infinite`,
                   }}
                 />
               ))}
