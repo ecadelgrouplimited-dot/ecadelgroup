@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect, useState } from "react";
+import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { Cpu, Bot, Building, Globe2, MapPin, Network } from "lucide-react";
 
@@ -9,31 +9,31 @@ const milestones = [
   {
     year: "2026",
     label: "Foundation",
-    desc: "ECADEL GROUP launches. SBB & PAME AI live. Uganda operations established.",
+    desc: "All five ECADEL companies operational in Uganda. SBB, PAME AI, SafeRoad, Hapa, and Meridian live — African intelligence infrastructure begins here.",
     active: true,
   },
   {
+    year: "2027",
+    label: "East Africa",
+    desc: "Regional expansion across the East African Community. SafeRoad deploys to Kenya, Tanzania, and Rwanda. SBB and PAME AI onboard East African institutions.",
+    active: false,
+  },
+  {
     year: "2028",
-    label: "Regional Scale",
-    desc: "East African deployment. SafeRoad UG fully operational. Hapa city networks launch.",
+    label: "West & Central Africa",
+    desc: "SBB and PAME AI expand to Nigeria, Ghana, and Senegal. Hapa launches city networks in Lagos and Nairobi. Meridian engages its first government clients.",
     active: false,
   },
   {
     year: "2030",
-    label: "Continental Grid",
-    desc: "Meridian deployed across 10 African governments. 100M+ people on ECADEL infrastructure.",
+    label: "Pan-African Scale",
+    desc: "Meridian deployed across multiple African governments. ECADEL infrastructure serving 100M+ people across the continent.",
     active: false,
   },
   {
     year: "2035",
-    label: "Pan-African",
-    desc: "Sovereign intelligence infrastructure operational across all major African economies.",
-    active: false,
-  },
-  {
-    year: "2050",
-    label: "Sovereign Continent",
-    desc: "Africa operates on a fully sovereign, continent-wide intelligence grid — built by Africans.",
+    label: "Sovereign Grid",
+    desc: "ECADEL intelligence infrastructure operating as the foundational layer across all major African economies — built by Africa, owned by Africa.",
     active: false,
   },
 ];
@@ -44,51 +44,51 @@ const pillars = [
     icon: Cpu,
     label: "Advanced AI Infrastructure",
     desc: "Sovereign AI models trained on African data, optimised for African languages, contexts, and infrastructure realities.",
-    target: "2030",
+    phase: "Near-term",
     accent: "#C8A96E",
   },
   {
     icon: Bot,
     label: "Autonomous Systems",
     desc: "Intelligent logistics, transport, and civic automation built specifically for African urban and rural environments.",
-    target: "2032",
+    phase: "Near-term",
     accent: "#8BA7C7",
   },
   {
     icon: Building,
     label: "Smart City Intelligence",
     desc: "City-scale operational intelligence managing energy, traffic, public safety, and civic services in real time.",
-    target: "2033",
+    phase: "Mid-term",
     accent: "#C8A96E",
   },
   {
     icon: Globe2,
     label: "Strategic Intelligence Networks",
     desc: "Cross-continental intelligence linking governments, development banks, and institutions with consequence foresight.",
-    target: "2035",
+    phase: "Mid-term",
     accent: "#8BA7C7",
   },
   {
     icon: MapPin,
     label: "Regional Infrastructure",
     desc: "Fully operational intelligence infrastructure spanning East, West, Central, and Southern Africa simultaneously.",
-    target: "2038",
+    phase: "Long-term",
     accent: "#C8A96E",
   },
   {
     icon: Network,
     label: "Continental Intelligence Grid",
     desc: "A unified, sovereign intelligence layer covering all 54 African nations — the backbone of a continent.",
-    target: "2050",
+    phase: "Long-term",
     accent: "#D4A96E",
   },
 ];
 
-// ── 2050 impact metrics ───────────────────────────────────────────────────────
+// ── Market opportunity metrics ────────────────────────────────────────────────
 const metrics = [
-  { value: "1.4B+", label: "People on sovereign African intelligence infrastructure" },
-  { value: "54",   label: "African nations with ECADEL systems operating" },
-  { value: "$2T+", label: "Annual economic value generated through the grid" },
+  { value: "1.4B+", label: "People across Africa — the market ECADEL is building for" },
+  { value: "54",   label: "African nations within ECADEL's long-term operational scope" },
+  { value: "$2T+", label: "Annual economic opportunity in Africa's digital infrastructure" },
 ];
 
 // ── Pre-computed particle positions (no hydration mismatch) ───────────────────
@@ -140,19 +140,20 @@ const PLATFORM_NODES = [
   };
 });
 
-// ── Pulsing scan-line keyframes injected once ─────────────────────────────────
+// ── 54 African nations for the background scroll ─────────────────────────────
+const AFRICAN_NATIONS = [
+  "Algeria","Angola","Benin","Botswana","Burkina Faso","Burundi","Cabo Verde",
+  "Cameroon","Central African Republic","Chad","Comoros","Congo","DR Congo",
+  "Djibouti","Egypt","Equatorial Guinea","Eritrea","Eswatini","Ethiopia","Gabon",
+  "Gambia","Ghana","Guinea","Guinea-Bissau","Kenya","Lesotho","Liberia","Libya",
+  "Madagascar","Malawi","Mali","Mauritania","Mauritius","Morocco","Mozambique",
+  "Namibia","Niger","Nigeria","Rwanda","São Tomé","Senegal","Seychelles",
+  "Sierra Leone","Somalia","South Africa","South Sudan","Sudan","Tanzania",
+  "Togo","Tunisia","Uganda","Zambia","Zimbabwe",
+];
+
+// ── Keyframes injected once ───────────────────────────────────────────────────
 const SCAN_STYLE = `
-  @keyframes scan2050 {
-    0%   { clip-path: inset(0 100% 0 0); opacity: 0; }
-    5%   { opacity: 1; }
-    50%  { clip-path: inset(0 0% 0 0); }
-    95%  { opacity: 1; }
-    100% { clip-path: inset(0 0 0 100%); opacity: 0; }
-  }
-  @keyframes glow2050 {
-    0%,100% { opacity: 0.04; filter: blur(2px); }
-    50%     { opacity: 0.10; filter: blur(0px); }
-  }
   @keyframes float-particle {
     0%,100% { transform: translate(0,0); }
     50%     { transform: translate(var(--dx),var(--dy)); }
@@ -178,13 +179,6 @@ const SCAN_STYLE = `
 export default function FutureVision() {
   const ref    = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
-  const [scanKey, setScanKey] = useState(0);
-
-  // Re-trigger scan line periodically
-  useEffect(() => {
-    const id = setInterval(() => setScanKey(k => k + 1), 7000);
-    return () => clearInterval(id);
-  }, []);
 
   return (
     <section
@@ -247,36 +241,28 @@ export default function FutureVision() {
         }} />
       </div>
 
-      {/* ── Giant breathing 2050 ghost ── */}
-      <div
-        className="absolute bottom-0 left-1/2 -translate-x-1/2 select-none pointer-events-none leading-none font-display font-black"
-        style={{
-          fontSize: "clamp(120px, 22vw, 320px)",
-          color: "transparent",
-          WebkitTextStroke: "1px rgba(200,169,110,0.18)",
-          animation: "glow2050 6s ease-in-out infinite",
-          letterSpacing: "-0.04em",
-          lineHeight: 0.85,
-        }}
-        aria-hidden="true"
-      >
-        2050
-      </div>
-
-      {/* ── Scan-line over the ghost text ── */}
-      <div
-        key={scanKey}
-        className="absolute bottom-0 left-1/2 -translate-x-1/2 select-none pointer-events-none leading-none font-display font-black"
-        style={{
-          fontSize: "clamp(120px, 22vw, 320px)",
-          color: "rgba(200,169,110,0.15)",
-          letterSpacing: "-0.04em",
-          lineHeight: 0.85,
-          animation: "scan2050 3s ease-in-out forwards",
-        }}
-        aria-hidden="true"
-      >
-        2050
+      {/* ── African nations scroll strip ── */}
+      <div className="absolute bottom-0 left-0 right-0 overflow-hidden pointer-events-none select-none" aria-hidden="true">
+        <motion.div
+          className="flex items-baseline gap-12 whitespace-nowrap pb-2"
+          animate={{ x: ["0%", "-50%"] }}
+          transition={{ duration: 120, ease: "linear", repeat: Infinity }}
+        >
+          {[...AFRICAN_NATIONS, ...AFRICAN_NATIONS].map((nation, i) => (
+            <span
+              key={i}
+              className="font-display font-black tracking-[0.1em] uppercase shrink-0"
+              style={{
+                fontSize: "clamp(48px, 8vw, 110px)",
+                color: "transparent",
+                WebkitTextStroke: "1px rgba(200,169,110,0.07)",
+                lineHeight: 1,
+              }}
+            >
+              {nation}
+            </span>
+          ))}
+        </motion.div>
       </div>
 
       {/* ── Main content ── */}
@@ -290,7 +276,7 @@ export default function FutureVision() {
             className="mb-5"
           >
             <span className="text-xs tracking-[0.4em] uppercase text-emerald-glow font-display">
-              Roadmap to 2050
+              Our Trajectory
             </span>
           </motion.div>
 
@@ -301,9 +287,9 @@ export default function FutureVision() {
             className="font-display font-bold leading-tight mb-8 max-w-5xl mx-auto"
             style={{ fontSize: "clamp(2.8rem, 6vw, 5.5rem)" }}
           >
-            <span className="text-softwhite">Building the Systems</span>
+            <span className="text-softwhite">The Infrastructure</span>
             <br />
-            <span style={{ color: "#C8A96E" }}>Africa Runs on in 2050</span>
+            <span style={{ color: "#C8A96E" }}>Modern Africa Runs On</span>
           </motion.h2>
 
           <motion.p
@@ -312,10 +298,10 @@ export default function FutureVision() {
             transition={{ duration: 0.7, delay: 0.3 }}
             className="text-platinum/74 text-lg leading-relaxed max-w-3xl mx-auto"
           >
-            ECADEL GROUP LIMITED is not building for this decade alone. Our roadmap
-            extends to a future where Africa operates on a fully sovereign,
-            continent-wide intelligence infrastructure — built by Africans, owned by
-            Africans, serving 1.4 billion people.
+            ECADEL GROUP operates five companies across AI infrastructure, road safety,
+            financial operations, city intelligence, and consequence foresight — fully
+            operational in Uganda today, and expanding systematically across East Africa,
+            West Africa, and the continent.
           </motion.p>
         </div>
 
@@ -329,7 +315,7 @@ export default function FutureVision() {
             transition={{ duration: 0.8, delay: 0.4 }}
           >
             <div className="text-[9px] tracking-[0.3em] uppercase text-platinum/50 font-display mb-8">
-              Milestone Timeline
+              Expansion Timeline
             </div>
 
             <div className="relative">
@@ -535,7 +521,7 @@ export default function FutureVision() {
               <text x="200" y="208" textAnchor="middle" fill="#C8A96E" fontSize="6"
                 fontFamily="monospace" letterSpacing="0.08em" opacity="0.55"
               >
-                2026 — 2050
+                EST. 2026
               </text>
 
               {/* Outer arc labels */}
@@ -561,7 +547,7 @@ export default function FutureVision() {
           className="mb-4"
         >
           <div className="text-[9px] tracking-[0.3em] uppercase text-platinum/50 font-display mb-8 text-center">
-            What We Are Building Toward
+            What We Are Building
           </div>
         </motion.div>
 
@@ -612,7 +598,7 @@ export default function FutureVision() {
                       borderColor: `${pillar.accent}25`,
                     }}
                   >
-                    Target {pillar.target}
+                    {pillar.phase}
                   </span>
                 </div>
 

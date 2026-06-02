@@ -421,13 +421,13 @@ export default function FlagshipProjects() {
               <div className="w-8 h-8 flex items-center justify-center border border-emerald-deep/40 text-emerald-glow">
                 <Shield size={14} />
               </div>
-              <PlatformBadge label="03 / 05 — SAFEROAD UG · Awaiting Regulatory Approval" />
+              <PlatformBadge label="03 / 05 — SAFEROAD UG™ · Uganda" />
             </div>
             <h3 className="font-display font-bold text-3xl md:text-4xl text-softwhite mb-4 leading-tight">
               National Road Safety<br />Intelligence Platform
             </h3>
             <p className="text-platinum/74 leading-relaxed mb-4">
-              Uganda loses thousands of lives to road accidents every year. SafeRoad UG is building the digital infrastructure layer that addresses this — a road safety platform awaiting regulatory approval to deploy at scale across Uganda&apos;s transport systems.
+              Uganda loses thousands of lives to road accidents every year. SafeRoad UG is the digital infrastructure layer addressing this — a national road safety platform built to operate at scale across Uganda&apos;s transport systems and the broader East African region.
             </p>
             <p className="text-platinum/65 text-sm leading-relaxed mb-8">
               Real-time fleet intelligence, AI-powered driver scoring, and government-grade operational dashboards built for national scale.
@@ -461,7 +461,7 @@ export default function FlagshipProjects() {
               <div className="w-8 h-8 flex items-center justify-center border border-emerald-deep/40 bg-emerald-deep/10 font-mono font-bold text-emerald-glow text-[10px]">
                 SBB
               </div>
-              <PlatformBadge label="01 / 05 — LIVE AT SBB.FINANCE" />
+              <PlatformBadge label="01 / 05 — SMART BUSINESS BOOK™ · Live" />
             </div>
             <h3 className="font-display font-bold text-3xl md:text-4xl text-softwhite mb-4 leading-tight">
               The Business Operating<br />System for Africa
@@ -514,7 +514,7 @@ export default function FlagshipProjects() {
               <div className="w-8 h-8 flex items-center justify-center border border-emerald-deep/40 bg-emerald-deep/10 text-emerald-glow">
                 <Brain size={14} />
               </div>
-              <PlatformBadge label="02 / 05 — PAME AI · LIVE AT PAME.CC" />
+              <PlatformBadge label="02 / 05 — PAME AI™ · Live" />
             </div>
             <h3 className="font-display font-bold text-3xl md:text-4xl text-softwhite mb-4 leading-tight">
               Your Agentic<br />Extended Brain
@@ -560,7 +560,7 @@ export default function FlagshipProjects() {
               <div className="w-8 h-8 flex items-center justify-center border border-emerald-deep/40 text-emerald-glow">
                 <MapPin size={14} />
               </div>
-              <PlatformBadge label="04 / 05 — HAPA · Pre-Launch · Kampala" />
+              <PlatformBadge label="04 / 05 — HAPA™ · Kampala 2026" />
             </div>
             <h3 className="font-display font-bold text-3xl md:text-4xl text-softwhite mb-4 leading-tight">
               Where You Are — And<br />Everything That Means
@@ -593,7 +593,7 @@ export default function FlagshipProjects() {
               <div className="w-8 h-8 flex items-center justify-center border border-white/10 text-platinum/72">
                 <Brain size={14} className="text-platinum/60" />
               </div>
-              <PlatformBadge label="05 / 05 — MERIDIAN · Playbook Stage · Seeking Seed" />
+              <PlatformBadge label="05 / 05 — MERIDIAN™ · Uganda" />
             </div>
             <h3 className="font-display font-bold text-3xl md:text-4xl text-softwhite mb-4 leading-tight">
               Consequence Intelligence<br />Platform

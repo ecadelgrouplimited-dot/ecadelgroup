@@ -19,7 +19,7 @@ const leaders = [
     name: "Catherine Ademun",
     title: "Co-Founder · ECADEL Group",
     discipline: "Co-Founder",
-    bio: "Catherine is the other half of the name that became the institution. Her identity is woven into ECADEL at the most fundamental level — not as a footnote or a supporting role, but as a founding truth. The company carries her forward in every letter of its name, in every system it builds, and in every person it serves. The full story of Catherine's role within ECADEL Group is still being written — as it should be.",
+    bio: "Catherine Ademun co-founded ECADEL GROUP LIMITED with a mandate that extends beyond product. As the institution scales, she shapes how ECADEL positions itself within African markets, builds strategic partnerships, and connects its systems to the communities they are built to serve. Her role evolves with the company — a founder invested in the long-term mission at every stage of its growth.",
     initials: "CA",
     accentColor: "#D4B97E",
     glowColor: "rgba(212,185,126,0.3)",
