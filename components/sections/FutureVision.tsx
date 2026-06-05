@@ -254,8 +254,8 @@ export default function FutureVision() {
               className="font-display font-black tracking-[0.1em] uppercase shrink-0"
               style={{
                 fontSize: "clamp(48px, 8vw, 110px)",
-                color: "transparent",
-                WebkitTextStroke: "1px rgba(200,169,110,0.07)",
+                color: "rgba(200,169,110,0.05)",
+                WebkitTextStroke: "1px rgba(200,169,110,0.22)",
                 lineHeight: 1,
               }}
             >

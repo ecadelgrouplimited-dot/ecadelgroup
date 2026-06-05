@@ -484,7 +484,7 @@ export default function FlagshipProjects() {
             <div className="grid grid-cols-3 gap-px bg-white/5 mb-10">
               {[
                 { value: "25", label: "AI Agents" },
-                { value: "136", label: "DB Tables" },
+                { value: "Free", label: "To Start" },
                 { value: "199", label: "Countries" },
               ].map((s) => (
                 <div key={s.label} className="bg-carbon px-4 py-3 text-center">
