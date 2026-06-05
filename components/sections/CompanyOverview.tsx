@@ -172,7 +172,7 @@ export default function CompanyOverview() {
                 <span className="text-softwhite/70">PAME AI</span> as an agentic extended-brain platform,{" "}
                 <span className="text-softwhite/70">SafeRoad UG</span> for road safety infrastructure,{" "}
                 <span className="text-softwhite/70">Hapa</span> for city intelligence and local discovery,
-                and <span className="text-softwhite/70">Meridian</span> for consequence intelligence.
+                and <span className="text-softwhite/70">PROSEQ</span> for consequence intelligence.
               </p>
             <p className="text-platinum/68 leading-relaxed">
               We are not a software agency. We are not a startup. We are a

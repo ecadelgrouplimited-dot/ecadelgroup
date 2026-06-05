@@ -38,7 +38,7 @@ const ORBITAL_NODES = [
   { angle: 72,  label: "PAME",     r: 130 },
   { angle: 144, label: "SafeRoad", r: 130 },
   { angle: 216, label: "Hapa",     r: 130 },
-  { angle: 288, label: "Meridian", r: 130 },
+  { angle: 288, label: "PROSEQ", r: 130 },
 ].map(({ angle, label, r }) => {
   const rad = ((angle - 90) * Math.PI) / 180;
   return {

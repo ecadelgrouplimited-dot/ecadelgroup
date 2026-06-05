@@ -9,7 +9,7 @@ const milestones = [
   {
     year: "2026",
     label: "Foundation",
-    desc: "All five ECADEL companies operational in Uganda. SBB, PAME AI, SafeRoad, Hapa, and Meridian live — African intelligence infrastructure begins here.",
+    desc: "All five ECADEL companies operational in Uganda. SBB, PAME AI, SafeRoad, Hapa, and PROSEQ live — African intelligence infrastructure begins here.",
     active: true,
   },
   {
@@ -21,13 +21,13 @@ const milestones = [
   {
     year: "2028",
     label: "West & Central Africa",
-    desc: "SBB and PAME AI expand to Nigeria, Ghana, and Senegal. Hapa launches city networks in Lagos and Nairobi. Meridian engages its first government clients.",
+    desc: "SBB and PAME AI expand to Nigeria, Ghana, and Senegal. Hapa launches city networks in Lagos and Nairobi. PROSEQ engages its first government clients.",
     active: false,
   },
   {
     year: "2030",
     label: "Pan-African Scale",
-    desc: "Meridian deployed across multiple African governments. ECADEL infrastructure serving 100M+ people across the continent.",
+    desc: "PROSEQ deployed across multiple African governments. ECADEL infrastructure serving 100M+ people across the continent.",
     active: false,
   },
   {
@@ -127,7 +127,7 @@ const PLATFORM_NODES = [
   { angle: 72,  label: "PAME AI",  r: 134 },
   { angle: 144, label: "SafeRoad", r: 172 },
   { angle: 216, label: "Hapa",     r: 58  },
-  { angle: 288, label: "Meridian", r: 96  },
+  { angle: 288, label: "PROSEQ", r: 96  },
 ].map(({ angle, label, r }) => {
   const rad = ((angle - 90) * Math.PI) / 180;
   return {

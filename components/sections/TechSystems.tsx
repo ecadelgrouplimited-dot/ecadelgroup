@@ -16,7 +16,7 @@ const techPillars = [
 ];
 
 const LAYERS = [
-  { label: "Intelligence Layer", color: "#C8A96E",  y: 18,  desc: "Kiongozi AI · Meridian · PAME · Decision Engine" },
+  { label: "Intelligence Layer", color: "#C8A96E",  y: 18,  desc: "Kiongozi AI · PROSEQ · PAME · Decision Engine" },
   { label: "Processing Layer",   color: "#8BA7C7",  y: 78,  desc: "Stream Processing · Event Bus · Inference Runtime" },
   { label: "Data Layer",         color: "#4a6080",  y: 138, desc: "Storage · Pipelines · Telemetry · Mobile Money Ingestion" },
 ];

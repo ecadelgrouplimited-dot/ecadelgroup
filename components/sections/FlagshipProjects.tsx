@@ -321,18 +321,18 @@ function HapaMockup() {
   );
 }
 
-// ─── Meridian ────────────────────────────────────────────────────────────────
+// ─── PROSEQ ──────────────────────────────────────────────────────────────────
 
-const meridianFeatures = [
-  "Strategic Foresight Engine",
-  "Systemic Consequence Analysis",
-  "Predictive Intelligence Models",
-  "Institutional Decision Support",
+const proseqFeatures = [
+  "300 Monte Carlo Simulations",
+  "Systemic Consequence Mapping",
+  "10 Domain Intelligence Agents",
+  "Point of No Return Detection",
   "Network Simulation & Modelling",
-  "Crisis Intelligence Mapping",
+  "Calibrated Against Real Outcomes",
 ];
 
-function MeridianMockup() {
+function ProseqMockup() {
   return (
     <div className="relative w-full aspect-[4/3] rounded-sm overflow-hidden bg-carbon border border-white/5"
       style={{ boxShadow: "0 20px 60px rgba(0,0,0,0.5)" }}>
@@ -342,7 +342,7 @@ function MeridianMockup() {
           <div className="w-2 h-2 rounded-full bg-yellow-500/50" />
           <div className="w-2 h-2 rounded-full bg-green-500/50" />
         </div>
-        <div className="flex-1 text-center text-[10px] text-platinum/50 font-mono">Meridian — Consequence Intelligence Platform</div>
+        <div className="flex-1 text-center text-[10px] text-platinum/50 font-mono">PROSEQ — Consequence Intelligence Platform</div>
       </div>
       <div className="relative h-48 bg-obsidian overflow-hidden">
         <svg className="absolute inset-0 w-full h-full">
@@ -365,7 +365,7 @@ function MeridianMockup() {
         </div>
       </div>
       <div className="grid grid-cols-3 divide-x divide-white/5 border-t border-white/5">
-        {[{label:"Scenarios Modelled",value:"847"},{label:"Risk Index",value:"72.4"},{label:"Foresight Horizon",value:"18mo"}].map((s)=>(
+        {[{label:"Monte Carlo Runs",value:"300"},{label:"Domain Agents",value:"10"},{label:"Calibration",value:"74/100"}].map((s)=>(
           <div key={s.label} className="px-3 py-3">
             <div className="font-mono text-base font-bold text-emerald-glow">{s.value}</div>
             <div className="text-platinum/50 text-[9px] uppercase tracking-wide mt-0.5">{s.label}</div>
@@ -585,7 +585,7 @@ export default function FlagshipProjects() {
           </div>
         </motion.div>
 
-        {/* ── Meridian ── */}
+        {/* ── PROSEQ ── */}
         <motion.div initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, delay: 0.3 }}
           className="grid lg:grid-cols-2 gap-12 items-center">
           <div>
@@ -593,31 +593,37 @@ export default function FlagshipProjects() {
               <div className="w-8 h-8 flex items-center justify-center border border-white/10 text-platinum/72">
                 <Brain size={14} className="text-platinum/60" />
               </div>
-              <PlatformBadge label="05 / 05 — MERIDIAN™ · Uganda" />
+              <PlatformBadge label="05 / 05 — PROSEQ™ · Uganda" />
             </div>
             <h3 className="font-display font-bold text-3xl md:text-4xl text-softwhite mb-4 leading-tight">
               Consequence Intelligence<br />Platform
             </h3>
             <p className="text-platinum/74 leading-relaxed mb-5">
-              The world has spent three decades building AI that answers questions. No one has built the tool that maps the consequences of decisions before they are made — across economic, social, political, environmental, technical, and human systems simultaneously, in real time.
+              The world doesn&apos;t fail from lack of information. It fails from lack of foresight. PROSEQ shows you what your next decision creates — in which systems, in what order, and when it becomes too late to change course.
             </p>
             <p className="text-platinum/65 text-sm leading-relaxed mb-8">
-              Meridian is that tool. Not a prediction engine. Not a risk platform. A living, dynamic consequence map — a new category of human capability called Consequence Intelligence.
+              Not a prediction engine. Not a risk platform. A living consequence map — a new category of human capability, calibrated against real-world outcomes.
             </p>
             <div className="space-y-3 mb-10">
-              {meridianFeatures.map((f) => (
+              {proseqFeatures.map((f) => (
                 <div key={f} className="flex items-center gap-3 text-sm text-platinum/60">
                   <div className="w-1 h-1 rounded-full bg-emerald-deep flex-shrink-0" />
                   <span>{f}</span>
                 </div>
               ))}
             </div>
-            <a href="#contact" className="group inline-flex items-center gap-2 text-sm text-emerald-glow border-b border-emerald-deep/40 pb-0.5 hover:border-emerald-glow transition-all duration-200">
-              Explore Meridian <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform duration-200" />
-            </a>
+            <div className="flex items-center gap-5">
+              <a href="https://proseq.io" target="_blank" rel="noopener noreferrer"
+                className="group inline-flex items-center gap-2 text-sm text-emerald-glow border-b border-emerald-deep/40 pb-0.5 hover:border-emerald-glow transition-all duration-200">
+                Visit proseq.io <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform duration-200" />
+              </a>
+              <a href="#contact" className="text-sm text-platinum/65 hover:text-platinum/70 transition-colors duration-200">
+                Request a pilot →
+              </a>
+            </div>
           </div>
           <motion.div initial={{ opacity: 0, x: 30 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.8, delay: 0.5 }}>
-            <MeridianMockup />
+            <ProseqMockup />
           </motion.div>
         </motion.div>
       </div>

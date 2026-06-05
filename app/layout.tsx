@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   },
 
   description:
-    "ECADEL GROUP LIMITED is a digital infrastructure and systems conglomerate headquartered in Kampala, Uganda. We build technology platforms, mobile & web applications, AI systems, and intelligent infrastructure for African businesses, governments, and institutions. Home of Smart Business Book, PAME AI, SafeRoad UG, Hapa, and Meridian.",
+    "ECADEL GROUP LIMITED is a digital infrastructure and systems conglomerate headquartered in Kampala, Uganda. We build technology platforms, mobile & web applications, AI systems, and intelligent infrastructure for African businesses, governments, and institutions. Home of Smart Business Book, PAME AI, SafeRoad UG, Hapa, and PROSEQ.",
 
   keywords: [
     // Brand
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     "PAME AI", "pame.cc", "agentic AI", "extended brain AI platform",
     "SafeRoad UG", "road safety Uganda", "fleet management Africa",
     "Hapa", "city intelligence Kampala", "local discovery Uganda",
-    "Meridian", "consequence intelligence", "strategic foresight Africa",
+    "PROSEQ", "consequence intelligence", "strategic foresight Africa",
     "ECADEL LABS", "African technology research",
     // Services
     "software development Uganda", "web development Kampala",
@@ -89,7 +89,7 @@ export const metadata: Metadata = {
   openGraph: {
     title:       "ECADEL GROUP LIMITED — Africa's Intelligence Infrastructure",
     description:
-      "Digital infrastructure conglomerate building the systems that run African businesses, governments, and cities. Platforms: Smart Business Book · PAME AI · SafeRoad UG · Hapa · Meridian.",
+      "Digital infrastructure conglomerate building the systems that run African businesses, governments, and cities. Platforms: Smart Business Book · PAME AI · SafeRoad UG · Hapa · PROSEQ.",
     siteName: "ECADEL GROUP LIMITED",
     url:      "https://ecadelgroup.com",
     locale:   "en_US",

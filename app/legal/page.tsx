@@ -104,7 +104,7 @@ const PrivacyContent = () => (
           ECADEL GROUP LIMITED (&ldquo;ECADEL GROUP&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;, or &ldquo;our&rdquo;) is committed to protecting
           the privacy and security of personal data entrusted to us in the course of our operations.
           This Privacy Policy explains how we collect, process, store, share, and protect personal
-          information across our platforms, including SafeRoad and Meridian, as well as our corporate
+          information across our platforms, including SafeRoad and PROSEQ, as well as our corporate
           website and any associated services.
         </Para>
       <Para>
@@ -151,7 +151,7 @@ const PrivacyContent = () => (
           "Session start and end times, trip duration, and distance",
         ]} />
       </Sub>
-      <Sub title="3. Data Collected Automatically (Meridian Platform)">
+      <Sub title="3. Data Collected Automatically (PROSEQ Platform)">
         <List items={[
           "Institutional query data and scenario parameters submitted for analysis",
           "Interaction logs, session identifiers, and API access records",
@@ -186,7 +186,7 @@ const PrivacyContent = () => (
           <tbody className="space-y-1">
             {[
               ["Provision of SafeRoad safety and fleet intelligence services", "Performance of contract"],
-              ["Provision of Meridian consequence intelligence analytics", "Performance of contract"],
+              ["Provision of PROSEQ consequence intelligence analytics", "Performance of contract"],
               ["AI-powered driver safety scoring and incident detection", "Legitimate interests / Contractual necessity"],
               ["Government dashboard reporting and regulatory compliance", "Legal obligation / Public interest"],
               ["SOS emergency response and dispatch coordination", "Vital interests of data subject"],
@@ -249,7 +249,7 @@ const PrivacyContent = () => (
         ["Trip and telemetry data (SafeRoad)", "24 months from date of capture, then anonymised or deleted"],
         ["Safety incident and SOS records", "7 years (regulatory and insurance requirements)"],
         ["Government dashboard reports", "As specified in the applicable government contract"],
-        ["Meridian scenario and query data", "Per enterprise DPA; default 12 months"],
+        ["PROSEQ scenario and query data", "Per enterprise DPA; default 12 months"],
         ["Contact and inquiry data", "3 years from last interaction"],
         ["Website analytics data", "13 months on a rolling basis"],
         ["Financial and billing records", "7 years (statutory accounting obligations)"],
@@ -376,7 +376,7 @@ const TermsContent = () => (
       </Para>
       <Para>
         By accessing our website, registering an account, or using any ECADEL GROUP LIMITED platform
-        or service — including SafeRoad, Meridian, and any associated APIs or dashboard products —
+        or service — including SafeRoad, PROSEQ, and any associated APIs or dashboard products —
         you confirm that you have read, understood, and agree to be bound by these Terms, our
         Privacy Policy, and any additional terms applicable to specific services.
       </Para>
@@ -397,7 +397,7 @@ const TermsContent = () => (
       </Para>
       <List items={[
         "SafeRoad — a national road safety intelligence platform providing real-time fleet monitoring, AI driver scoring, SOS emergency response, road hazard intelligence, and government-grade safety dashboards",
-        "Meridian — a consequence intelligence platform providing systemic foresight analysis, predictive consequence modelling, scenario simulation, and institutional decision support",
+        "PROSEQ — a consequence intelligence platform providing systemic foresight analysis, predictive consequence modelling, scenario simulation, and institutional decision support",
         "Data APIs — programmatic access to platform data for integration with third-party systems including insurance platforms, government portals, and enterprise tools",
         "Consulting and implementation services — advisory, integration, and deployment support for enterprise and government clients",
         "The ECADEL GROUP LIMITED corporate website and associated informational resources",
@@ -445,7 +445,7 @@ const TermsContent = () => (
       <Sub title="ECADEL GROUP LIMITED Property">
         <Para>
           All intellectual property rights in our platforms, services, algorithms, models,
-          user interfaces, documentation, branding, and content — including SafeRoad, Meridian,
+          user interfaces, documentation, branding, and content — including SafeRoad, PROSEQ,
           and all underlying technology — are the exclusive property of ECADEL GROUP LIMITED or
           our licensors. Nothing in these Terms transfers ownership of any intellectual property
           to you.
@@ -815,7 +815,7 @@ const DPAContent = () => (
         This Data Processing Agreement (&ldquo;DPA&rdquo;) forms part of the agreement between
         ECADEL GROUP LIMITED (&ldquo;Processor&rdquo;) and the contracting organisation (&ldquo;Controller&rdquo;)
         for the provision of intelligence infrastructure services including the SafeRoad and
-        Meridian platforms.
+        PROSEQ platforms.
       </Para>
       <Para>
         This DPA applies wherever ECADEL GROUP LIMITED processes personal data on behalf of the

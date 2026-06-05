@@ -8,7 +8,7 @@ const stats = [
     value: 5,
     suffix: "",
     label: "Group Subsidiaries",
-    description: "SBB · PAME AI · SafeRoad · Hapa · Meridian",
+    description: "SBB · PAME AI · SafeRoad · Hapa · PROSEQ",
     accent: "#C8A96E",
   },
   {

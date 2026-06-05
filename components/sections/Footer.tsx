@@ -15,7 +15,7 @@ const footerLinks = {
     { label: "PAME AI", href: "https://pame.cc" },
     { label: "SafeRoad UG", href: "#platforms" },
     { label: "Hapa", href: "#platforms" },
-    { label: "Meridian", href: "#platforms" },
+    { label: "PROSEQ", href: "#platforms" },
   ],
   Focus: [
     { label: "Mobility Intelligence", href: "#focus" },
