@@ -26,6 +26,17 @@ const leaders = [
     patternAngle: -45,
     tags: ["Co-Founder", "ECADEL Group", "Founding Vision"],
   },
+  {
+    name: "Emuron Ricardo Osujal",
+    title: "Chief Marketing Officer · ECADEL Group",
+    discipline: "Chief Marketing Officer",
+    bio: "Ricardo Osujal leads brand strategy, growth marketing, and market positioning across ECADEL GROUP's entire portfolio. With five years of experience in marketing, he specialises in making technically complex products legible to the markets that need them most — translating ECADEL's intelligence infrastructure into narratives that resonate with enterprises, governments, and investors. He is responsible for how SBB, PROSEQ, SafeRoad, PAME AI, and Hapa are understood, positioned, and remembered in every market ECADEL enters.",
+    initials: "RO",
+    accentColor: "#8BA7C7",
+    glowColor: "rgba(139,167,199,0.3)",
+    patternAngle: 30,
+    tags: ["Brand Strategy", "Growth Marketing", "Market Intelligence"],
+  },
 ];
 
 function LeaderCard({
@@ -216,11 +227,11 @@ export default function Leadership() {
           transition={{ duration: 0.6, delay: 0.25 }}
           className="text-platinum/68 text-sm max-w-lg mb-16 leading-relaxed"
         >
-          ECADEL GROUP LIMITED is led by founders who combine deep technical expertise with
-          strategic operational discipline — building for generations, not quarters.
+          ECADEL GROUP LIMITED is built by people who combine deep technical expertise with
+          strategic operational discipline — and the marketing conviction to make it matter.
         </motion.p>
 
-        <div className="grid md:grid-cols-2 gap-12 max-w-4xl">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12 max-w-6xl">
           {leaders.map((leader, i) => (
             <LeaderCard key={leader.name} leader={leader} index={i} inView={inView} />
           ))}
