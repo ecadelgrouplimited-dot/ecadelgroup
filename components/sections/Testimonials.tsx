@@ -45,6 +45,16 @@ const testimonials = [
     accent: "#D4B97E",
     glow: "rgba(212,185,126,0.06)",
   },
+  {
+    quote: "UK haulage compliance is not forgiving — one missed renewal or unmonitored expiry and you are facing a DVSA audit that can strip your Operator's Licence, or a Home Office review that threatens your Sponsor Licence. Before this system, compliance lived in folders, spreadsheets, and the memory of whoever was on shift. ECADEL built us something that watches every driver, every vehicle, and every certificate, every single day. Audit evidence that used to take days to assemble now takes minutes. It is the most operationally critical system we run, and it was delivered with the precision the industry demands.",
+    name: "Director",
+    title: "Director",
+    org: "256 Logistics Ltd",
+    project: "Compliance Intelligence Platform · 256logisticsltd.com",
+    initials: "256",
+    accent: "#8BA7C7",
+    glow: "rgba(139,167,199,0.07)",
+  },
 ];
 
 export default function Testimonials() {

@@ -2,15 +2,17 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { ArrowUpRight, Clock } from "lucide-react";
+import { ArrowUpRight, Clock, Star } from "lucide-react";
 
 const projects = [
   {
     index: "01",
     status: "live" as const,
+    featured: false,
     name: "Simon Sharp Products",
     client: "Simon Sharp · Founder",
     type: "Mini E-Commerce Platform",
+    region: "United Kingdom",
     description:
       "A clean, high-performing online storefront for Simon Sharp's product brand. Full e-commerce functionality — product catalogue, cart, and checkout — delivered with a premium user experience that positions the brand alongside much larger players in the market.",
     url: "simonsharpproducts.com",
@@ -20,9 +22,11 @@ const projects = [
   {
     index: "02",
     status: "live" as const,
+    featured: false,
     name: "Einstein Rising Canada",
     client: "Derek J Lobo · President",
     type: "Complete Organisation Management System",
+    region: "Canada",
     description:
       "A comprehensive portal and public-facing website for Einstein Rising Canada — managing the full operational lifecycle of the organisation. Member management, programme tracking, donor reporting, and administrative workflows, all integrated into one institutional-grade system.",
     url: "einsteinrisingcanada.org",
@@ -32,9 +36,11 @@ const projects = [
   {
     index: "03",
     status: "live" as const,
+    featured: false,
     name: "Bunyonyi Luxury Resort",
     client: "Precious · Resort Manager",
     type: "Premium Resort Website & Bookings Management",
+    region: "Uganda",
     description:
       "A complete digital presence for one of Uganda's premier luxury resort destinations on Lake Bunyonyi. A visually striking website that captures the resort's premium identity, paired with a full bookings management system that transforms how the resort handles reservations.",
     url: "bunyonyiluxuryresort.com",
@@ -44,14 +50,30 @@ const projects = [
   {
     index: "04",
     status: "upcoming" as const,
+    featured: false,
     name: "Ambrosoli Creations",
     client: "Ambrose · Founder",
     type: "Premium Handcraft E-Commerce Platform",
+    region: "Uganda",
     description:
       "A flagship e-commerce platform for Ambrosoli Creations — makers of handcrafted premium bags. Built to carry the brand's artisanal identity into the digital space: custom product showcases, seamless checkout, and a shopping experience that honours the craft behind every piece.",
     url: "ambrosolicreations.com",
     href: "#",
     tags: ["E-Commerce", "Brand Experience", "Handcraft"],
+  },
+  {
+    index: "05",
+    status: "live" as const,
+    featured: true,
+    name: "256 Logistics Compliance Hub",
+    client: "Director · 256 Logistics Ltd",
+    type: "UK Haulage Compliance Intelligence Platform",
+    region: "United Kingdom",
+    description:
+      "A purpose-built compliance intelligence platform for a licensed UK haulier — protecting their Operator's Licence (DVSA) and Sponsor Licence (Home Office) simultaneously. The system monitors every driver record, vehicle roadworthiness certificate, visa validity, right-to-work check, and training log in real time — flagging risks before they become violations. Five integrated compliance modules, role-based access control, and one-click audit evidence packs that turn a multi-day audit response into a matter of minutes. Built to the exacting operational standards of UK road transport regulation.",
+    url: "256logisticsltd.com/welcome",
+    href: "https://256logisticsltd.com/welcome",
+    tags: ["Compliance SaaS", "UK Haulage", "RegTech", "Licence Protection", "Enterprise"],
   },
 ];
 
@@ -121,66 +143,96 @@ export default function ClientProjects() {
               initial={{ opacity: 0, y: 24 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.65, delay: 0.1 + i * 0.1 }}
-              className={`group relative bg-graphite p-10 hover:bg-carbon transition-all duration-400 cursor-default ${
-                project.status === "upcoming" ? "border-t-2 border-emerald-deep/50" : ""
-              }`}
+              className={`group relative bg-graphite hover:bg-carbon transition-all duration-400 cursor-default ${
+                project.featured ? "md:col-span-2 p-12 md:p-14" : "p-10"
+              } ${project.status === "upcoming" ? "border-t-2 border-emerald-deep/50" : ""}`}
             >
               {/* left accent */}
               <div className="absolute top-0 left-0 w-px h-0 bg-emerald-deep group-hover:h-full transition-all duration-500" />
               <div className="absolute bottom-0 left-0 h-px w-0 bg-emerald-deep group-hover:w-full transition-all duration-500" />
 
+              {/* Featured glow */}
+              {project.featured && (
+                <div className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                  style={{ background: "radial-gradient(ellipse 60% 80% at 10% 50%, rgba(200,169,110,0.04) 0%, transparent 70%)" }}
+                />
+              )}
+
               {/* header */}
               <div className="flex items-start justify-between mb-6">
-                <div className="font-display text-[10px] tracking-[0.25em] uppercase text-platinum/42">
-                  {project.index} / 04
+                <div className="flex items-center gap-3">
+                  <div className="font-display text-[10px] tracking-[0.25em] uppercase text-platinum/42">
+                    {project.index} / {String(projects.length).padStart(2, "0")}
+                  </div>
+                  {project.region && (
+                    <span className="text-[9px] tracking-[0.15em] uppercase text-platinum/30 border border-white/5 px-2 py-0.5">
+                      {project.region}
+                    </span>
+                  )}
                 </div>
-                <StatusBadge status={project.status} />
+                <div className="flex items-center gap-2">
+                  {project.featured && (
+                    <span className="inline-flex items-center gap-1.5 text-[9px] tracking-[0.2em] uppercase font-display px-2.5 py-1"
+                      style={{ color: "#C8A96E", border: "1px solid rgba(200,169,110,0.35)", background: "rgba(200,169,110,0.06)" }}>
+                      <Star size={8} />
+                      Featured
+                    </span>
+                  )}
+                  <StatusBadge status={project.status} />
+                </div>
               </div>
 
-              <h3 className="font-display font-bold text-2xl text-softwhite mb-1 leading-tight tracking-tight group-hover:text-white transition-colors duration-200">
-                {project.name}
-              </h3>
+              <div className={project.featured ? "grid lg:grid-cols-2 gap-10 items-start" : ""}>
+                <div>
+                  <h3 className="font-display font-bold text-softwhite mb-1 leading-tight tracking-tight group-hover:text-white transition-colors duration-200"
+                    style={{ fontSize: project.featured ? "clamp(1.6rem, 3vw, 2.4rem)" : undefined }}>
+                    {project.name}
+                  </h3>
 
-              <div className="text-[10px] tracking-[0.18em] uppercase text-platinum/50 font-display mb-1">
-                {project.client}
+                  <div className="text-[10px] tracking-[0.18em] uppercase text-platinum/50 font-display mb-1">
+                    {project.client}
+                  </div>
+
+                  <div className="font-serif italic text-sm text-emerald-glow/80 mb-5">
+                    {project.type}
+                  </div>
+
+                  <p className="text-platinum/72 text-sm leading-relaxed mb-6">
+                    {project.description}
+                  </p>
+                </div>
+
+                <div className={project.featured ? "lg:pt-2" : ""}>
+                  {/* tags */}
+                  <div className="flex flex-wrap gap-2 mb-6">
+                    {project.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="text-[9px] tracking-[0.15em] uppercase text-platinum/42 border border-white/5 px-2 py-0.5"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* link */}
+                  {project.status === "live" ? (
+                    <a
+                      href={project.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-xs text-emerald-glow border-b border-emerald-deep/40 pb-0.5 hover:border-emerald-glow transition-all duration-200"
+                    >
+                      {project.url}
+                      <ArrowUpRight size={12} />
+                    </a>
+                  ) : (
+                    <span className="text-xs text-platinum/50 font-display tracking-wider">
+                      {project.url} · Launching Soon
+                    </span>
+                  )}
+                </div>
               </div>
-
-              <div className="font-serif italic text-sm text-emerald-glow/80 mb-5">
-                {project.type}
-              </div>
-
-              <p className="text-platinum/72 text-sm leading-relaxed mb-6">
-                {project.description}
-              </p>
-
-              {/* tags */}
-              <div className="flex flex-wrap gap-2 mb-6">
-                {project.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="text-[9px] tracking-[0.15em] uppercase text-platinum/42 border border-white/5 px-2 py-0.5"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-
-              {/* link */}
-              {project.status === "live" ? (
-                <a
-                  href={project.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-xs text-emerald-glow border-b border-emerald-deep/40 pb-0.5 hover:border-emerald-glow transition-all duration-200"
-                >
-                  {project.url}
-                  <ArrowUpRight size={12} />
-                </a>
-              ) : (
-                <span className="text-xs text-platinum/50 font-display tracking-wider">
-                  {project.url} · Launching Soon
-                </span>
-              )}
             </motion.div>
           ))}
         </div>
