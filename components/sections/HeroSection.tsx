@@ -1,11 +1,11 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import Image from "next/image";
 
-function IntelligenceCanvas() {
+function IntelligenceCanvas({ still }: { still: boolean }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -16,24 +16,31 @@ function IntelligenceCanvas() {
 
     let animFrame: number;
 
+    // Render at device pixel ratio so the hairline grid and node cores stay crisp
+    // on high-DPI displays instead of resolving to soft grey smears.
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
     const resize = () => {
-      canvas.width = canvas.offsetWidth;
-      canvas.height = canvas.offsetHeight;
+      canvas.width = canvas.offsetWidth * dpr;
+      canvas.height = canvas.offsetHeight * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     };
     resize();
     window.addEventListener("resize", resize);
 
     // Nodes
     const NODE_COUNT = 55;
-    const EMERALD = "200,169,110";
+    const GOLD = "200,169,110";
+    const W = () => canvas.offsetWidth;
+    const H = () => canvas.offsetHeight;
+
     const nodes: {
       x: number; y: number; vx: number; vy: number; r: number; pulse: number;
     }[] = [];
 
     for (let i = 0; i < NODE_COUNT; i++) {
       nodes.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
+        x: Math.random() * W(),
+        y: Math.random() * H(),
         vx: (Math.random() - 0.5) * 0.35,
         vy: (Math.random() - 0.5) * 0.35,
         r: Math.random() * 2.2 + 0.8,
@@ -42,32 +49,32 @@ function IntelligenceCanvas() {
     }
 
     const CONNECT_DIST = 160;
+    const CONNECT_DIST_SQ = CONNECT_DIST * CONNECT_DIST;
 
-    function draw() {
+    function draw(advance: boolean) {
       if (!ctx || !canvas) return;
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const w = W(), h = H();
+      ctx.clearRect(0, 0, w, h);
 
       // subtle grid
-      ctx.strokeStyle = `rgba(${EMERALD},0.035)`;
+      ctx.strokeStyle = `rgba(${GOLD},0.035)`;
       ctx.lineWidth = 1;
       const gs = 70;
-      for (let x = 0; x < canvas.width; x += gs) {
-        ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, canvas.height); ctx.stroke();
-      }
-      for (let y = 0; y < canvas.height; y += gs) {
-        ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(canvas.width, y); ctx.stroke();
-      }
+      ctx.beginPath();
+      for (let x = 0; x < w; x += gs) { ctx.moveTo(x, 0); ctx.lineTo(x, h); }
+      for (let y = 0; y < h; y += gs) { ctx.moveTo(0, y); ctx.lineTo(w, y); }
+      ctx.stroke();
 
-      // edges
+      // edges — squared-distance compare avoids a sqrt per pair
+      ctx.lineWidth = 0.8;
       for (let i = 0; i < nodes.length; i++) {
         for (let j = i + 1; j < nodes.length; j++) {
           const dx = nodes[i].x - nodes[j].x;
           const dy = nodes[i].y - nodes[j].y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < CONNECT_DIST) {
-            const alpha = (1 - dist / CONNECT_DIST) * 0.18;
-            ctx.strokeStyle = `rgba(${EMERALD},${alpha})`;
-            ctx.lineWidth = 0.8;
+          const distSq = dx * dx + dy * dy;
+          if (distSq < CONNECT_DIST_SQ) {
+            const alpha = (1 - Math.sqrt(distSq) / CONNECT_DIST) * 0.18;
+            ctx.strokeStyle = `rgba(${GOLD},${alpha})`;
             ctx.beginPath();
             ctx.moveTo(nodes[i].x, nodes[i].y);
             ctx.lineTo(nodes[j].x, nodes[j].y);
@@ -78,41 +85,56 @@ function IntelligenceCanvas() {
 
       // nodes
       nodes.forEach((n) => {
-        n.pulse += 0.025;
+        if (advance) n.pulse += 0.025;
         const pulseAlpha = 0.5 + 0.5 * Math.sin(n.pulse);
         const grd = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.r * 4);
-        grd.addColorStop(0, `rgba(${EMERALD},${0.9 * pulseAlpha})`);
-        grd.addColorStop(1, `rgba(${EMERALD},0)`);
+        grd.addColorStop(0, `rgba(${GOLD},${0.9 * pulseAlpha})`);
+        grd.addColorStop(1, `rgba(${GOLD},0)`);
         ctx.fillStyle = grd;
         ctx.beginPath();
         ctx.arc(n.x, n.y, n.r * 4, 0, Math.PI * 2);
         ctx.fill();
 
-        ctx.fillStyle = `rgba(${EMERALD},${pulseAlpha})`;
+        ctx.fillStyle = `rgba(${GOLD},${pulseAlpha})`;
         ctx.beginPath();
         ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
         ctx.fill();
 
+        if (!advance) return;
         n.x += n.vx;
         n.y += n.vy;
-        if (n.x < 0 || n.x > canvas.width) n.vx *= -1;
-        if (n.y < 0 || n.y > canvas.height) n.vy *= -1;
+        if (n.x < 0 || n.x > w) n.vx *= -1;
+        if (n.y < 0 || n.y > h) n.vy *= -1;
       });
-
-      animFrame = requestAnimationFrame(draw);
     }
 
-    animFrame = requestAnimationFrame(draw);
+    // Reduced motion: paint one static frame of the graph and leave it there.
+    if (still) {
+      draw(false);
+      const repaint = () => { resize(); draw(false); };
+      window.addEventListener("resize", repaint);
+      return () => {
+        window.removeEventListener("resize", resize);
+        window.removeEventListener("resize", repaint);
+      };
+    }
+
+    const loop = () => {
+      draw(true);
+      animFrame = requestAnimationFrame(loop);
+    };
+    animFrame = requestAnimationFrame(loop);
 
     return () => {
       cancelAnimationFrame(animFrame);
       window.removeEventListener("resize", resize);
     };
-  }, []);
+  }, [still]);
 
   return (
     <canvas
       ref={canvasRef}
+      aria-hidden="true"
       className="absolute inset-0 w-full h-full"
       style={{ opacity: 0.7 }}
     />
@@ -126,10 +148,12 @@ const fadeUp = (delay = 0) => ({
 });
 
 export default function HeroSection() {
+  const reduceMotion = useReducedMotion();
+
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-obsidian">
       {/* animated canvas */}
-      <IntelligenceCanvas />
+      <IntelligenceCanvas still={!!reduceMotion} />
 
       {/* radial glow overlay */}
       <div
@@ -146,7 +170,8 @@ export default function HeroSection() {
       <div className="absolute bottom-0 inset-x-0 h-40 bg-gradient-to-t from-obsidian to-transparent pointer-events-none" />
 
       {/* content */}
-      <div className="relative z-10 max-w-6xl mx-auto px-6 text-center pt-24">
+      {/* pb > pt lifts the content off the scroll indicator pinned at the bottom */}
+      <div className="relative z-10 max-w-6xl mx-auto px-6 text-center pt-20 pb-32">
         {/* logo mark above headline */}
         <motion.div
           {...fadeUp(0.25)}
@@ -210,7 +235,7 @@ export default function HeroSection() {
         <motion.div {...fadeUp(0.85)} className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <a
             href="#platforms"
-            className="group inline-flex items-center gap-2 px-8 py-4 bg-emerald-deep text-softwhite text-sm font-medium tracking-wide hover:bg-emerald-glow transition-all duration-300"
+            className="group inline-flex items-center gap-2 px-8 py-4 bg-emerald-deep text-obsidian text-sm font-semibold tracking-wide hover:bg-emerald-glow transition-all duration-300"
             style={{ boxShadow: "0 0 30px rgba(200,169,110,0.3)" }}
           >
             Explore Our Platforms
@@ -230,18 +255,19 @@ export default function HeroSection() {
         {/* stat bar */}
         <motion.div
           {...fadeUp(1.0)}
-          className="mt-20 grid grid-cols-3 max-w-lg mx-auto divide-x divide-white/10"
+          className="mt-20 grid grid-cols-2 sm:grid-cols-4 gap-y-6 max-w-2xl mx-auto sm:divide-x sm:divide-white/10"
         >
           {[
             { value: "5", label: "Subsidiaries" },
+            { value: "7", label: "Client Builds" },
             { value: "199", label: "Countries" },
             { value: "KLA", label: "Kampala, Uganda" },
           ].map((stat) => (
-            <div key={stat.label} className="px-6 text-center">
+            <div key={stat.label} className="px-4 sm:px-6 text-center">
               <div className="font-display font-bold text-2xl text-softwhite mb-1">
                 {stat.value}
               </div>
-              <div className="text-platinum/65 text-xs tracking-wide uppercase">
+              <div className="text-platinum/65 text-[11px] tracking-wide uppercase">
                 {stat.label}
               </div>
             </div>

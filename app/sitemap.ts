@@ -4,7 +4,7 @@ const BASE = "https://ecadelgroup.com";
 
 // Use a fixed date that reflects actual last content update.
 // Update this when you make significant content changes.
-const LAST_UPDATED = new Date("2026-05-29");
+const LAST_UPDATED = new Date("2026-07-25");
 const LEGAL_DATE   = new Date("2026-01-01");
 
 export default function sitemap(): MetadataRoute.Sitemap {

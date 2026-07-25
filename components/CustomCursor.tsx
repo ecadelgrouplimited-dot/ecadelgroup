@@ -1,33 +1,48 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
+
+const INTERACTIVE = "a, button, [role='tab'], [data-cursor]";
 
 export default function CustomCursor() {
   const [pos, setPos] = useState({ x: -100, y: -100 });
   const [isHovering, setIsHovering] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  const reduceMotion = useReducedMotion();
+
+  // The motion preference is not knowable during SSR, so the server would render
+  // the cursor and the client would drop it — a hydration mismatch. Render
+  // nothing until after mount, then decide.
+  useEffect(() => setMounted(true), []);
 
   useEffect(() => {
+    if (!mounted || reduceMotion) return;
+
     const move = (e: MouseEvent) => setPos({ x: e.clientX, y: e.clientY });
-    window.addEventListener("mousemove", move);
 
-    const handleEnter = () => setIsHovering(true);
-    const handleLeave = () => setIsHovering(false);
+    // Delegated hover detection — sections mount and unmount cards as filters
+    // change, so binding listeners once on mount would miss anything added later.
+    const over = (e: MouseEvent) => {
+      if ((e.target as Element | null)?.closest?.(INTERACTIVE)) setIsHovering(true);
+    };
+    const out = (e: MouseEvent) => {
+      if ((e.target as Element | null)?.closest?.(INTERACTIVE)) setIsHovering(false);
+    };
 
-    const targets = document.querySelectorAll("a, button, [data-cursor]");
-    targets.forEach((el) => {
-      el.addEventListener("mouseenter", handleEnter);
-      el.addEventListener("mouseleave", handleLeave);
-    });
+    window.addEventListener("mousemove", move, { passive: true });
+    document.addEventListener("mouseover", over, true);
+    document.addEventListener("mouseout", out, true);
 
     return () => {
       window.removeEventListener("mousemove", move);
-      targets.forEach((el) => {
-        el.removeEventListener("mouseenter", handleEnter);
-        el.removeEventListener("mouseleave", handleLeave);
-      });
+      document.removeEventListener("mouseover", over, true);
+      document.removeEventListener("mouseout", out, true);
     };
-  }, []);
+  }, [mounted, reduceMotion]);
+
+  // Motion-sensitive users get the native cursor back (globals.css restores it).
+  if (!mounted || reduceMotion) return null;
 
   return (
     <>

@@ -27,8 +27,11 @@ export default function Home() {
       <CustomCursor />
       <ScrollProgress />
       <ScrollToTop />
+      <a href="#main" className="skip-link">
+        Skip to content
+      </a>
       <Navbar />
-      <main>
+      <main id="main">
         <HeroSection />
         <MarqueeStrip />
         <CompanyOverview />

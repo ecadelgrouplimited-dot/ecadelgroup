@@ -236,7 +236,7 @@ export default function Contact() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full flex items-center justify-center gap-2 px-6 py-4 bg-emerald-deep text-softwhite text-sm font-medium tracking-wide hover:bg-emerald-glow transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed"
+                  className="w-full flex items-center justify-center gap-2 px-6 py-4 bg-emerald-deep text-obsidian text-sm font-semibold tracking-wide hover:bg-emerald-glow transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed"
                   style={{ boxShadow: "0 0 24px rgba(200,169,110,0.25)" }}
                 >
                   {loading ? (

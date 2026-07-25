@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Space_Grotesk } from "next/font/google";
+import { Inter, Space_Grotesk, Instrument_Serif } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import CookieBanner from "@/components/CookieBanner";
@@ -13,6 +13,15 @@ const inter = Inter({
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
   variable: "--font-space-grotesk",
+  display: "swap",
+});
+
+// Editorial serif — used for pull-quotes, testimonials, and project descriptors.
+const instrumentSerif = Instrument_Serif({
+  subsets: ["latin"],
+  weight: "400",
+  style: ["normal", "italic"],
+  variable: "--font-instrument-serif",
   display: "swap",
 });
 
@@ -37,6 +46,14 @@ export const metadata: Metadata = {
     "Hapa", "city intelligence Kampala", "local discovery Uganda",
     "PROSEQ", "consequence intelligence", "strategic foresight Africa",
     "ECADEL LABS", "African technology research",
+    // Client platforms & work
+    "FLEETS.HQ", "fleetshq.com", "transport management software UK",
+    "fleet compliance software", "DVSA compliance platform", "tachograph analysis software",
+    "operator licence compliance", "haulage software UK", "transport operating system",
+    "256 Logistics", "256logisticsltd.co.uk", "UK freight transport",
+    "Reberon Investments", "reberoninvestments.com", "construction company Uganda",
+    "Einstein Rising Canada", "Bunyonyi Luxury Resort", "Simon Sharp Products",
+    "Ambrosoli Creations",
     // Services
     "software development Uganda", "web development Kampala",
     "mobile app development Uganda", "custom software Uganda",
@@ -181,6 +198,46 @@ const schemaOrg = {
       publisher: { "@id": "https://ecadelgroup.com/#organization" },
     },
 
+    // FLEETS.HQ — transport operating platform built & managed by ECADEL
+    {
+      "@type":           "SoftwareApplication",
+      name:              "FLEETS.HQ",
+      url:               "https://fleetshq.com",
+      applicationCategory: "BusinessApplication",
+      operatingSystem:   "Web",
+      description:
+        "The operating system for transport companies. Five integrated domains — drivers, vehicles, compliance, tachographs and maintenance — plus dispatch, proof of delivery, invoicing and one-click DVSA audit evidence packs. UK-hosted, multi-tenant, role-based.",
+      author:    { "@id": "https://ecadelgroup.com/#organization" },
+      publisher: { "@id": "https://ecadelgroup.com/#organization" },
+      featureList: [
+        "Driver licence, CPC and training management",
+        "Vehicle maintenance, MOT and defect tracking",
+        "DVSA and Home Office compliance monitoring",
+        "Digital tachograph analysis and alerts",
+        "Dispatch, proof of delivery and settlement",
+      ],
+    },
+
+    // Client work delivered by ECADEL GROUP
+    {
+      "@type": "ItemList",
+      "@id":   "https://ecadelgroup.com/#client-work",
+      name:    "Client Projects — ECADEL GROUP LIMITED",
+      itemListElement: [
+        { name: "FLEETS.HQ — Transport Operating Platform",             url: "https://fleetshq.com" },
+        { name: "Reberon Investments — Construction Corporate Platform", url: "https://reberoninvestments.com" },
+        { name: "256 Logistics Ltd — UK Freight Corporate Website",      url: "https://256logisticsltd.co.uk" },
+        { name: "Einstein Rising Canada — Organisation Management System", url: "https://einsteinrisingcanada.org" },
+        { name: "Bunyonyi Luxury Resort — Resort Website & Bookings",    url: "https://bunyonyiluxuryresort.com" },
+        { name: "Simon Sharp Products — E-Commerce Platform",            url: "https://simonsharpproducts.com" },
+      ].map((item, i) => ({
+        "@type":   "ListItem",
+        position:  i + 1,
+        name:      item.name,
+        url:       item.url,
+      })),
+    },
+
     // Services offered
     {
       "@type":        "Service",
@@ -208,7 +265,10 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable}`}>
+    <html
+      lang="en"
+      className={`${inter.variable} ${spaceGrotesk.variable} ${instrumentSerif.variable}`}
+    >
       <head>
         <script
           type="application/ld+json"

@@ -251,7 +251,7 @@ Include CTA:
 
 ## MERIDIAN
 
-Present Meridian as:
+Present PROSEQ as:
 “Consequence Intelligence Platform”
 
 Describe it as:
@@ -266,7 +266,7 @@ Visuals:
 * strategic dashboards
 
 Include CTA:
-“Explore Meridian”
+“Explore PROSEQ”
 
 ====================================================
 5. WHY AFRICA SECTION

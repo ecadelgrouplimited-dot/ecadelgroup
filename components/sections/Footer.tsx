@@ -1,11 +1,21 @@
 "use client";
 
 import Image from "next/image";
-import { Twitter } from "lucide-react";
+import { Twitter, ArrowUpRight } from "lucide-react";
+
+const clientWork = [
+  { label: "FLEETS.HQ",             href: "https://fleetshq.com" },
+  { label: "Reberon Investments",   href: "https://reberoninvestments.com" },
+  { label: "256 Logistics Ltd",     href: "https://256logisticsltd.co.uk" },
+  { label: "Einstein Rising Canada", href: "https://einsteinrisingcanada.org" },
+  { label: "Bunyonyi Luxury Resort", href: "https://bunyonyiluxuryresort.com" },
+  { label: "Simon Sharp Products",  href: "https://simonsharpproducts.com" },
+];
 
 const footerLinks = {
   Company: [
     { label: "About", href: "#overview" },
+    { label: "Our Work", href: "#client-work" },
     { label: "Leadership", href: "#leadership" },
     { label: "Vision", href: "#vision" },
     { label: "Contact", href: "#contact" },
@@ -97,6 +107,28 @@ export default function Footer() {
               </ul>
             </div>
           ))}
+        </div>
+
+        {/* selected client work — outbound links to live builds */}
+        <div className="py-8 border-b border-white/5">
+          <h4 className="font-display text-[10px] tracking-[0.3em] uppercase text-platinum/65 mb-5">
+            Selected Client Work
+          </h4>
+          <div className="flex flex-wrap gap-x-6 gap-y-3">
+            {clientWork.map((c) => (
+              <a
+                key={c.href}
+                href={c.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex items-center gap-1.5 text-platinum/60 text-xs hover:text-softwhite transition-colors duration-200"
+              >
+                <span className="w-1 h-1 rounded-full bg-emerald-deep/50 group-hover:bg-emerald-deep transition-colors duration-200" />
+                {c.label}
+                <ArrowUpRight size={10} className="opacity-0 group-hover:opacity-70 transition-opacity duration-200" />
+              </a>
+            ))}
+          </div>
         </div>
 
         {/* bottom */}

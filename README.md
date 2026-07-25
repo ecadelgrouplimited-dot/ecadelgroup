@@ -32,9 +32,9 @@
 This is the official corporate website for **ECADEL GROUP LIMITED** — a digital infrastructure and systems conglomerate headquartered in Kampala, Uganda.
 
 The site showcases:
-- The five subsidiary platforms (SBB, PAME AI, SafeRoad UG, Hapa, Meridian)
+- The five subsidiary platforms (SBB, PAME AI, SafeRoad UG, Hapa, PROSEQ)
 - Client-facing services (software dev, mobile/web, hosting, consultancy, AI integration)
-- Delivered client projects (Simon Sharp, Einstein Rising Canada, Bunyonyi Resort, Ambrosoli)
+- Delivered client projects (FLEETS.HQ, Reberon Investments, 256 Logistics, Einstein Rising Canada, Bunyonyi Resort, Simon Sharp, Ambrosoli)
 - ECADEL LABS — the research and innovation engine
 - Client testimonials
 - Leadership team
@@ -54,7 +54,7 @@ The company profile document lives at `docs/ecadel_group_profile.html` — a sta
 | Animations | Framer Motion |
 | Icons | Lucide React |
 | Email | Nodemailer (Hostinger SMTP) |
-| Fonts | Inter · Space Grotesk (Google Fonts) |
+| Fonts | Inter (body) · Space Grotesk (display) · Instrument Serif (pull-quotes) |
 | Runtime | Node.js 20 LTS |
 | Process Manager | PM2 |
 | Web Server | Nginx (reverse proxy) |
@@ -177,10 +177,10 @@ The page is assembled in `app/page.tsx`. Each section is a separate component:
 | Services | `Services.tsx` | 5 client service cards + CTA |
 | Platforms (SBB/PAME etc.) | `FlagshipProjects.tsx` | All 5 platform writeups + mockups |
 | ECADEL LABS | `EcadelLabs.tsx` | Labs description, pillars, orbital visual |
-| Client Projects | `ClientProjects.tsx` | The 4 delivered client projects |
-| Testimonials | `Testimonials.tsx` | The 4 client testimonials |
+| Client Projects | `ClientProjects.tsx` | 7 client projects, sector filter tabs, FLEETS.HQ flagship card |
+| Testimonials | `Testimonials.tsx` | 5 attributed client testimonials (sign-off required to add) |
 | Why Africa | `WhyAfrica.tsx` | Africa thesis section |
-| Leadership | `Leadership.tsx` | Wilson & Catherine profiles |
+| Leadership | `Leadership.tsx` | Leadership profiles |
 | Tech Systems | `TechSystems.tsx` | Technical architecture breakdown |
 | Partnerships | `Partnerships.tsx` | Partner categories |
 | Future Vision | `FutureVision.tsx` | Roadmap and long-term vision |
@@ -223,7 +223,39 @@ Add a new object to the `testimonials` array:
 ### Add a new client project
 **File:** `components/sections/ClientProjects.tsx`
 
-Add to the `projects` array and update the index number.
+Add an object to the `projects` array. There is no index number to maintain — the
+summary strip and the filter-tab counts are derived from the array itself.
+
+```typescript
+{
+  id: "unique-slug",              // React key; must be unique
+  status: "live",                 // "live" | "upcoming"
+  featured: false,                // only one project should be featured
+  sector: "Corporate Web",        // "Platforms & Systems" | "Corporate Web" | "E-Commerce"
+  icon: Building2,                // any lucide-react icon, imported at the top
+  accent: STEEL,                  // alternate STEEL / GOLD_LIGHT; GOLD is reserved for the flagship
+  name: "Client Name",
+  client: "Contact · Role",
+  type: "What was built",
+  region: "United Kingdom",       // feeds the "Countries" figure in the summary strip
+  description: "…",
+  metrics: [{ value: "40+", label: "Fleet Vehicles" }],  // 1–4 items, rendered as a stat strip
+  url: "example.com",
+  href: "https://example.com",
+  tags: ["Corporate Web", "Logistics"],
+}
+```
+
+Keep the palette disciplined: gold `#C8A96E` marks the flagship only, everything
+else alternates light gold `#D4B97E` and steel `#8BA7C7`. Adding a fourth colour
+is what makes the grid look scattered.
+
+Also update, in the same change:
+- `StatsSection.tsx` → the **Client Projects Delivered** figure
+- `HeroSection.tsx` → the **Client Builds** figure in the hero stat bar
+- `Footer.tsx` → the `clientWork` array (outbound links)
+- `app/layout.tsx` → the `ItemList` in `schemaOrg`, plus brand keywords
+- `README.md` → the Delivered Client Projects table below
 
 ### Update stats
 **File:** `components/sections/StatsSection.tsx`
@@ -595,16 +627,34 @@ pm2 logs ecadelgroup
 | PAME AI | Live | [pame.cc](https://pame.cc) |
 | SafeRoad UG | Awaiting regulatory approval | — |
 | Hapa | Pre-launch (Kampala) | — |
-| Meridian | Playbook stage | — |
+| PROSEQ | Playbook stage | — |
 
 ### Delivered Client Projects
 
-| Project | Client | Type | Status |
-|---------|--------|------|--------|
-| [simonsharpproducts.com](https://simonsharpproducts.com) | Simon Sharp | Mini e-commerce platform | Live |
-| [einsteinrisingcanada.org](https://einsteinrisingcanada.org) | Derek J Lobo | Organisation management system | Live |
-| [bunyonyiluxuryresort.com](https://bunyonyiluxuryresort.com) | Precious | Resort website + bookings | Live |
-| ambrosolicreations.com | Ambrose | Premium handcraft e-commerce | In development |
+Source of truth: the `projects` array in `components/sections/ClientProjects.tsx`.
+Each project has a `sector` (drives the filter tabs), an `accent`, and a `metrics`
+array rendered as the stat strip on the card.
+
+| Project | Client | Type | Sector | Status |
+|---------|--------|------|--------|--------|
+| [fleetshq.com](https://fleetshq.com) | 256 Logistics Ltd (operator) | Transport operating platform — 5 domains, 10 role panels | Platforms & Systems | Live · Flagship |
+| [reberoninvestments.com](https://reberoninvestments.com) | Denis Mayamba, MD | Construction & investment corporate platform | Corporate Web | Live |
+| [256logisticsltd.co.uk](https://256logisticsltd.co.uk) | 256 Logistics Ltd | UK freight & haulage corporate website | Corporate Web | Live |
+| [einsteinrisingcanada.org](https://einsteinrisingcanada.org) | Derek J Lobo | Organisation management system | Platforms & Systems | Live |
+| [bunyonyiluxuryresort.com](https://bunyonyiluxuryresort.com) | Precious | Resort website + bookings | Platforms & Systems | Live |
+| [simonsharpproducts.com](https://simonsharpproducts.com) | Simon Sharp | Mini e-commerce platform | E-Commerce | Live |
+| ambrosolicreations.com | Ambrose | Premium handcraft e-commerce | E-Commerce | In development |
+
+**FLEETS.HQ** is the flagship. It began as the *256 Logistics Compliance Hub* at
+`256logisticsltd.com/welcome` and has since been rebuilt and rebranded as a
+standalone transport SaaS at `fleetshq.com` — developed and managed by ECADEL
+GROUP, operated by 256 Logistics Ltd. Any reference to the old name or URL is
+stale; the site renders it as the featured card with a live operator-console panel.
+
+> **Note on testimonials.** `components/sections/Testimonials.tsx` carries
+> attributed client quotes. Do not add a quote for a named individual without
+> written sign-off from that client. Drafts awaiting sign-off live in
+> `docs/testimonial-drafts.md` and must not be shipped to the site until approved.
 
 ---
 
