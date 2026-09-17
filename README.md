@@ -440,6 +440,17 @@ backup → reset tracked files → purge junk → git pull → npm install → n
 > The script also takes a backup before touching anything, restores tracked
 > files to their committed state, and purges defacement artefacts (see §16).
 
+> **Expect `package-lock.json` to show as modified on the server.** The local
+> toolchain is newer (node 24 / npm 11) than the VPS (node 22 / npm 10.9.8), and
+> npm 11 records `libc` fields on optional platform-specific packages that npm 10
+> strips again on install. It is metadata only — the resolved versions are the
+> same and the build is unaffected.
+>
+> Do **not** "fix" this by committing the server's version, and do not upgrade
+> node/npm on the VPS to match: thirteen other projects build on that box.
+> `deploy.sh` resets the file before every pull, so it self-heals; if you want a
+> clean tree by hand, `git checkout -- package-lock.json`.
+
 Day-to-day commands:
 
 ```bash
