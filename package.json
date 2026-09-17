@@ -6,13 +6,16 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "audit": "node scripts/site-audit.mjs",
+    "audit:reduced-motion": "node scripts/site-audit.mjs --reduced-motion",
+    "audit:scroll": "node scripts/scroll-audit.mjs"
   },
   "dependencies": {
     "clsx": "^2.1.1",
     "framer-motion": "^11.15.0",
     "lucide-react": "^0.468.0",
-    "next": "15.3.2",
+    "next": "15.5.25",
     "nodemailer": "^8.0.9",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

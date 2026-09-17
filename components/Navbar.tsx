@@ -9,6 +9,7 @@ const navLinks = [
   { label: "About", href: "#overview" },
   { label: "Services", href: "#services" },
   { label: "Platforms", href: "#platforms" },
+  { label: "Akili OS", href: "#akili-os" },
   { label: "Labs", href: "#labs" },
   { label: "Our Work", href: "#client-work" },
   { label: "Leadership", href: "#leadership" },
@@ -51,7 +52,7 @@ export default function Navbar() {
           </a>
 
           {/* Desktop links */}
-          <div className="hidden lg:flex items-center gap-8">
+          <div className="hidden lg:flex items-center gap-5 xl:gap-8">
             {navLinks.map((link) => (
               <a
                 key={link.label}

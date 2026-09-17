@@ -167,12 +167,13 @@ export default function CompanyOverview() {
               </h2>
               <p className="text-platinum/60 text-lg leading-relaxed mb-8">
                 ECADEL GROUP LIMITED is a digital infrastructure and systems conglomerate
-                headquartered in Kampala, Uganda. Our portfolio spans five subsidiaries:{" "}
+                headquartered in Kampala, Uganda. Our portfolio spans six platforms:{" "}
                 <span className="text-softwhite/70">Smart Business Book</span> for African SMEs,{" "}
                 <span className="text-softwhite/70">PAME AI</span> as an agentic extended-brain platform,{" "}
                 <span className="text-softwhite/70">SafeRoad UG</span> for road safety infrastructure,{" "}
-                <span className="text-softwhite/70">Hapa</span> for city intelligence and local discovery,
-                and <span className="text-softwhite/70">PROSEQ</span> for consequence intelligence.
+                <span className="text-softwhite/70">Hapa</span> for city intelligence and local discovery,{" "}
+                <span className="text-softwhite/70">PROSEQ</span> for consequence intelligence,
+                and <span className="text-softwhite/70">Akili Code OS</span> as a native engine for autonomous AI work.
               </p>
             <p className="text-platinum/68 leading-relaxed">
               We are not a software agency. We are not a startup. We are a

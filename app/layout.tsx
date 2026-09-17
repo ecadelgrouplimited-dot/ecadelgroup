@@ -1,8 +1,9 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Space_Grotesk, Instrument_Serif } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import CookieBanner from "@/components/CookieBanner";
+import MotionProvider from "@/components/MotionProvider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -34,7 +35,7 @@ export const metadata: Metadata = {
   },
 
   description:
-    "ECADEL GROUP LIMITED is a digital infrastructure and systems conglomerate headquartered in Kampala, Uganda. We build technology platforms, mobile & web applications, AI systems, and intelligent infrastructure for African businesses, governments, and institutions. Home of Smart Business Book, PAME AI, SafeRoad UG, Hapa, and PROSEQ.",
+    "ECADEL GROUP LIMITED is a digital infrastructure and systems conglomerate headquartered in Kampala, Uganda. We build technology platforms, mobile & web applications, AI systems, and intelligent infrastructure for African businesses, governments, and institutions. Home of Smart Business Book, PAME AI, SafeRoad UG, Hapa, PROSEQ, and Akili Code OS.",
 
   keywords: [
     // Brand
@@ -45,6 +46,9 @@ export const metadata: Metadata = {
     "SafeRoad UG", "road safety Uganda", "fleet management Africa",
     "Hapa", "city intelligence Kampala", "local discovery Uganda",
     "PROSEQ", "consequence intelligence", "strategic foresight Africa",
+    "Akili Code OS", "akilios.dev", "autonomous coding agent", "AI desktop engine",
+    "Akili Fundi", "Akili Core", "Akili Fundi Code model", "Akili Core model",
+    "akilios.dev models", "AI coding agent Africa", "sovereign AI developer tool",
     "ECADEL LABS", "African technology research",
     // Client platforms & work
     "FLEETS.HQ", "fleetshq.com", "transport management software UK",
@@ -106,7 +110,7 @@ export const metadata: Metadata = {
   openGraph: {
     title:       "ECADEL GROUP LIMITED — Africa's Intelligence Infrastructure",
     description:
-      "Digital infrastructure conglomerate building the systems that run African businesses, governments, and cities. Platforms: Smart Business Book · PAME AI · SafeRoad UG · Hapa · PROSEQ.",
+      "Digital infrastructure conglomerate building the systems that run African businesses, governments, and cities. Platforms: Smart Business Book · PAME AI · SafeRoad UG · Hapa · PROSEQ · Akili Code OS.",
     siteName: "ECADEL GROUP LIMITED",
     url:      "https://ecadelgroup.com",
     locale:   "en_US",
@@ -159,6 +163,7 @@ const schemaOrg = {
       sameAs: [
         "https://sbb.finance",
         "https://pame.cc",
+        "https://akilios.dev",
         "https://x.com/ecadelgroup",
       ],
     },
@@ -195,6 +200,29 @@ const schemaOrg = {
       operatingSystem:   "Web",
       description:
         "Agentic extended-brain platform with persistent memory architecture, brain graph system, and clone-and-share intelligence widgets.",
+      publisher: { "@id": "https://ecadelgroup.com/#organization" },
+    },
+
+    // Akili Code OS
+    {
+      "@type":           "SoftwareApplication",
+      name:              "Akili Code OS",
+      url:               "https://akilios.dev",
+      applicationCategory: "DeveloperApplication",
+      operatingSystem:   "Linux, macOS, Windows",
+      description:
+        "One native engine with three faces: Build writes and ships software, Motion makes video, Work does documents, spreadsheets, research and email. Runs on your machine — files never leave it. Verified, not trusted.",
+      softwareRequirements: "None beyond the application itself",
+      featureList: [
+        "Akili Fundi (Code) — the build model for long agent runs, refactors and migrations",
+        "Akili Core — the everyday model for chat, search, quick edits and summarising",
+        "1,000,000-token context window on both models, switchable mid-conversation",
+        "Build, Motion and Work on one engine: software, video, documents and data",
+        "Verifies its own work — build/test ladder after every change, revert on failure",
+        "A git checkpoint before every run, plus a timestamped audit log",
+        "Budget caps per conversation and per day that stop a run mid-flight",
+        "Runs locally: files never leave the machine, only model calls go out",
+      ],
       publisher: { "@id": "https://ecadelgroup.com/#organization" },
     },
 
@@ -261,6 +289,12 @@ const schemaOrg = {
   ],
 };
 
+// Browser UI colour — keeps the mobile address bar on-brand instead of white.
+export const viewport: Viewport = {
+  themeColor: "#060608",
+  colorScheme: "dark",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
@@ -276,7 +310,7 @@ export default function RootLayout({
         />
       </head>
       <body>
-        {children}
+        <MotionProvider>{children}</MotionProvider>
         <CookieBanner />
         {/* PAME AI Brain Clone — intelligent chat widget */}
         <Script

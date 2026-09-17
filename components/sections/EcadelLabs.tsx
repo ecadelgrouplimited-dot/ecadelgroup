@@ -32,13 +32,14 @@ const labsPillars = [
   },
 ];
 
-// Pre-computed orbital positions for the 5 subsidiary nodes
+// Pre-computed orbital positions for the 6 group platform nodes
 const ORBITAL_NODES = [
-  { angle: 0,   label: "SBB",      r: 130 },
-  { angle: 72,  label: "PAME",     r: 130 },
-  { angle: 144, label: "SafeRoad", r: 130 },
-  { angle: 216, label: "Hapa",     r: 130 },
-  { angle: 288, label: "PROSEQ", r: 130 },
+  { angle: 0,   label: "SBB",       r: 130 },
+  { angle: 60,  label: "PAME",      r: 130 },
+  { angle: 120, label: "SafeRoad",  r: 130 },
+  { angle: 180, label: "Hapa",      r: 130 },
+  { angle: 240, label: "PROSEQ",    r: 130 },
+  { angle: 300, label: "Akili OS",  r: 130 },
 ].map(({ angle, label, r }) => {
   const rad = ((angle - 90) * Math.PI) / 180;
   return {
@@ -314,8 +315,8 @@ export default function EcadelLabs() {
         >
           {[
             {
-              value: "5",
-              label: "Subsidiaries Powered",
+              value: "6",
+              label: "Platforms Powered",
               sub: "Every ECADEL platform runs on shared Lab infrastructure",
             },
             {

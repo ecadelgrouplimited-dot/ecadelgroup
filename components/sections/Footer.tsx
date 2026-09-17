@@ -26,6 +26,7 @@ const footerLinks = {
     { label: "SafeRoad UG", href: "#platforms" },
     { label: "Hapa", href: "#platforms" },
     { label: "PROSEQ", href: "#platforms" },
+    { label: "Akili Code OS", href: "https://akilios.dev" },
   ],
   Focus: [
     { label: "Mobility Intelligence", href: "#focus" },
@@ -94,16 +95,26 @@ export default function Footer() {
                 {section}
               </h4>
               <ul className="space-y-3">
-                {links.map((link) => (
-                  <li key={link.label}>
-                    <a
-                      href={link.href}
-                      className="text-platinum/72 text-sm hover:text-softwhite transition-colors duration-200"
-                    >
-                      {link.label}
-                    </a>
-                  </li>
-                ))}
+                {links.map((link) => {
+                  const external = link.href.startsWith("http");
+                  return (
+                    <li key={link.label}>
+                      <a
+                        href={link.href}
+                        {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                        className="group inline-flex items-center gap-1.5 text-platinum/72 text-sm hover:text-softwhite transition-colors duration-200"
+                      >
+                        {link.label}
+                        {external && (
+                          <ArrowUpRight
+                            size={10}
+                            className="opacity-40 group-hover:opacity-80 transition-opacity duration-200"
+                          />
+                        )}
+                      </a>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           ))}
@@ -133,10 +144,10 @@ export default function Footer() {
 
         {/* bottom */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p className="text-platinum/42 text-xs tracking-wide">
+          <p className="text-platinum/60 text-xs tracking-wide">
             © {new Date().getFullYear()} ECADEL GROUP LIMITED. All rights reserved. Kampala, Uganda.
           </p>
-          <p className="text-platinum/42 text-xs tracking-[0.15em] italic">
+          <p className="text-platinum/60 text-xs tracking-[0.15em] italic">
             Building Africa&apos;s Intelligence Infrastructure.
           </p>
         </div>

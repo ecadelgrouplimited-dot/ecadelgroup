@@ -9,6 +9,7 @@ import StatsSection from "@/components/sections/StatsSection";
 import StrategicFocus from "@/components/sections/StrategicFocus";
 import Services from "@/components/sections/Services";
 import FlagshipProjects from "@/components/sections/FlagshipProjects";
+import AkiliOSFeature from "@/components/sections/AkiliOSFeature";
 import EcadelLabs from "@/components/sections/EcadelLabs";
 import ClientProjects from "@/components/sections/ClientProjects";
 import Testimonials from "@/components/sections/Testimonials";
@@ -39,6 +40,7 @@ export default function Home() {
         <StrategicFocus />
         <Services />
         <FlagshipProjects />
+        <AkiliOSFeature />
         <EcadelLabs />
         <ClientProjects />
         <Testimonials />

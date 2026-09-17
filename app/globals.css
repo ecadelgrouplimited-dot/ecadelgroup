@@ -34,6 +34,20 @@
 html {
   scroll-behavior: smooth;
   background-color: var(--obsidian);
+  /* Sections animate their cards in from a horizontal offset. Until a card has
+     scrolled into view it sits at that offset, which makes the document wider
+     than the viewport (measured: 6px at 1024px — a horizontal scrollbar before
+     you have scrolled anything).
+
+     It takes both elements to clamp this. Measured on the real page: `clip` on
+     `body` alone still left 6px of horizontal scroll reachable, and moving it to
+     `html` alone still left 6px; with it on both, scroll clamps to 0 and
+     vertical scrolling, the fixed nav and the scroll-driven progress bar all
+     keep working. Verified at 360–1920px by `npm run audit:scroll`.
+
+     `clip` rather than `hidden`: it does not create a scroll container, so
+     `position: sticky` and fixed positioning are unaffected. */
+  overflow-x: clip;
 }
 
 body {
@@ -42,12 +56,16 @@ body {
   font-family: var(--font-inter), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  cursor: none;
+  overflow-x: clip;
 }
 
-@media (max-width: 768px) {
+/* The custom cursor replaces the native one only where there is a real mouse.
+   Gating on pointer capability (rather than viewport width) means touch and
+   hybrid devices never end up with a hidden pointer and nothing drawn in its
+   place — if the JS cursor fails to mount, the system cursor is still there. */
+@media (hover: hover) and (pointer: fine) {
   body {
-    cursor: auto;
+    cursor: none;
   }
 }
 

@@ -1,26 +1,41 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import Image from "next/image";
+
+const SEEN_KEY = "ecadel-intro-seen";
 
 export default function LoadingScreen() {
   const [visible, setVisible] = useState(true);
   const [progress, setProgress] = useState(0);
+  const reduceMotion = useReducedMotion();
 
+  // Two reasons to skip the intro outright: the user asked for reduced motion,
+  // or they have already seen it this session (a branded curtain is a first
+  // impression, not a toll on every reload).
   useEffect(() => {
+    let seen = false;
+    try { seen = Boolean(sessionStorage.getItem(SEEN_KEY)); } catch { /* private mode */ }
+
+    if (reduceMotion || seen) {
+      setVisible(false);
+      return;
+    }
+    try { sessionStorage.setItem(SEEN_KEY, "1"); } catch { /* private mode — ignore */ }
+
     const interval = setInterval(() => {
       setProgress((p) => {
         if (p >= 100) {
           clearInterval(interval);
-          setTimeout(() => setVisible(false), 500);
+          setTimeout(() => setVisible(false), 400);
           return 100;
         }
         return Math.min(p + Math.random() * 16 + 5, 100);
       });
-    }, 70);
+    }, 60);
     return () => clearInterval(interval);
-  }, []);
+  }, [reduceMotion]);
 
   return (
     <AnimatePresence>
@@ -95,7 +110,7 @@ export default function LoadingScreen() {
                 transition={{ duration: 0.08 }}
               />
             </div>
-            <p className="text-platinum/42 text-[10px] tracking-[0.3em] uppercase mt-4 font-display">
+            <p className="text-platinum/60 text-[10px] tracking-[0.3em] uppercase mt-4 font-display">
               Initialising Systems
             </p>
           </motion.div>

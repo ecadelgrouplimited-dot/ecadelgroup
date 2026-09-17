@@ -9,15 +9,23 @@ export default function CustomCursor() {
   const [pos, setPos] = useState({ x: -100, y: -100 });
   const [isHovering, setIsHovering] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [finePointer, setFinePointer] = useState(false);
   const reduceMotion = useReducedMotion();
 
-  // The motion preference is not knowable during SSR, so the server would render
-  // the cursor and the client would drop it — a hydration mismatch. Render
-  // nothing until after mount, then decide.
-  useEffect(() => setMounted(true), []);
+  // Neither the motion preference nor the pointer capability is knowable during
+  // SSR, so the server would render the cursor and the client would drop it — a
+  // hydration mismatch. Render nothing until after mount, then decide.
+  useEffect(() => {
+    setMounted(true);
+    const mq = window.matchMedia("(hover: hover) and (pointer: fine)");
+    const sync = () => setFinePointer(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
 
   useEffect(() => {
-    if (!mounted || reduceMotion) return;
+    if (!mounted || reduceMotion || !finePointer) return;
 
     const move = (e: MouseEvent) => setPos({ x: e.clientX, y: e.clientY });
 
@@ -39,10 +47,11 @@ export default function CustomCursor() {
       document.removeEventListener("mouseover", over, true);
       document.removeEventListener("mouseout", out, true);
     };
-  }, [mounted, reduceMotion]);
+  }, [mounted, reduceMotion, finePointer]);
 
-  // Motion-sensitive users get the native cursor back (globals.css restores it).
-  if (!mounted || reduceMotion) return null;
+  // Motion-sensitive users and touch/hybrid devices get the native cursor back
+  // (globals.css only hides it for hover-capable fine pointers).
+  if (!mounted || reduceMotion || !finePointer) return null;
 
   return (
     <>

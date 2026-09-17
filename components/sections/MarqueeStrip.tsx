@@ -7,6 +7,7 @@ const rowOne = [
   "Business Infrastructure", "Civic Technology", "PAME AI Extended Brain",
   "Mobile Money Integration", "Hapa City Intelligence", "Kiongozi AI Copilot",
   "Agentic Intelligence", "Operational Intelligence", "Fleet Analytics",
+  "Akili Code OS Engine",
 ];
 
 const rowTwo = [
@@ -38,7 +39,7 @@ function MarqueeRow({
 }) {
   const doubled = [...items, ...items];
   return (
-    <div className="relative overflow-hidden py-3">
+    <div className="relative overflow-hidden py-3" aria-hidden="true">
       <motion.div
         className="flex items-center whitespace-nowrap"
         animate={{ x: reverse ? ["-50%", "0%"] : ["0%", "-50%"] }}

@@ -9,7 +9,7 @@ const milestones = [
   {
     year: "2026",
     label: "Foundation",
-    desc: "All five ECADEL companies operational in Uganda. SBB, PAME AI, SafeRoad, Hapa, and PROSEQ live — African intelligence infrastructure begins here.",
+    desc: "All six ECADEL platforms operational in Uganda. SBB, PAME AI, SafeRoad, Hapa, PROSEQ and Akili Code OS live — African intelligence infrastructure begins here.",
     active: true,
   },
   {
@@ -128,6 +128,7 @@ const PLATFORM_NODES = [
   { angle: 144, label: "SafeRoad", r: 172 },
   { angle: 216, label: "Hapa",     r: 58  },
   { angle: 288, label: "PROSEQ", r: 96  },
+  { angle: 300, label: "Akili OS", r: 134 },
 ].map(({ angle, label, r }) => {
   const rad = ((angle - 90) * Math.PI) / 180;
   return {
@@ -298,8 +299,9 @@ export default function FutureVision() {
             transition={{ duration: 0.7, delay: 0.3 }}
             className="text-platinum/74 text-lg leading-relaxed max-w-3xl mx-auto"
           >
-            ECADEL GROUP operates five companies across AI infrastructure, road safety,
-            financial operations, city intelligence, and consequence foresight — fully
+            ECADEL GROUP operates six platforms across AI infrastructure, road safety,
+            financial operations, city intelligence, consequence foresight, and autonomous
+            AI work on the desktop — fully
             operational in Uganda today, and expanding systematically across East Africa,
             West Africa, and the continent.
           </motion.p>

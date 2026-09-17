@@ -228,7 +228,7 @@ export default function HeroSection() {
         >
           We build the infrastructure Africa runs on — road safety intelligence,
           agentic AI, city discovery, consequence foresight, and the financial operating
-          system that powers businesses across the continent. Five companies. One mission.
+          system that powers businesses across the continent. Six platforms. One mission.
         </motion.p>
 
         {/* CTAs */}
@@ -258,7 +258,7 @@ export default function HeroSection() {
           className="mt-20 grid grid-cols-2 sm:grid-cols-4 gap-y-6 max-w-2xl mx-auto sm:divide-x sm:divide-white/10"
         >
           {[
-            { value: "5", label: "Subsidiaries" },
+            { value: "6", label: "Platforms" },
             { value: "7", label: "Client Builds" },
             { value: "199", label: "Countries" },
             { value: "KLA", label: "Kampala, Uganda" },

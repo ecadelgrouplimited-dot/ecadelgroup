@@ -39,3 +39,6 @@ ecosystem.config.js.bak
 
 # Claude Code internal
 .claude/
+
+# Akili Code internal (agent session state, memory, plan, audit log)
+.akili-code/

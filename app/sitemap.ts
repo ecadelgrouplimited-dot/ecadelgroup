@@ -37,6 +37,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority:        0.9,
     },
     {
+      url:             `${BASE}/#akili-os`,
+      lastModified:    LAST_UPDATED,
+      changeFrequency: "weekly",
+      priority:        0.9,
+    },
+    {
       url:             `${BASE}/#labs`,
       lastModified:    LAST_UPDATED,
       changeFrequency: "monthly",

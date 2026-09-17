@@ -6,7 +6,7 @@ import {
   ArrowRight, Shield, Brain, MapPin, Activity, AlertTriangle,
   BarChart3, Car, Zap, Wallet, FileText, Users, Cpu,
   Globe, TrendingUp, Building2, Receipt, GitBranch, Share2,
-  Compass, Heart,
+  Compass, Heart, Code2, Clapperboard, FileSpreadsheet, ShieldCheck,
 } from "lucide-react";
 
 // ─── SafeRoad ────────────────────────────────────────────────────────────────
@@ -376,6 +376,95 @@ function ProseqMockup() {
   );
 }
 
+// ─── Akili Code OS ───────────────────────────────────────────────────────────
+
+const akiliOSFeatures = [
+  { icon: Code2,           label: "Build — verifies its own work" },
+  { icon: Clapperboard,    label: "Motion — video as editable data" },
+  { icon: FileSpreadsheet, label: "Work — real .docx & .xlsx" },
+  { icon: GitBranch,       label: "Checkpoint before every run" },
+  { icon: ShieldCheck,     label: "Policy rails that only tighten" },
+  { icon: Wallet,          label: "Budgets that stop the run" },
+];
+
+// The three faces, and where each sits in the engine diagram
+const AKILI_FACES = [
+  { label: "Build",  x: 66 },
+  { label: "Motion", x: 200 },
+  { label: "Work",   x: 334 },
+];
+
+function AkiliOSMockup() {
+  return (
+    <div className="relative w-full aspect-[4/3] rounded-sm overflow-hidden bg-carbon border border-white/5"
+      style={{ boxShadow: "0 20px 60px rgba(0,0,0,0.5)" }}>
+      <div className="flex items-center gap-2 px-4 py-3 bg-graphite border-b border-white/5">
+        <div className="flex gap-1.5">
+          <div className="w-2 h-2 rounded-full bg-red-500/50" />
+          <div className="w-2 h-2 rounded-full bg-yellow-500/50" />
+          <div className="w-2 h-2 rounded-full bg-green-500/50" />
+        </div>
+        <div className="flex-1 text-center text-[10px] text-platinum/50 font-mono">Akili Code OS — one engine · three faces</div>
+      </div>
+
+      <div className="relative h-48 bg-obsidian overflow-hidden">
+        <svg className="absolute inset-0 w-full h-full">
+          {/* rails from the kernel out to the three faces */}
+          {AKILI_FACES.map((f) => (
+            <path key={`rail-${f.label}`} d={`M 200 94 C 200 76, ${f.x} 68, ${f.x} 40`}
+              stroke="#C8A96E" strokeWidth="1" fill="none" opacity="0.35" strokeDasharray="3 3" />
+          ))}
+
+          {/* the autonomy loop: plan → act → verify → reflect → remember */}
+          <circle cx="200" cy="118" r="38" fill="none" stroke="#C8A96E" strokeOpacity="0.16" strokeWidth="1" />
+          <circle cx="200" cy="118" r="38" fill="none" stroke="#C8A96E" strokeOpacity="0.55" strokeWidth="1.5"
+            strokeDasharray="40 199" strokeLinecap="round">
+            <animateTransform attributeName="transform" type="rotate" from="0 200 118" to="360 200 118" dur="7s" repeatCount="indefinite" />
+          </circle>
+
+          {/* the kernel */}
+          <circle cx="200" cy="118" r="24" fill="#16181D" stroke="#C8A96E" strokeOpacity="0.5" strokeWidth="1.2" />
+          <circle cx="200" cy="118" r="24" fill="none" stroke="#C8A96E" strokeOpacity="0.25" strokeWidth="1">
+            <animate attributeName="r" values="24;34;24" dur="3s" repeatCount="indefinite" />
+            <animate attributeName="opacity" values="0.35;0;0.35" dur="3s" repeatCount="indefinite" />
+          </circle>
+          <text x="200" y="115" textAnchor="middle" fill="#C8A96E" fontSize="9" fontFamily="monospace" opacity="0.9">ENGINE</text>
+          <text x="200" y="126" textAnchor="middle" fill="#D4B97E" fontSize="6" fontFamily="monospace" opacity="0.6">one of each</text>
+
+          {/* the three faces */}
+          {AKILI_FACES.map((f) => (
+            <g key={`face-${f.label}`}>
+              <rect x={f.x - 48} y="14" width="96" height="26" rx="6"
+                fill="#16181D" stroke="rgba(200,169,110,0.35)" strokeWidth="1" />
+              <text x={f.x} y="31" textAnchor="middle" fill="#F0EDE6" fontSize="9" fontFamily="monospace" opacity="0.85">{f.label}</text>
+            </g>
+          ))}
+
+          {/* the shared substrate beneath all three */}
+          <text x="200" y="172" textAnchor="middle" fill="#9A9590" fontSize="7" fontFamily="monospace" opacity="0.65">
+            providers · budget · policy · audit — one of each, underneath all three
+          </text>
+        </svg>
+
+        <div className="absolute top-3 right-3 bg-graphite/90 border border-white/10 px-2 py-1 text-[9px] text-platinum/60 font-mono">NATIVE · RUST · RUNS LOCALLY</div>
+      </div>
+
+      <div className="grid grid-cols-3 divide-x divide-white/5 border-t border-white/5">
+        {[
+          { label: "Engine Faces", value: "3", color: "#C8A96E" },
+          { label: "Runtime Needed", value: "None", color: "#D4B97E" },
+          { label: "Verify", value: "PASS", color: "#C7CCD4" },
+        ].map((s) => (
+          <div key={s.label} className="px-3 py-3">
+            <div className="font-mono text-base font-bold" style={{ color: s.color }}>{s.value}</div>
+            <div className="text-platinum/50 text-[9px] uppercase tracking-wide mt-0.5">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 // ─── Section ─────────────────────────────────────────────────────────────────
 
 function PlatformBadge({ label }: { label: string }) {
@@ -402,13 +491,13 @@ export default function FlagshipProjects() {
 
         <motion.h2 initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7, delay: 0.1 }}
           className="font-display font-bold text-4xl md:text-5xl text-softwhite leading-tight mb-6">
-          Five Companies.
-          <br /><span style={{ color: "#C8A96E" }}>Five Categories.</span>
+          Six Platforms.
+          <br /><span style={{ color: "#C8A96E" }}>Six Domains.</span>
         </motion.h2>
 
         <motion.p initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ duration: 0.6, delay: 0.2 }}
           className="text-platinum/72 max-w-2xl text-base leading-relaxed mb-24">
-          Each subsidiary operates in a distinct infrastructure domain. Together they form the foundation
+          Each platform operates in a distinct infrastructure domain. Together they form the foundation
           of ECADEL GROUP LIMITED&apos;s mission: building the systems that run the institutions, businesses,
           and infrastructure of modern Africa.
         </motion.p>
@@ -421,7 +510,7 @@ export default function FlagshipProjects() {
               <div className="w-8 h-8 flex items-center justify-center border border-emerald-deep/40 text-emerald-glow">
                 <Shield size={14} />
               </div>
-              <PlatformBadge label="03 / 05 — SAFEROAD UG™ · Uganda" />
+              <PlatformBadge label="03 / 06 — SAFEROAD UG™ · Uganda" />
             </div>
             <h3 className="font-display font-bold text-3xl md:text-4xl text-softwhite mb-4 leading-tight">
               National Road Safety<br />Intelligence Platform
@@ -461,7 +550,7 @@ export default function FlagshipProjects() {
               <div className="w-8 h-8 flex items-center justify-center border border-emerald-deep/40 bg-emerald-deep/10 font-mono font-bold text-emerald-glow text-[10px]">
                 SBB
               </div>
-              <PlatformBadge label="01 / 05 — SMART BUSINESS BOOK™ · Live" />
+              <PlatformBadge label="01 / 06 — SMART BUSINESS BOOK™ · Live" />
             </div>
             <h3 className="font-display font-bold text-3xl md:text-4xl text-softwhite mb-4 leading-tight">
               The Business Operating<br />System for Africa
@@ -514,7 +603,7 @@ export default function FlagshipProjects() {
               <div className="w-8 h-8 flex items-center justify-center border border-emerald-deep/40 bg-emerald-deep/10 text-emerald-glow">
                 <Brain size={14} />
               </div>
-              <PlatformBadge label="02 / 05 — PAME AI™ · Live" />
+              <PlatformBadge label="02 / 06 — PAME AI™ · Live" />
             </div>
             <h3 className="font-display font-bold text-3xl md:text-4xl text-softwhite mb-4 leading-tight">
               Your Agentic<br />Extended Brain
@@ -560,7 +649,7 @@ export default function FlagshipProjects() {
               <div className="w-8 h-8 flex items-center justify-center border border-emerald-deep/40 text-emerald-glow">
                 <MapPin size={14} />
               </div>
-              <PlatformBadge label="04 / 05 — HAPA™ · Kampala 2026" />
+              <PlatformBadge label="04 / 06 — HAPA™ · Kampala 2026" />
             </div>
             <h3 className="font-display font-bold text-3xl md:text-4xl text-softwhite mb-4 leading-tight">
               Where You Are — And<br />Everything That Means
@@ -587,13 +676,13 @@ export default function FlagshipProjects() {
 
         {/* ── PROSEQ ── */}
         <motion.div initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, delay: 0.3 }}
-          className="grid lg:grid-cols-2 gap-12 items-center">
+          className="grid lg:grid-cols-2 gap-12 items-center mb-32">
           <div>
             <div className="flex items-center gap-3 mb-3">
               <div className="w-8 h-8 flex items-center justify-center border border-white/10 text-platinum/72">
                 <Brain size={14} className="text-platinum/60" />
               </div>
-              <PlatformBadge label="05 / 05 — PROSEQ™ · Uganda" />
+              <PlatformBadge label="05 / 06 — PROSEQ™ · Uganda" />
             </div>
             <h3 className="font-display font-bold text-3xl md:text-4xl text-softwhite mb-4 leading-tight">
               Consequence Intelligence<br />Platform
@@ -625,6 +714,54 @@ export default function FlagshipProjects() {
           <motion.div initial={{ opacity: 0, x: 30 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.8, delay: 0.5 }}>
             <ProseqMockup />
           </motion.div>
+        </motion.div>
+
+        {/* ── Akili Code OS ── */}
+        <motion.div initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, delay: 0.3 }}
+          className="grid lg:grid-cols-2 gap-12 items-center">
+          <motion.div initial={{ opacity: 0, x: -30 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.8, delay: 0.5 }}
+            className="order-2 lg:order-1">
+            <AkiliOSMockup />
+          </motion.div>
+          <div className="order-1 lg:order-2">
+            <div className="flex items-center gap-3 mb-3">
+              <div className="w-8 h-8 flex items-center justify-center border border-emerald-deep/40 bg-emerald-deep/10 text-emerald-glow">
+                <Code2 size={14} />
+              </div>
+              <PlatformBadge label="06 / 06 — AKILI CODE OS™ · akilios.dev" />
+            </div>
+            <h3 className="font-display font-bold text-3xl md:text-4xl text-softwhite mb-4 leading-tight">
+              One Engine.<br />Three Faces.
+            </h3>
+            <p className="text-platinum/74 leading-relaxed mb-5">
+              Akili Code OS is a native operating layer for AI work — one engine behind three faces.{" "}
+              <span className="text-softwhite/70">Build</span> writes, verifies and ships software;{" "}
+              <span className="text-softwhite/70">Motion</span> makes video from scenes that stay editable data;{" "}
+              <span className="text-softwhite/70">Work</span> does real documents, spreadsheets, research and email —
+              all on one engine, with one provider list, one budget, one policy engine and one audit log.
+            </p>
+            <p className="text-platinum/65 text-sm leading-relaxed mb-8">
+              Native to Linux, macOS and Windows, written in Rust with no heavy dependency tree.
+              It runs on your machine and your files never leave it — only model calls go out.
+            </p>
+            <div className="grid grid-cols-2 gap-3 mb-8">
+              {akiliOSFeatures.map(({ icon: Icon, label }) => (
+                <div key={label} className="flex items-center gap-2.5 text-sm text-platinum/60">
+                  <Icon size={13} className="text-emerald-deep flex-shrink-0" />
+                  <span>{label}</span>
+                </div>
+              ))}
+            </div>
+            <div className="flex items-center gap-5">
+              <a href="https://akilios.dev" target="_blank" rel="noopener noreferrer"
+                className="group inline-flex items-center gap-2 text-sm text-emerald-glow border-b border-emerald-deep/40 pb-0.5 hover:border-emerald-glow transition-all duration-200">
+                Visit akilios.dev <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform duration-200" />
+              </a>
+              <a href="#akili-os" className="text-sm text-platinum/65 hover:text-platinum/70 transition-colors duration-200">
+                See why teams switch →
+              </a>
+            </div>
+          </div>
         </motion.div>
       </div>
     </section>

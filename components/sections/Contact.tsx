@@ -155,10 +155,11 @@ export default function Contact() {
               <form onSubmit={handleSubmit} className="space-y-5">
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-[10px] tracking-[0.25em] uppercase text-platinum/65 mb-2">
+                    <label htmlFor="contact-name" className="block text-[10px] tracking-[0.25em] uppercase text-platinum/65 mb-2">
                       Full Name *
                     </label>
                     <input
+                      id="contact-name"
                       required
                       value={form.name}
                       onChange={(e) => setForm({ ...form, name: e.target.value })}
@@ -167,10 +168,11 @@ export default function Contact() {
                     />
                   </div>
                   <div>
-                    <label className="block text-[10px] tracking-[0.25em] uppercase text-platinum/65 mb-2">
+                    <label htmlFor="contact-org" className="block text-[10px] tracking-[0.25em] uppercase text-platinum/65 mb-2">
                       Organisation *
                     </label>
                     <input
+                      id="contact-org"
                       required
                       value={form.org}
                       onChange={(e) => setForm({ ...form, org: e.target.value })}
@@ -181,10 +183,11 @@ export default function Contact() {
                 </div>
 
                 <div>
-                  <label className="block text-[10px] tracking-[0.25em] uppercase text-platinum/65 mb-2">
+                  <label htmlFor="contact-email" className="block text-[10px] tracking-[0.25em] uppercase text-platinum/65 mb-2">
                     Email Address *
                   </label>
                   <input
+                    id="contact-email"
                     required
                     type="email"
                     value={form.email}
@@ -195,10 +198,11 @@ export default function Contact() {
                 </div>
 
                 <div>
-                  <label className="block text-[10px] tracking-[0.25em] uppercase text-platinum/65 mb-2">
+                  <label htmlFor="contact-type" className="block text-[10px] tracking-[0.25em] uppercase text-platinum/65 mb-2">
                     Inquiry Type
                   </label>
                   <select
+                    id="contact-type"
                     value={form.type}
                     onChange={(e) => setForm({ ...form, type: e.target.value })}
                     className="w-full bg-carbon border border-white/8 px-4 py-3 text-sm text-softwhite focus:outline-none focus:border-emerald-deep/60 transition-colors duration-200"
@@ -214,10 +218,11 @@ export default function Contact() {
                 </div>
 
                 <div>
-                  <label className="block text-[10px] tracking-[0.25em] uppercase text-platinum/65 mb-2">
+                  <label htmlFor="contact-message" className="block text-[10px] tracking-[0.25em] uppercase text-platinum/65 mb-2">
                     Message *
                   </label>
                   <textarea
+                    id="contact-message"
                     required
                     rows={5}
                     value={form.message}
@@ -228,7 +233,7 @@ export default function Contact() {
                 </div>
 
                 {error && (
-                  <p className="text-red-400/80 text-xs leading-relaxed border border-red-400/20 bg-red-400/5 px-4 py-3">
+                  <p role="alert" className="text-red-400/90 text-xs leading-relaxed border border-red-400/20 bg-red-400/5 px-4 py-3">
                     {error}
                   </p>
                 )}
