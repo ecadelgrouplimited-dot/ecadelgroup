@@ -393,7 +393,7 @@ To update the password on the VPS:
 ssh root@72.62.185.212
 nano /var/www/ecadelgroup/.env.local
 # Edit, save, then:
-cd /var/www/ecadelgroup && pm2 restart ecadelgroup
+systemctl restart ecadelgroup
 ```
 
 ---
@@ -465,8 +465,8 @@ apt-get install -y git curl nginx certbot python3-certbot-nginx
 curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
 apt-get install -y nodejs
 
-# Install PM2
-npm install -g pm2
+# There is no process manager to install: each project runs as a systemd
+# unit (see /etc/systemd/system/ecadelgroup.service on the existing server).
 
 # Create project directory and clone
 mkdir -p /var/www/ecadelgroup
@@ -589,14 +589,14 @@ Add deploy key at: `github.com/ecadelgrouplimited-dot/ecadelgroup → Settings �
 # SSH in
 ssh root@72.62.185.212
 
-# Check PM2 status
-pm2 status
+# Is the app running?
+systemctl status ecadelgroup
 
-# View live logs
-pm2 logs ecadelgroup
+# Live logs (Ctrl+C to stop)
+journalctl -u ecadelgroup -f
 
 # Restart the app
-pm2 restart ecadelgroup
+systemctl restart ecadelgroup
 
 # Deploy latest from GitHub
 cd /var/www/ecadelgroup && ./deploy.sh
@@ -625,9 +625,51 @@ free -h
 For each new project (e.g., `example.com`):
 
 1. **Clone the repo** into `/var/www/example/`
-2. **Build and start with PM2** on a different port (e.g., 3001):
+2. **Build, then start it as a systemd unit** on a different port (e.g., 3001).
+   This is how the existing projects are run. Do NOT use `pm2 start … --port 3001`
+   or a bare `next start` in a shell — pm2 is not installed here, and a stray
+   process on a port that is already taken (3000!) will collide with a live site.
+
+   ```ini
+   # /etc/systemd/system/example.service
+   [Unit]
+   Description=example.com website
+   After=network.target
+
+   [Service]
+   Type=simple
+   User=example
+   Group=example
+   WorkingDirectory=/var/www/example
+   Environment=NODE_ENV=production
+   Environment=PORT=3001
+   Environment=HOSTNAME=127.0.0.1
+   ExecStart=/usr/bin/npm start -- -H 127.0.0.1 -p 3001
+   Restart=always
+   RestartSec=5
+   # Confine the service to its own directory
+   NoNewPrivileges=true
+   PrivateTmp=true
+   ProtectSystem=strict
+   ProtectHome=true
+   ReadWritePaths=/var/www/example
+   RestrictSUIDSGID=true
+   LockPersonality=true
+
+   [Install]
+   WantedBy=multi-user.target
+   ```
+
    ```bash
-   pm2 start npm --name "example" -- start -- --port 3001
+   systemctl daemon-reload
+   systemctl enable --now example
+   systemctl status example
+   ```
+
+   **Check the port is actually free first — this VPS already uses 3000, 3001,
+   3005, 3210, 3300, 4500, 8000, 8787 and 8788:**
+   ```bash
+   ss -tlnp | grep -E ':(3000|3001|3005|3210|3300|4500|8000|8787|8788) '
    ```
 3. **Create Nginx config** at `/etc/nginx/sites-available/example.com` — same pattern as `ecadelgroup.com` but with `proxy_pass http://localhost:3001`
 4. **Enable and reload:**
@@ -650,12 +692,12 @@ Port allocation guide:
 
 ## 14. Troubleshooting
 
-### Site is down / PM2 crashed
+### Site is down / the service crashed
 ```bash
 ssh root@72.62.185.212
-pm2 status                    # Check if process is online
-pm2 logs ecadelgroup          # Read error logs
-pm2 restart ecadelgroup       # Restart it
+systemctl status ecadelgroup        # Is it running, and why did it stop?
+journalctl -u ecadelgroup -n 50     # Read the error output
+systemctl restart ecadelgroup       # Restart it
 ```
 
 ### Build fails on VPS
@@ -671,8 +713,8 @@ Most common causes:
 ### Contact form not sending emails
 ```bash
 ssh root@72.62.185.212
-cat /var/www/ecadelgroup/.env.local    # Verify credentials are there
-pm2 logs ecadelgroup --lines 50        # Look for SMTP errors
+cat /var/www/ecadelgroup/.env.local        # Verify credentials are there
+journalctl -u ecadelgroup -n 50            # Look for SMTP errors
 ```
 Common causes:
 - Wrong password in `.env.local`
@@ -695,11 +737,18 @@ cat ~/.ssh/ecadelgroup_github.pub   # Copy this
 ```
 
 ### Nginx showing 502 Bad Gateway
-The Next.js app has crashed. Restart PM2:
+Nginx is up but the app behind it is not. Check and restart the service:
 ```bash
 ssh root@72.62.185.212
-pm2 restart ecadelgroup
-pm2 logs ecadelgroup
+systemctl status ecadelgroup
+systemctl restart ecadelgroup
+journalctl -u ecadelgroup -n 50
+```
+
+Also confirm exactly one process is bound to the port nginx proxies to —
+a stray second server on 3000 is the other way this happens:
+```bash
+ss -tlnp | grep ':3000 '
 ```
 
 ---
