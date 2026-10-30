@@ -41,6 +41,7 @@ export default function LoadingScreen() {
     <AnimatePresence>
       {visible && (
         <motion.div
+          data-loading-curtain
           className="fixed inset-0 z-[99999] bg-obsidian flex flex-col items-center justify-center"
           exit={{ opacity: 0, scale: 1.015 }}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}

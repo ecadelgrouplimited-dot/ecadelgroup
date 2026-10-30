@@ -4,12 +4,14 @@ import Image from "next/image";
 import { Twitter, ArrowUpRight } from "lucide-react";
 
 const clientWork = [
-  { label: "FLEETS.HQ",             href: "https://fleetshq.com" },
-  { label: "Reberon Investments",   href: "https://reberoninvestments.com" },
-  { label: "256 Logistics Ltd",     href: "https://256logisticsltd.co.uk" },
+  { label: "FLEETS.HQ",              href: "https://fleetshq.com" },
+  { label: "Reberon Hotel & HMS",    href: "https://reberonhotel.com" },
+  { label: "Neptune Guards Ltd",     href: "https://neptuneguards.com" },
+  { label: "Reberon Investments",    href: "https://reberoninvestments.com" },
+  { label: "256 Logistics Ltd",      href: "https://256logisticsltd.co.uk" },
   { label: "Einstein Rising Canada", href: "https://einsteinrisingcanada.org" },
   { label: "Bunyonyi Luxury Resort", href: "https://bunyonyiluxuryresort.com" },
-  { label: "Simon Sharp Products",  href: "https://simonsharpproducts.com" },
+  { label: "Simon Sharp Products",   href: "https://simonsharpproducts.com" },
 ];
 
 const footerLinks = {
@@ -22,7 +24,7 @@ const footerLinks = {
   ],
   Platforms: [
     { label: "Smart Business Book", href: "https://sbb.finance" },
-    { label: "PAME AI", href: "https://pame.cc" },
+    { label: "PAME AI", href: "#platforms" },
     { label: "SafeRoad UG", href: "#platforms" },
     { label: "Hapa", href: "#platforms" },
     { label: "PROSEQ", href: "#platforms" },

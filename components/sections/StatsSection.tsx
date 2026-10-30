@@ -12,10 +12,10 @@ const stats = [
     accent: "#C8A96E",
   },
   {
-    value: 7,
+    value: 9,
     suffix: "",
-    label: "Client Projects Delivered",
-    description: "UK · Uganda · Canada — six live in production",
+    label: "Client Systems Delivered",
+    description: "UK · Uganda · Canada — eight live in production",
     accent: "#D4B97E",
   },
   {

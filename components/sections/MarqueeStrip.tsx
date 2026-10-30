@@ -6,13 +6,13 @@ const rowOne = [
   "Artificial Intelligence", "Road Safety Intelligence", "Consequence Intelligence",
   "Business Infrastructure", "Civic Technology", "PAME AI Extended Brain",
   "Mobile Money Integration", "Hapa City Intelligence", "Kiongozi AI Copilot",
-  "Agentic Intelligence", "Operational Intelligence", "Fleet Analytics",
+  "Agentic Intelligence", "FLEETS.HQ Transport OS", "Hospitality Operating Systems",
   "Akili Code OS Engine",
 ];
 
 const rowTwo = [
-  "eTIMS Compliance", "Location-Anchored Social Graph", "Strategic Foresight",
-  "ROSCA & Savings Groups", "Geospatial Systems", "Public Safety Infrastructure",
+  "eTIMS Compliance", "DVSA & Home Office RegTech", "Strategic Foresight",
+  "Hotel Management & POS Systems", "Geospatial Systems", "Public Safety Infrastructure",
   "Real-Time Data Systems", "NGO Fund Accounting", "Sovereign AI Africa",
   "Continental Intelligence Grid", "Smart City Systems", "Offline-First Architecture",
 ];

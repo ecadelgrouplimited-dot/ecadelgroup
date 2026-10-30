@@ -603,7 +603,7 @@ export default function FlagshipProjects() {
               <div className="w-8 h-8 flex items-center justify-center border border-emerald-deep/40 bg-emerald-deep/10 text-emerald-glow">
                 <Brain size={14} />
               </div>
-              <PlatformBadge label="02 / 06 — PAME AI™ · Live" />
+              <PlatformBadge label="02 / 06 — PAME AI™ · Extended Brain" />
             </div>
             <h3 className="font-display font-bold text-3xl md:text-4xl text-softwhite mb-4 leading-tight">
               Your Agentic<br />Extended Brain
@@ -614,7 +614,7 @@ export default function FlagshipProjects() {
             <p className="text-platinum/65 text-sm leading-relaxed mb-8">
               You don&apos;t use PAME. PAME grows with you.
             </p>
-            <div className="grid grid-cols-2 gap-3 mb-8">
+            <div className="grid grid-cols-2 gap-3 mb-10">
               {pameFeatures.map(({ icon: Icon, label }) => (
                 <div key={label} className="flex items-center gap-2.5 text-sm text-platinum/60">
                   <Icon size={13} className="text-emerald-deep flex-shrink-0" />
@@ -622,15 +622,9 @@ export default function FlagshipProjects() {
                 </div>
               ))}
             </div>
-            <div className="flex items-center gap-5">
-              <a href="https://pame.cc" target="_blank" rel="noopener noreferrer"
-                className="group inline-flex items-center gap-2 text-sm text-emerald-glow border-b border-emerald-deep/40 pb-0.5 hover:border-emerald-glow transition-all duration-200">
-                Visit pame.cc <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform duration-200" />
-              </a>
-              <a href="#contact" className="text-sm text-platinum/65 hover:text-platinum/70 transition-colors duration-200">
-                Enterprise Inquiry →
-              </a>
-            </div>
+            <a href="#contact" className="group inline-flex items-center gap-2 text-sm text-emerald-glow border-b border-emerald-deep/40 pb-0.5 hover:border-emerald-glow transition-all duration-200">
+              Enterprise Inquiry <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform duration-200" />
+            </a>
           </div>
           <motion.div initial={{ opacity: 0, x: 30 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.8, delay: 0.5 }}>
             <PAMEMockup />
@@ -669,7 +663,7 @@ export default function FlagshipProjects() {
               ))}
             </div>
             <a href="#contact" className="group inline-flex items-center gap-2 text-sm text-emerald-glow border-b border-emerald-deep/40 pb-0.5 hover:border-emerald-glow transition-all duration-200">
-              Follow Hapa Development <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform duration-200" />
+              Inquire About Hapa <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform duration-200" />
             </a>
           </div>
         </motion.div>
@@ -701,15 +695,9 @@ export default function FlagshipProjects() {
                 </div>
               ))}
             </div>
-            <div className="flex items-center gap-5">
-              <a href="https://proseq.io" target="_blank" rel="noopener noreferrer"
-                className="group inline-flex items-center gap-2 text-sm text-emerald-glow border-b border-emerald-deep/40 pb-0.5 hover:border-emerald-glow transition-all duration-200">
-                Visit proseq.io <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform duration-200" />
-              </a>
-              <a href="#contact" className="text-sm text-platinum/65 hover:text-platinum/70 transition-colors duration-200">
-                Request a pilot →
-              </a>
-            </div>
+            <a href="#contact" className="group inline-flex items-center gap-2 text-sm text-emerald-glow border-b border-emerald-deep/40 pb-0.5 hover:border-emerald-glow transition-all duration-200">
+              Request a Pilot <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform duration-200" />
+            </a>
           </div>
           <motion.div initial={{ opacity: 0, x: 30 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.8, delay: 0.5 }}>
             <ProseqMockup />

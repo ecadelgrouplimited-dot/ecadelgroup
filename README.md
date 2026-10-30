@@ -35,7 +35,7 @@ This is the official corporate website for **ECADEL GROUP LIMITED** — a digita
 The site showcases:
 - The six group platforms (SBB, PAME AI, SafeRoad UG, Hapa, PROSEQ, Akili Code OS)
 - Client-facing services (software dev, mobile/web, hosting, consultancy, AI integration)
-- Delivered client projects (FLEETS.HQ, Reberon Investments, 256 Logistics, Einstein Rising Canada, Bunyonyi Resort, Simon Sharp, Ambrosoli)
+- Delivered client projects (FLEETS.HQ, Reberon Hotel & "The House" HMS, Neptune Guards Ltd, Reberon Investments, 256 Logistics, Einstein Rising Canada, Bunyonyi Resort, Simon Sharp, Ambrosoli)
 - ECADEL LABS — the research and innovation engine
 - Client testimonials
 - Leadership team
@@ -188,7 +188,7 @@ The page is assembled in `app/page.tsx`. Each section is a separate component:
 | Platforms (SBB/PAME etc.) | `FlagshipProjects.tsx` | All 6 platform writeups + mockups |
 | **Akili Code OS (featured)** | `AkiliOSFeature.tsx` | The Akili OS pitch, why-try reasons, terminal mock, the two models (Fundi/Core), and link-outs to akilios.dev. Anchor `#akili-os` |
 | ECADEL LABS | `EcadelLabs.tsx` | Labs description, pillars, orbital visual |
-| Client Projects | `ClientProjects.tsx` | 7 client projects, sector filter tabs, FLEETS.HQ flagship card |
+| Client Projects | `ClientProjects.tsx` | 9 client projects, sector filter tabs, interactive galleries for FLEETS.HQ, Reberon Hotel & HMS, and Neptune Guards |
 | Testimonials | `Testimonials.tsx` | 5 attributed client testimonials (sign-off required to add) |
 | Why Africa | `WhyAfrica.tsx` | Africa thesis section |
 | Leadership | `Leadership.tsx` | Leadership profiles |
@@ -771,7 +771,7 @@ ss -tlnp | grep ':3000 '
 | Platform | Status | URL |
 |----------|--------|-----|
 | Smart Business Book (SBB) | Live | [sbb.finance](https://sbb.finance) |
-| PAME AI | Live | [pame.cc](https://pame.cc) |
+| PAME AI | Live | — |
 | SafeRoad UG | Awaiting regulatory approval | — |
 | Hapa | Pre-launch (Kampala) | — |
 | PROSEQ | Playbook stage | — |
@@ -786,10 +786,12 @@ array rendered as the stat strip on the card.
 | Project | Client | Type | Sector | Status |
 |---------|--------|------|--------|--------|
 | [fleetshq.com](https://fleetshq.com) | 256 Logistics Ltd (operator) | Transport operating platform — 5 domains, 10 role panels | Platforms & Systems | Live · Flagship |
+| [reberonhotel.com](https://reberonhotel.com) | Denis Mayamba · Reberon Hospitality | Luxury highland sanctuary website, Sipi Concierge AI & "The House" Hotel Management System | Hospitality & Security | Live · Flagship |
+| [neptuneguards.com](https://neptuneguards.com) | Edwin Rwensiisira · Director | Private security corporate platform & operations admin panel (6 security divisions) | Hospitality & Security | Live |
 | [reberoninvestments.com](https://reberoninvestments.com) | Denis Mayamba, MD | Construction & investment corporate platform | Corporate Web | Live |
 | [256logisticsltd.co.uk](https://256logisticsltd.co.uk) | 256 Logistics Ltd | UK freight & haulage corporate website | Corporate Web | Live |
 | [einsteinrisingcanada.org](https://einsteinrisingcanada.org) | Derek J Lobo | Organisation management system | Platforms & Systems | Live |
-| [bunyonyiluxuryresort.com](https://bunyonyiluxuryresort.com) | Precious | Resort website + bookings | Platforms & Systems | Live |
+| [bunyonyiluxuryresort.com](https://bunyonyiluxuryresort.com) | Precious | Resort website + bookings | Hospitality & Security | Live |
 | [simonsharpproducts.com](https://simonsharpproducts.com) | Simon Sharp | Mini e-commerce platform | E-Commerce | Live |
 | ambrosolicreations.com | Ambrose | Premium handcraft e-commerce | E-Commerce | In development |
 

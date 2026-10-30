@@ -42,3 +42,6 @@ ecosystem.config.js.bak
 
 # Akili Code internal (agent session state, memory, plan, audit log)
 .akili-code/
+
+# Raw source screenshots (cropped/optimized versions live in public/assets/projects/)
+public/projects_screenshots/

@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     "ECADEL GROUP", "ECADEL GROUP LIMITED", "ECADEL", "ecadelgroup.com",
     // Platforms
     "Smart Business Book", "SBB finance", "sbb.finance",
-    "PAME AI", "pame.cc", "agentic AI", "extended brain AI platform",
+    "PAME AI", "agentic AI", "extended brain AI platform",
     "SafeRoad UG", "road safety Uganda", "fleet management Africa",
     "Hapa", "city intelligence Kampala", "local discovery Uganda",
     "PROSEQ", "consequence intelligence", "strategic foresight Africa",
@@ -54,6 +54,8 @@ export const metadata: Metadata = {
     "FLEETS.HQ", "fleetshq.com", "transport management software UK",
     "fleet compliance software", "DVSA compliance platform", "tachograph analysis software",
     "operator licence compliance", "haulage software UK", "transport operating system",
+    "Reberon Hotel", "reberonhotel.com", "hotel management system Africa", "hospitality software Uganda",
+    "Neptune Guards", "neptuneguards.com", "private security platform Uganda",
     "256 Logistics", "256logisticsltd.co.uk", "UK freight transport",
     "Reberon Investments", "reberoninvestments.com", "construction company Uganda",
     "Einstein Rising Canada", "Bunyonyi Luxury Resort", "Simon Sharp Products",
@@ -162,7 +164,6 @@ const schemaOrg = {
       ],
       sameAs: [
         "https://sbb.finance",
-        "https://pame.cc",
         "https://akilios.dev",
         "https://x.com/ecadelgroup",
       ],
@@ -195,7 +196,7 @@ const schemaOrg = {
     {
       "@type":           "SoftwareApplication",
       name:              "PAME AI",
-      url:               "https://pame.cc",
+      url:               "https://ecadelgroup.com/#platforms",
       applicationCategory: "BusinessApplication",
       operatingSystem:   "Web",
       description:
@@ -253,6 +254,8 @@ const schemaOrg = {
       name:    "Client Projects — ECADEL GROUP LIMITED",
       itemListElement: [
         { name: "FLEETS.HQ — Transport Operating Platform",             url: "https://fleetshq.com" },
+        { name: "Reberon Hotel — Luxury Sanctuary & Hotel Management System", url: "https://reberonhotel.com" },
+        { name: "Neptune Guards Ltd — Security Platform & Admin Panel",  url: "https://neptuneguards.com" },
         { name: "Reberon Investments — Construction Corporate Platform", url: "https://reberoninvestments.com" },
         { name: "256 Logistics Ltd — UK Freight Corporate Website",      url: "https://256logisticsltd.co.uk" },
         { name: "Einstein Rising Canada — Organisation Management System", url: "https://einsteinrisingcanada.org" },

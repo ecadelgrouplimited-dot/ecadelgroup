@@ -241,7 +241,10 @@ body::after {
   }
 
   /* Grain is static, but drop it too: it reads as noise to motion-sensitive users. */
-  body::after {
-    display: none;
+  body::after,
+  [data-loading-curtain] {
+    display: none !important;
+    position: static !important;
+    z-index: auto !important;
   }
 }
