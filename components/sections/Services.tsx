@@ -192,7 +192,7 @@ export default function Services() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="text-platinum/72 max-w-md text-sm leading-relaxed"
           >
-            Beyond our six proprietary platforms, ECADEL GROUP partners with ambitious
+            Beyond our seven proprietary platforms, ECADEL GROUP partners with ambitious
             enterprises, hotels, logistics operators, security firms, and institutions across
             Africa, the UK, and North America to architect and manage mission-critical software.
           </motion.p>

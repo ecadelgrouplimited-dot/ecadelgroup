@@ -270,7 +270,7 @@ export default function HeroSection() {
             href="#platforms"
             className="inline-flex items-center gap-2 px-7 py-4 border border-emerald-deep/45 bg-obsidian/70 text-softwhite text-xs sm:text-sm font-display uppercase tracking-[0.14em] hover:border-emerald-glow hover:bg-emerald-deep/10 transition-all duration-300"
           >
-            Our 6 Group Platforms
+            Our 7 Group Platforms
           </a>
           <a
             href="#contact"
@@ -350,7 +350,7 @@ export default function HeroSection() {
           className="grid grid-cols-2 sm:grid-cols-4 gap-y-6 max-w-3xl mx-auto sm:divide-x sm:divide-white/10 pt-4 border-t border-white/8"
         >
           {[
-            { value: "6", label: "Group Platforms" },
+            { value: "7", label: "Group Platforms" },
             { value: "9", label: "Client Systems Built" },
             { value: "199", label: "Countries Reached" },
             { value: "UK · UG · CAN", label: "Production Markets" },

@@ -29,6 +29,7 @@ const footerLinks = {
     { label: "Hapa", href: "#platforms" },
     { label: "PROSEQ", href: "#platforms" },
     { label: "Akili Code OS", href: "https://akilios.dev" },
+    { label: "Kazi OS", href: "https://kazios.app" },
   ],
   Focus: [
     { label: "Mobility Intelligence", href: "#focus" },

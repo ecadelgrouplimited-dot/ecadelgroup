@@ -35,7 +35,7 @@ export const metadata: Metadata = {
   },
 
   description:
-    "ECADEL GROUP LIMITED is a digital infrastructure and systems conglomerate headquartered in Kampala, Uganda. We build technology platforms, mobile & web applications, AI systems, and intelligent infrastructure for African businesses, governments, and institutions. Home of Smart Business Book, PAME AI, SafeRoad UG, Hapa, PROSEQ, and Akili Code OS.",
+    "ECADEL GROUP LIMITED is a digital infrastructure and systems conglomerate headquartered in Kampala, Uganda. We build technology platforms, mobile & web applications, AI systems, and intelligent infrastructure for African businesses, governments, and institutions. Home of Smart Business Book, PAME AI, SafeRoad UG, Hapa, PROSEQ, Akili Code OS, and Kazi OS.",
 
   keywords: [
     // Brand
@@ -49,6 +49,8 @@ export const metadata: Metadata = {
     "Akili Code OS", "akilios.dev", "autonomous coding agent", "AI desktop engine",
     "Akili Fundi", "Akili Core", "Akili Fundi Code model", "Akili Core model",
     "akilios.dev models", "AI coding agent Africa", "sovereign AI developer tool",
+    "Kazi OS", "kazios.app", "free office suite", "offline office suite",
+    "offline-first office apps", "free Word and Excel alternative", "PDF signing free",
     "ECADEL LABS", "African technology research",
     // Client platforms & work
     "FLEETS.HQ", "fleetshq.com", "transport management software UK",
@@ -112,7 +114,7 @@ export const metadata: Metadata = {
   openGraph: {
     title:       "ECADEL GROUP LIMITED — Africa's Intelligence Infrastructure",
     description:
-      "Digital infrastructure conglomerate building the systems that run African businesses, governments, and cities. Platforms: Smart Business Book · PAME AI · SafeRoad UG · Hapa · PROSEQ · Akili Code OS.",
+      "Digital infrastructure conglomerate building the systems that run African businesses, governments, and cities. Platforms: Smart Business Book · PAME AI · SafeRoad UG · Hapa · PROSEQ · Akili Code OS · Kazi OS.",
     siteName: "ECADEL GROUP LIMITED",
     url:      "https://ecadelgroup.com",
     locale:   "en_US",
@@ -165,6 +167,7 @@ const schemaOrg = {
       sameAs: [
         "https://sbb.finance",
         "https://akilios.dev",
+        "https://kazios.app",
         "https://x.com/ecadelgroup",
       ],
     },
@@ -223,6 +226,27 @@ const schemaOrg = {
         "A git checkpoint before every run, plus a timestamped audit log",
         "Budget caps per conversation and per day that stop a run mid-flight",
         "Runs locally: files never leave the machine, only model calls go out",
+      ],
+      publisher: { "@id": "https://ecadelgroup.com/#organization" },
+    },
+
+    // Kazi OS
+    {
+      "@type":           "SoftwareApplication",
+      name:              "Kazi OS",
+      url:               "https://kazios.app",
+      applicationCategory: "BusinessApplication",
+      operatingSystem:   "Windows, macOS, Linux, ChromeOS, Android, iOS, iPadOS (browser / installable web app)",
+      description:
+        "The free office suite that works offline. Eight apps in one fast workspace that opens in the browser — Docs, Sheets, Slides, PDF, Notes, Forms, Draw and Mail — and keeps working when the internet doesn't.",
+      offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+      featureList: [
+        "Kazi Docs, Sheets, Slides, PDF, Notes, Forms, Draw and Mail in one workspace",
+        "Works offline after the first visit; files stay on the device by default",
+        "Kazi AI inside every app — builds slide decks, writes documents, explains data",
+        "Opens .docx, .xlsx and .pptx; exports Word, PowerPoint, PDF, CSV and Markdown",
+        "Sign, stamp and redact PDFs; merge and split; form fields",
+        "Free with no signup; installs on desktop, Android, iPhone and iPad",
       ],
       publisher: { "@id": "https://ecadelgroup.com/#organization" },
     },

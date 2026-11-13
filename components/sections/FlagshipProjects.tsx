@@ -1,12 +1,14 @@
 "use client";
 
 import { useRef } from "react";
+import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 import {
   ArrowRight, Shield, Brain, MapPin, Activity, AlertTriangle,
   BarChart3, Car, Zap, Wallet, FileText, Users, Cpu,
   Globe, TrendingUp, Building2, Receipt, GitBranch, Share2,
   Compass, Heart, Code2, Clapperboard, FileSpreadsheet, ShieldCheck,
+  WifiOff, Sparkles, PenLine, Mail, MonitorSmartphone, Briefcase,
 } from "lucide-react";
 
 // ─── SafeRoad ────────────────────────────────────────────────────────────────
@@ -465,6 +467,74 @@ function AkiliOSMockup() {
   );
 }
 
+// ─── Kazi OS ─────────────────────────────────────────────────────────────────
+// Content sourced from kazios.app and docs.kazios.app/start/introduction
+
+const kaziFeatures = [
+  { icon: WifiOff,           label: "Works fully offline" },
+  { icon: Sparkles,          label: "Kazi AI inside every app" },
+  { icon: FileText,          label: "Opens .docx · .xlsx · .pptx" },
+  { icon: PenLine,           label: "Sign, stamp & redact PDFs" },
+  { icon: Mail,              label: "Kazi Mail — @kazios.app" },
+  { icon: MonitorSmartphone, label: "Installs on any device" },
+];
+
+const KAZI_APPS = [
+  { name: "Docs",   color: "#2F6FDB" },
+  { name: "Sheets", color: "#1F9D55" },
+  { name: "Slides", color: "#E2553B" },
+  { name: "PDF",    color: "#D64545" },
+  { name: "Notes",  color: "#E0A526" },
+  { name: "Forms",  color: "#7B5BD6" },
+  { name: "Draw",   color: "#D9468F" },
+  { name: "Mail",   color: "#3B82C4" },
+];
+
+function KaziOSMockup() {
+  return (
+    <div className="relative w-full rounded-sm overflow-hidden bg-carbon border border-white/5"
+      style={{ boxShadow: "0 20px 60px rgba(0,0,0,0.5)" }}>
+      <div className="flex items-center gap-2 px-4 py-3 bg-graphite border-b border-white/5">
+        <div className="flex gap-1.5">
+          <div className="w-2 h-2 rounded-full bg-red-500/50" />
+          <div className="w-2 h-2 rounded-full bg-yellow-500/50" />
+          <div className="w-2 h-2 rounded-full bg-green-500/50" />
+        </div>
+        <div className="flex-1 flex justify-center">
+          <span className="px-3 py-0.5 rounded-sm bg-obsidian/70 border border-white/5 text-[10px] text-platinum/60 font-mono">
+            kazios.app
+          </span>
+        </div>
+        <span className="flex items-center gap-1 text-[9px] text-emerald-glow font-mono">
+          <WifiOff size={10} /> OFFLINE-READY
+        </span>
+      </div>
+
+      <div className="relative aspect-[4/3] bg-white overflow-hidden">
+        <Image
+          src="/assets/projects/kazios-home.webp"
+          alt="Kazi OS homepage — the free office suite that works offline, with a live Docs editor demo"
+          fill
+          sizes="(min-width: 1024px) 600px, 100vw"
+          className="object-cover object-top"
+        />
+        {/* fade into the app strip */}
+        <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-carbon/90 to-transparent" />
+      </div>
+
+      {/* the eight apps */}
+      <div className="grid grid-cols-4 sm:grid-cols-8 gap-px bg-white/5 border-t border-white/5">
+        {KAZI_APPS.map((a) => (
+          <div key={a.name} className="bg-carbon px-2 py-2.5 flex items-center justify-center gap-1.5">
+            <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: a.color }} />
+            <span className="text-[10px] text-platinum/70 font-mono">{a.name}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 // ─── Section ─────────────────────────────────────────────────────────────────
 
 function PlatformBadge({ label }: { label: string }) {
@@ -491,8 +561,8 @@ export default function FlagshipProjects() {
 
         <motion.h2 initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7, delay: 0.1 }}
           className="font-display font-bold text-4xl md:text-5xl text-softwhite leading-tight mb-6">
-          Six Platforms.
-          <br /><span style={{ color: "#C8A96E" }}>Six Domains.</span>
+          Seven Platforms.
+          <br /><span style={{ color: "#C8A96E" }}>Seven Domains.</span>
         </motion.h2>
 
         <motion.p initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ duration: 0.6, delay: 0.2 }}
@@ -510,7 +580,7 @@ export default function FlagshipProjects() {
               <div className="w-8 h-8 flex items-center justify-center border border-emerald-deep/40 text-emerald-glow">
                 <Shield size={14} />
               </div>
-              <PlatformBadge label="03 / 06 — SAFEROAD UG™ · Uganda" />
+              <PlatformBadge label="03 / 07 — SAFEROAD UG™ · Uganda" />
             </div>
             <h3 className="font-display font-bold text-3xl md:text-4xl text-softwhite mb-4 leading-tight">
               National Road Safety<br />Intelligence Platform
@@ -550,7 +620,7 @@ export default function FlagshipProjects() {
               <div className="w-8 h-8 flex items-center justify-center border border-emerald-deep/40 bg-emerald-deep/10 font-mono font-bold text-emerald-glow text-[10px]">
                 SBB
               </div>
-              <PlatformBadge label="01 / 06 — SMART BUSINESS BOOK™ · Live" />
+              <PlatformBadge label="01 / 07 — SMART BUSINESS BOOK™ · Live" />
             </div>
             <h3 className="font-display font-bold text-3xl md:text-4xl text-softwhite mb-4 leading-tight">
               The Business Operating<br />System for Africa
@@ -603,7 +673,7 @@ export default function FlagshipProjects() {
               <div className="w-8 h-8 flex items-center justify-center border border-emerald-deep/40 bg-emerald-deep/10 text-emerald-glow">
                 <Brain size={14} />
               </div>
-              <PlatformBadge label="02 / 06 — PAME AI™ · Extended Brain" />
+              <PlatformBadge label="02 / 07 — PAME AI™ · Extended Brain" />
             </div>
             <h3 className="font-display font-bold text-3xl md:text-4xl text-softwhite mb-4 leading-tight">
               Your Agentic<br />Extended Brain
@@ -643,7 +713,7 @@ export default function FlagshipProjects() {
               <div className="w-8 h-8 flex items-center justify-center border border-emerald-deep/40 text-emerald-glow">
                 <MapPin size={14} />
               </div>
-              <PlatformBadge label="04 / 06 — HAPA™ · Kampala 2026" />
+              <PlatformBadge label="04 / 07 — HAPA™ · Kampala 2026" />
             </div>
             <h3 className="font-display font-bold text-3xl md:text-4xl text-softwhite mb-4 leading-tight">
               Where You Are — And<br />Everything That Means
@@ -676,7 +746,7 @@ export default function FlagshipProjects() {
               <div className="w-8 h-8 flex items-center justify-center border border-white/10 text-platinum/72">
                 <Brain size={14} className="text-platinum/60" />
               </div>
-              <PlatformBadge label="05 / 06 — PROSEQ™ · Uganda" />
+              <PlatformBadge label="05 / 07 — PROSEQ™ · Uganda" />
             </div>
             <h3 className="font-display font-bold text-3xl md:text-4xl text-softwhite mb-4 leading-tight">
               Consequence Intelligence<br />Platform
@@ -706,7 +776,7 @@ export default function FlagshipProjects() {
 
         {/* ── Akili Code OS ── */}
         <motion.div initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, delay: 0.3 }}
-          className="grid lg:grid-cols-2 gap-12 items-center">
+          className="grid lg:grid-cols-2 gap-12 items-center mb-32">
           <motion.div initial={{ opacity: 0, x: -30 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.8, delay: 0.5 }}
             className="order-2 lg:order-1">
             <AkiliOSMockup />
@@ -716,7 +786,7 @@ export default function FlagshipProjects() {
               <div className="w-8 h-8 flex items-center justify-center border border-emerald-deep/40 bg-emerald-deep/10 text-emerald-glow">
                 <Code2 size={14} />
               </div>
-              <PlatformBadge label="06 / 06 — AKILI CODE OS™ · akilios.dev" />
+              <PlatformBadge label="06 / 07 — AKILI CODE OS™ · akilios.dev" />
             </div>
             <h3 className="font-display font-bold text-3xl md:text-4xl text-softwhite mb-4 leading-tight">
               One Engine.<br />Three Faces.
@@ -750,6 +820,66 @@ export default function FlagshipProjects() {
               </a>
             </div>
           </div>
+        </motion.div>
+
+        {/* ── Kazi OS ── */}
+        <motion.div initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, delay: 0.3 }}
+          className="grid lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <div className="flex items-center gap-3 mb-3">
+              <div className="w-8 h-8 flex items-center justify-center border border-emerald-deep/40 bg-emerald-deep/10 text-emerald-glow">
+                <Briefcase size={14} />
+              </div>
+              <PlatformBadge label="07 / 07 — KAZI OS™ · kazios.app" />
+            </div>
+            <h3 className="font-display font-bold text-3xl md:text-4xl text-softwhite mb-4 leading-tight">
+              The Free Office Suite<br />That Works Offline
+            </h3>
+            <p className="text-platinum/74 leading-relaxed mb-5">
+              Kazi OS puts eight apps in one fast workspace that opens in the browser —{" "}
+              <span className="text-softwhite/70">Docs, Sheets, Slides, PDF, Notes, Forms, Draw and Mail</span>.
+              Write documents, crunch numbers, build slides with AI, sign PDFs and send email, and keep
+              working when the internet doesn&apos;t.
+            </p>
+            <p className="text-platinum/65 text-sm leading-relaxed mb-8">
+              After the first visit the suite lives on your device, and files stay there by default. Free with no
+              signup, it installs on Windows, macOS, Linux, ChromeOS, Android, iPhone and iPad — built for students,
+              freelancers, small businesses and field teams.
+            </p>
+            <div className="grid grid-cols-2 gap-3 mb-8">
+              {kaziFeatures.map(({ icon: Icon, label }) => (
+                <div key={label} className="flex items-center gap-2.5 text-sm text-platinum/60">
+                  <Icon size={13} className="text-emerald-deep flex-shrink-0" />
+                  <span>{label}</span>
+                </div>
+              ))}
+            </div>
+            <div className="grid grid-cols-3 gap-px bg-white/5 mb-10">
+              {[
+                { value: "8", label: "Apps" },
+                { value: "0", label: "Signups" },
+                { value: "110+", label: "Formulas" },
+              ].map((s) => (
+                <div key={s.label} className="bg-carbon px-4 py-3 text-center">
+                  <div className="font-display font-bold text-lg text-softwhite">{s.value}</div>
+                  <div className="text-platinum/56 text-[9px] uppercase tracking-wider">{s.label}</div>
+                </div>
+              ))}
+            </div>
+            <div className="flex items-center gap-5">
+              <a href="https://kazios.app" target="_blank" rel="noopener noreferrer"
+                className="group inline-flex items-center gap-2 text-sm text-emerald-glow border-b border-emerald-deep/40 pb-0.5 hover:border-emerald-glow transition-all duration-200">
+                Open kazios.app <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform duration-200" />
+              </a>
+              <a href="https://docs.kazios.app/start/introduction/" target="_blank" rel="noopener noreferrer"
+                className="text-sm text-platinum/65 hover:text-platinum/70 transition-colors duration-200">
+                Read the docs →
+              </a>
+            </div>
+          </div>
+          <motion.div initial={{ opacity: 0, x: 30 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.8, delay: 0.5 }}>
+            <KaziOSMockup />
+          </motion.div>
         </motion.div>
       </div>
     </section>

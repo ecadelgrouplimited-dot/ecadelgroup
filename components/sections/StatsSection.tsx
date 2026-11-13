@@ -5,10 +5,10 @@ import { motion, useInView } from "framer-motion";
 
 const stats = [
   {
-    value: 6,
+    value: 7,
     suffix: "",
     label: "Group Platforms",
-    description: "SBB · PAME AI · SafeRoad · Hapa · PROSEQ · Akili Code OS",
+    description: "SBB · PAME AI · SafeRoad · Hapa · PROSEQ · Akili Code OS · Kazi OS",
     accent: "#C8A96E",
   },
   {

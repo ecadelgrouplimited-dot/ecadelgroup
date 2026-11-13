@@ -45,3 +45,4 @@ ecosystem.config.js.bak
 
 # Raw source screenshots (cropped/optimized versions live in public/assets/projects/)
 public/projects_screenshots/
+projects_assets/

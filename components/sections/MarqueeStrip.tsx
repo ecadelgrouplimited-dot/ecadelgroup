@@ -7,7 +7,7 @@ const rowOne = [
   "Business Infrastructure", "Civic Technology", "PAME AI Extended Brain",
   "Mobile Money Integration", "Hapa City Intelligence", "Kiongozi AI Copilot",
   "Agentic Intelligence", "FLEETS.HQ Transport OS", "Hospitality Operating Systems",
-  "Akili Code OS Engine",
+  "Akili Code OS Engine", "Kazi OS Offline Office Suite",
 ];
 
 const rowTwo = [

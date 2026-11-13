@@ -33,7 +33,7 @@
 This is the official corporate website for **ECADEL GROUP LIMITED** — a digital infrastructure and systems conglomerate headquartered in Kampala, Uganda.
 
 The site showcases:
-- The six group platforms (SBB, PAME AI, SafeRoad UG, Hapa, PROSEQ, Akili Code OS)
+- The seven group platforms (SBB, PAME AI, SafeRoad UG, Hapa, PROSEQ, Akili Code OS, Kazi OS)
 - Client-facing services (software dev, mobile/web, hosting, consultancy, AI integration)
 - Delivered client projects (FLEETS.HQ, Reberon Hotel & "The House" HMS, Neptune Guards Ltd, Reberon Investments, 256 Logistics, Einstein Rising Canada, Bunyonyi Resort, Simon Sharp, Ambrosoli)
 - ECADEL LABS — the research and innovation engine
@@ -208,11 +208,11 @@ The page is assembled in `app/page.tsx`. Each section is a separate component:
 
 Find the platform section and change:
 ```tsx
-<PlatformBadge label="03 / 06 — SAFEROAD UG™ · Awaiting Regulatory Approval" />
+<PlatformBadge label="03 / 07 — SAFEROAD UG™ · Awaiting Regulatory Approval" />
 ```
 to:
 ```tsx
-<PlatformBadge label="03 / 06 — SAFEROAD UG™ · LIVE AT SAFEROAD.UG" />
+<PlatformBadge label="03 / 07 — SAFEROAD UG™ · LIVE AT SAFEROAD.UG" />
 ```
 Also update the CTA link from `#contact` to the live URL.
 
@@ -223,10 +223,10 @@ numbers never disagree:
 
 | Where | What to change |
 |-------|----------------|
-| `components/sections/FlagshipProjects.tsx` | New `<PlatformBadge label="NN / TT — …" />` block + mockup; renumber all `NN / TT` badges and the `Six Platforms.` heading |
+| `components/sections/FlagshipProjects.tsx` | New `<PlatformBadge label="NN / TT — …" />` block + mockup; renumber all `NN / TT` badges and the `Seven Platforms.` heading |
 | `components/sections/HeroSection.tsx` | `"Six platforms. One mission."` + the `Platforms` stat value |
 | `components/sections/StatsSection.tsx` | `Group Platforms` value (a `count-up` number) and its `description` list |
-| `components/sections/CompanyOverview.tsx` | The `Our portfolio spans six platforms:` sentence |
+| `components/sections/CompanyOverview.tsx` | The `Our portfolio spans seven platforms:` sentence |
 | `components/sections/FutureVision.tsx` | The `2026 — Foundation` milestone text, the orbital `PLATFORM_NODES` array, and the section paragraph |
 | `components/sections/EcadelLabs.tsx` | The `ORBITAL_NODES` array (evenly spaced angles) and the `Platforms Powered` stat |
 | `components/sections/Footer.tsx` | The `Platforms` link list |
@@ -234,7 +234,11 @@ numbers never disagree:
 | `app/layout.tsx` | `description`, `keywords`, OpenGraph `description`, and the JSON-LD `sameAs` / `SoftwareApplication` entries |
 
 Platforms are numbered in brand order: `01` Smart Business Book, `02` PAME AI,
-`03` SafeRoad UG, `04` Hapa, `05` PROSEQ, `06` Akili Code OS.
+`03` SafeRoad UG, `04` Hapa, `05` PROSEQ, `06` Akili Code OS, `07` Kazi OS.
+
+Kazi OS's card uses a real screenshot of the kazios.app homepage
+(`public/assets/projects/kazios-home.webp`, browser chrome cropped off). Its claims come from
+[kazios.app](https://kazios.app) and <https://docs.kazios.app/start/introduction/>.
 
 ### Akili Code OS claims come from its own docs
 **File:** `components/sections/AkiliOSFeature.tsx` (anchor `#akili-os`)
@@ -776,6 +780,7 @@ ss -tlnp | grep ':3000 '
 | Hapa | Pre-launch (Kampala) | — |
 | PROSEQ | Playbook stage | — |
 | Akili Code OS | Live | [akilios.dev](https://akilios.dev) |
+| Kazi OS | Live | [kazios.app](https://kazios.app) |
 
 ### Delivered Client Projects
 
